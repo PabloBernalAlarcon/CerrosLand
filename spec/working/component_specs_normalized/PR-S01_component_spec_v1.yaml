@@ -1,0 +1,161 @@
+schema_version: '1.0'
+component_id: PR-S01
+component_type: SKILL
+traits: []
+name: Análisis de barreras y apoyos
+domain: PERSONA
+head: null
+version: '0.1'
+lifecycle_status: ACTIVE
+architecture_status: READY_WITH_CONDITIONS
+implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+deployment_status: PILOT_OR_BLOCKED
+purpose: Identificar barreras concretas de acceso, proceso, participación o demostración a partir de evidencia y proponer
+  apoyos pedagógicos proporcionados sin convertir condiciones diagnósticas en recetas.
+users:
+  primary: docente o profesional autorizado
+triggers:
+- Dificultad observable en actividad, evaluación o aprendizaje.
+- PPI/PIAE necesita mapa de barreras y apoyos.
+- Se revisa una propuesta de diferenciación.
+required_inputs:
+- Objetivo/tarea.
+- Evidencia observable de dificultad.
+- Contexto.
+- Fortalezas relevantes.
+optional_inputs:
+- Diagnóstico/documento especializado.
+- Apoyos ya probados.
+- Respuesta a apoyos.
+authoritative_sources:
+- source: Objetivo de aprendizaje
+  function: Referencia
+  limit: No perder el objetivo esencial.
+- source: Evidencia observable
+  function: Base de barrera
+  limit: Prioridad sobre etiqueta.
+- source: Documentos especializados
+  function: Contexto
+  limit: No convierten automáticamente una condición en barrera.
+- source: Marcos ED/DUA autorizados
+  function: Repertorio
+  limit: Herramientas complementarias, no modelo total obligatorio.
+source_hierarchy: []
+knowledge_dependencies:
+- KP-008
+core_rules_inherited:
+- No inventar ni completar vacíos como hechos.
+- Respetar jerarquía y autoridad de fuentes.
+- Distinguir evidencia, inferencia, propuesta y decisión.
+- La IA no sustituye autoridad profesional o institucional humana.
+- Detener o degradar la salida cuando falta información crítica.
+- Señalar incoherencias relevantes y ejecutar QA antes del cierre.
+- La persona precede a la etiqueta, dificultad, diagnóstico, calificación o procedimiento.
+- Comprender contexto y fortalezas antes de recomendar.
+- Usar evidencia observable antes que inferencia y formular hipótesis con prudencia.
+- No diagnosticar, patologizar, psicologizar ni convertir circunstancias en identidad.
+- Proteger dignidad, posibilidad de crecimiento y autonomía progresiva.
+- Los apoyos deben ser proporcionales, viables y no reducir automáticamente el objetivo académico.
+rules:
+  R-PRS01-01:
+    title: Barrera contextual
+    text: Definir barrera en relación con tarea/contexto.
+  R-PRS01-02:
+    title: Etiqueta ≠ barrera
+    text: No deducir apoyo solo del diagnóstico.
+  R-PRS01-03:
+    title: Apoyo proporcional
+    text: Preferir apoyo focal antes que reducción significativa.
+  R-PRS01-04:
+    title: Autonomía
+    text: Diseñar apoyos que puedan retirarse/reducirse si crece autonomía.
+  R-PRS01-05:
+    title: Viabilidad
+    text: El apoyo debe ser realizable en aula.
+  R-PRS01-06:
+    title: Seguimiento
+    text: Toda recomendación importante debe indicar qué evidencia observar después.
+procedure:
+- phase: Paso 1
+  steps:
+  - Precisar objetivo y tarea.
+- phase: Paso 2
+  steps:
+  - Describir conducta/dificultad observable y contexto.
+- phase: Paso 3
+  steps:
+  - Identificar barrera probable con nivel de certeza.
+- phase: Paso 4
+  steps:
+  - Proponer uno o más apoyos proporcionados.
+- phase: Paso 5
+  steps:
+  - Definir evidencia de seguimiento.
+decision_logic:
+- if: SI la lectura no es el objetivo y bloquea demostrar ciencias
+  then: ENTONCES considerar vía de acceso sin reducir el concepto.
+- if: SI el apoyo elimina complejidad esencial
+  then: ENTONCES revisar porque puede alterar el objetivo.
+- if: SI no hay evidencia individual
+  then: ENTONCES no aplicar receta diagnóstica.
+autonomous_actions:
+- Describir barreras.
+- Proponer apoyos.
+- Explicar ventajas/limitaciones.
+- Definir evidencia de seguimiento.
+human_reserved_actions:
+- Aprobar apoyos formales.
+- Asignar recursos.
+- Decidir adaptaciones significativas.
+forbidden_actions:
+- Diagnosticar.
+- Generalizar desde etiqueta.
+- Reducir objetivos por defecto.
+- Asignar recursos institucionales.
+outputs:
+- Barreras sustentadas.
+- Apoyos sugeridos.
+- Razonamiento pedagógico.
+- Indicadores de seguimiento.
+validation_states:
+- state: VALIDADO
+  condition: Puede emitirse como producto final dentro de la lógica funcional, sujeto a autoridad humana correspondiente.
+  source: Documento Maestro de Continuidad v0.11 §9.4 (default general, aprobado 2026-11-24)
+- state: PRELIMINAR
+  condition: Borrador o estado intermedio; faltan elementos no críticos o validación.
+  source: Documento Maestro de Continuidad v0.11 §9.4 (default general, aprobado 2026-11-24)
+- state: NO VALIDADO
+  condition: Falta información crítica, existe contradicción importante o la autoridad requerida no ha decidido.
+  source: Documento Maestro de Continuidad v0.11 §9.4 (default general, aprobado 2026-11-24)
+quality_checks:
+- ¿La barrera es observable/contextual?
+- ¿El apoyo conserva objetivo?
+- ¿Es proporcional y viable?
+- ¿Evita dependencia innecesaria?
+sensitive_data: Puede usar datos educativos y de salud sensibles.
+dependencies:
+- dependency: PR-S02
+  function: Cuando se requiere formalizar ajuste.
+- dependency: PR-S04
+  function: Para seguimiento.
+- dependency: Objetivo académico
+  function: Control de integridad.
+handoff_conditions: []
+completion_condition:
+- Barrera suficientemente descrita.
+- Apoyo vinculado al objetivo.
+- Evidencia de seguimiento definida.
+functional_acceptance_criteria:
+- scenario: Lectura secundaria
+  input: Prueba de ciencias con carga lectora excesiva.
+  expected: Debe distinguir acceso de conocimiento científico.
+- scenario: Proyecto largo
+  input: Dificultad organizativa.
+  expected: Debe proponer hitos/seguimiento antes que eliminar complejidad.
+open_issues:
+- Taxonomía oficial de barreras/apoyos.
+- Criterio formal de apoyo fallido.
+- Relación operativa exacta con DUA.
+implementation_note: Do not implement data persistence/access policy unless separately approved.
+legacy_status_text: VALIDADA funcionalmente / pendiente de implementación técnica
+legacy_component_type: SKILL

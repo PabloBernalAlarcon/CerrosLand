@@ -1,0 +1,145 @@
+schema_version: '1.0'
+component_id: PR-S06
+component_type: SKILL
+traits: []
+name: Análisis longitudinal de trayectoria
+domain: PERSONA
+head: null
+version: '0.1'
+lifecycle_status: ACTIVE
+architecture_status: READY_WITH_CONDITIONS
+implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+deployment_status: PILOT_OR_BLOCKED
+purpose: Comparar evidencia válida de distintos periodos para identificar crecimiento, persistencia y cambio sin convertir
+  patrones en rasgos permanentes ni inferir causalidad injustificada.
+users:
+  primary: mentor/profesional autorizado
+triggers:
+- Existen registros comparables previos.
+- PPD requiere reconstrucción longitudinal.
+- Seguimiento pedagógico necesita evolución temporal.
+required_inputs:
+- Registros previos válidos.
+- Periodo actual.
+- Variables/categorías comparables.
+- Contexto relevante.
+optional_inputs:
+- Cambios de contexto/responsables.
+- Intervenciones documentadas.
+authoritative_sources:
+- source: PPD/seguimientos previos
+  function: Evidencia longitudinal
+  limit: No alterar ni rellenar vacíos.
+- source: Registro actual
+  function: Comparación
+  limit: Distinguir cambio real de falta de datos.
+source_hierarchy: []
+knowledge_dependencies:
+- KP-009
+core_rules_inherited:
+- No inventar ni completar vacíos como hechos.
+- Respetar jerarquía y autoridad de fuentes.
+- Distinguir evidencia, inferencia, propuesta y decisión.
+- La IA no sustituye autoridad profesional o institucional humana.
+- Detener o degradar la salida cuando falta información crítica.
+- Señalar incoherencias relevantes y ejecutar QA antes del cierre.
+- La persona precede a la etiqueta, dificultad, diagnóstico, calificación o procedimiento.
+- Comprender contexto y fortalezas antes de recomendar.
+- Usar evidencia observable antes que inferencia y formular hipótesis con prudencia.
+- No diagnosticar, patologizar, psicologizar ni convertir circunstancias en identidad.
+- Proteger dignidad, posibilidad de crecimiento y autonomía progresiva.
+- Los apoyos deben ser proporcionales, viables y no reducir automáticamente el objetivo académico.
+rules:
+  R-PRS06-01:
+    title: Comparabilidad
+    text: Solo comparar categorías/evidencias razonablemente comparables.
+  R-PRS06-02:
+    title: Contexto
+    text: Cambios de contexto deben hacerse visibles.
+  R-PRS06-03:
+    title: No identidad
+    text: Persistencia no equivale a rasgo esencial.
+  R-PRS06-04:
+    title: No causalidad
+    text: Intervención y cambio temporal no prueban causalidad.
+  R-PRS06-05:
+    title: Vacíos
+    text: Ausencia de dato no equivale a ausencia de comportamiento.
+procedure:
+- phase: Paso 1
+  steps:
+  - Validar registros y comparabilidad.
+- phase: Paso 2
+  steps:
+  - Identificar continuidades/cambios.
+- phase: Paso 3
+  steps:
+  - Contextualizar sin causalidad automática.
+- phase: Paso 4
+  steps:
+  - Redactar síntesis prudente.
+decision_logic:
+- if: SI periodos no son comparables
+  then: ENTONCES limitar análisis.
+- if: SI falta dato en un periodo
+  then: ENTONCES marcar ausencia, no inferir mejora/empeoramiento.
+- if: SI hay patrón
+  then: ENTONCES describir como patrón observado, no identidad.
+autonomous_actions:
+- Comparar.
+- Detectar patrones.
+- Redactar tendencias prudentes.
+human_reserved_actions:
+- Interpretación formativa final.
+- Decisiones de acompañamiento.
+forbidden_actions:
+- Etiquetar.
+- Inferir causalidad.
+- Convertir trayectoria en diagnóstico.
+outputs:
+- Crecimientos.
+- Persistencias.
+- Cambios.
+- Vacíos/contexto.
+- Preguntas de seguimiento.
+validation_states:
+- state: VALIDADO
+  condition: Puede emitirse como producto final dentro de la lógica funcional, sujeto a autoridad humana correspondiente.
+  source: Documento Maestro de Continuidad v0.11 §9.4 (default general, aprobado 2026-11-24)
+- state: PRELIMINAR
+  condition: Borrador o estado intermedio; faltan elementos no críticos o validación.
+  source: Documento Maestro de Continuidad v0.11 §9.4 (default general, aprobado 2026-11-24)
+- state: NO VALIDADO
+  condition: Falta información crítica, existe contradicción importante o la autoridad requerida no ha decidido.
+  source: Documento Maestro de Continuidad v0.11 §9.4 (default general, aprobado 2026-11-24)
+quality_checks:
+- ¿Registros son comparables?
+- ¿Vacíos están explícitos?
+- ¿Lenguaje evita identidad/causalidad?
+sensitive_data: Datos longitudinales altamente sensibles.
+dependencies:
+- dependency: WF-P03
+  function: PPD.
+- dependency: PR-S04
+  function: Seguimiento de apoyos.
+- dependency: Gobierno de datos
+  function: Persistencia autorizada.
+handoff_conditions: []
+completion_condition:
+- Comparación válida.
+- Contexto y límites explícitos.
+- Síntesis disponible para workflow llamante.
+functional_acceptance_criteria:
+- scenario: Dato faltante
+  input: No hay PPD T2.
+  expected: No debe inventar continuidad entre T1 y T3.
+- scenario: Patrón
+  input: Tres periodos muestran dificultad organizativa.
+  expected: Debe describir persistencia observable, no 'es desorganizado'.
+open_issues:
+- Política de memoria longitudinal.
+- Periodo mínimo para hablar de patrón.
+- Accesos por rol.
+implementation_note: Do not implement data persistence/access policy unless separately approved.
+legacy_status_text: VALIDADA funcionalmente / pendiente de gobierno de datos
+legacy_component_type: SKILL

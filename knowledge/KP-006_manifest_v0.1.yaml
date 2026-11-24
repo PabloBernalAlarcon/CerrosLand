@@ -1,0 +1,24 @@
+knowledge_id: KP-006
+name: Evaluación Matemática y Pruebas Saber
+domain: ACADÉMICO / PRODUCE
+authority_class: 'MIXTO: estándar externo + matriz institucional'
+status: PARCIAL — estructura recuperada; fuentes canónicas faltantes
+version: '0.1'
+canonical_sources:
+- Estándares de matemáticas
+- Estructura de Pruebas Saber
+- Matriz curricular institucional
+- Resultados agregados del colegio
+source_availability: []
+purpose: Proveer competencias, contenidos, contextos, proporciones, criterios de validez y distractores para la especialización
+  Matemáticas/Saber.
+consumers:
+- FL-D03
+- FL-D02 cuando especialización está activa
+owner: Área de Matemáticas/autoridad académica — NO DETERMINADO.
+update_triggers:
+- Cambio en marco Saber, estándares o matriz curricular institucional.
+forbidden_reasoning:
+- No universalizar distribución Saber a otras asignaturas.
+- No inferir causas desde resultados agregados.
+notes: 'Competencias recuperadas: Interpretación, Formulación, Argumentación; contenidos: Álgebra, Geometría, Estadística.'

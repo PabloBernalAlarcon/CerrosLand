@@ -1,0 +1,153 @@
+schema_version: '1.0'
+component_id: FL-D04
+component_type: SKILL
+traits: []
+name: Diseño de rúbricas y criterios
+domain: Académico
+head: FLUFFY · PRODUCE
+version: '0.1'
+lifecycle_status: DISABLED
+architecture_status: NOT_READY
+implementation_status: NOT_IMPLEMENTABLE
+deployment_status: NOT_DEPLOYABLE
+purpose: Definir criterios y descriptores alineados con objetivos y evidencias para orientar evaluación y retroalimentación.
+  Esta ficha documenta únicamente lo sustentado y preserva explícitamente los vacíos.
+users:
+  primary: docente
+  secondary: []
+triggers:
+- Una evaluación/proyecto requiere criterios explícitos.
+- Un workflow de recuperación solicita rúbrica.
+- Un producto requiere criterios de calidad observables.
+required_inputs:
+- Objetivos/evidencias confirmados.
+- Producto o desempeño a valorar.
+- Decisión docente sobre uso y alcance de la rúbrica.
+optional_inputs:
+- Escala de desempeño, si existe en fuente institucional.
+- Criterios externos autorizados.
+authoritative_sources:
+- source: Planificación y objetivos
+  function: Base de criterios
+  rule: La rúbrica debe derivarse de lo que se pretende observar.
+- source: Fuente institucional/external autorizada
+  function: Escala/criterios cuando exista
+  rule: No inventar escalas institucionales.
+- source: Decisión docente
+  function: Uso y alcance
+  rule: El docente valida criterios y ponderaciones.
+source_hierarchy: []
+knowledge_dependencies:
+- KP-003
+core_rules_inherited:
+- No inventar ni completar vacíos como hechos.
+- Respetar jerarquía y autoridad de fuentes.
+- Distinguir evidencia, inferencia, propuesta y decisión.
+- La IA no sustituye la autoridad profesional humana.
+- Detener o degradar la salida cuando falta información crítica.
+- Señalar incoherencias relevantes.
+- Ejecutar control de calidad antes del cierre.
+- Proteger autoría y trabajo cognitivo cuando el producto involucra estudiantes.
+- Alinear objetivo, evidencia, actividad y evaluación.
+- Mantener rigor sin reducir exigencia arbitrariamente.
+- No confundir actividad o cumplimiento con evidencia de dominio.
+rules:
+  R-FLD04-01:
+    title: Alineación
+    text: Criterios deben corresponder a objetivos/evidencias.
+  R-FLD04-02:
+    title: Observabilidad
+    text: Descriptores deben referirse a desempeños observables.
+  R-FLD04-03:
+    title: No invención
+    text: No inventar escalas institucionales ni ponderaciones.
+  R-FLD04-04:
+    title: Rigor
+    text: No usar la rúbrica para reducir arbitrariamente la exigencia.
+  R-FLD04-05:
+    title: Estado
+    text: Toda rúbrica generada bajo esta versión es propuesta/borrador hasta validación docente.
+procedure:
+- phase: Paso 1 — Confirmar evidencia
+  steps:
+  - Identificar producto/desempeño y objetivos.
+- phase: Paso 2 — Proponer criterios
+  steps:
+  - Derivar criterios observables de la evidencia.
+- phase: Paso 3 — Proponer descriptores
+  steps:
+  - Solo si existe escala definida o el docente autoriza una propuesta explícita.
+- phase: Paso 4 — Validar
+  steps:
+  - Marcar como borrador y solicitar aprobación docente.
+decision_logic:
+- if: SI no existe escala institucional
+  then: ENTONCES no presentarla como institucional; puede proponerse una para validación.
+- if: SI un criterio no corresponde al objetivo
+  then: ENTONCES eliminar/reformular.
+- if: SI se pide ponderación sin fuente
+  then: ENTONCES solicitar decisión docente.
+autonomous_actions:
+- Proponer criterios observables.
+- Detectar criterios irrelevantes o duplicados.
+- Organizar una estructura de borrador.
+human_reserved_actions:
+- Aprobar criterios, niveles, escalas y ponderaciones.
+- Declarar una rúbrica como versión institucional/definitiva.
+forbidden_actions:
+- Inventar una política de calificación.
+- Atribuir escalas a Cerros sin fuente.
+- Usar criterios no vinculados a evidencia.
+outputs:
+- Lista de criterios.
+- Borrador de descriptores.
+- Matriz de alineación criterio↔evidencia.
+validation_states:
+- state: VALIDADO
+  condition: Puede emitirse como producto final cuando pasa QA y no quedan decisiones críticas pendientes.
+  source: FL-D04_Dise├▒o_de_r├║bricas_y_criterios_v0.1.docx §13
+- state: PRELIMINAR
+  condition: Borrador o estructura intermedia claramente marcada.
+  source: FL-D04_Dise├▒o_de_r├║bricas_y_criterios_v0.1.docx §13
+- state: NO VALIDADO
+  condition: Faltan fuentes, planificación, decisión humana o existe una incoherencia crítica.
+  source: FL-D04_Dise├▒o_de_r├║bricas_y_criterios_v0.1.docx §13
+quality_checks:
+- ¿Cada criterio corresponde a una evidencia?
+- ¿Es observable?
+- ¿No se inventó una escala?
+- ¿Está marcado como borrador?
+sensitive_data: No requiere datos personales por defecto.
+dependencies:
+- dependency: TX-A01
+  function: Objetivos.
+- dependency: TX-A02
+  function: Alineación.
+- dependency: FL-D02
+  function: Instrumento/proyecto al que sirve.
+- dependency: Knowledge de escala
+  function: Cuando exista.
+handoff_conditions: []
+completion_condition:
+- Criterios propuestos.
+- Vacíos explícitos.
+- Validación docente solicitada.
+functional_acceptance_criteria:
+- scenario: Sin escala
+  input: Usuario pide 'rúbrica institucional de 4 niveles' sin fuente.
+  expected: Debe aclarar que no hay escala institucional documentada.
+- scenario: Criterio irrelevante
+  input: Se añade presentación estética a un objetivo puramente conceptual sin razón.
+  expected: Debe señalar falta de alineación.
+- scenario: Ponderación inventada
+  input: Se piden porcentajes sin decisión.
+  expected: Debe solicitar criterio docente.
+open_issues:
+- Arquitectura institucional de rúbricas.
+- Escalas/niveles.
+- Ponderaciones.
+- Relación con calificación 1–7.
+- Reglas por tipo de producto y edad.
+implementation_note: Implement as specified; preserve provisional/open status where indicated.
+legacy_status_text: PENDIENTE DE VALIDAR — no existe todavía expediente suficiente para especificación completa
+legacy_component_type: SKILL_CANDIDATE

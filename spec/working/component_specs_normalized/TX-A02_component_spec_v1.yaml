@@ -1,0 +1,156 @@
+schema_version: '1.0'
+component_id: TX-A02
+component_type: MICRO_SKILL
+traits:
+- qa
+- transversal
+name: Alineación pedagógica
+domain: Académico
+head: Transversal a PLANIFICA / PRODUCE / QA
+version: '0.1'
+lifecycle_status: ACTIVE
+architecture_status: READY_WITH_CONDITIONS
+implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+deployment_status: PILOT_OR_BLOCKED
+purpose: Verificar la coherencia entre objetivo, evidencia/assessment, actividad/procedimiento y, cuando aplique, contenidos
+  priorizados, sin decidir unilateralmente el ajuste pedagógico.
+users:
+  primary: otros componentes de Cerros AI y profesores
+  secondary: []
+triggers:
+- Un componente construye o revisa planificación, guía, recuperación o evaluación.
+- Existe sospecha de que una evaluación no mide el objetivo.
+- Una actividad consume tiempo pero no produce evidencia del aprendizaje esperado.
+required_inputs:
+- Objetivo confirmado.
+- Assessment/evidencia propuesta.
+- Actividad o procedimiento relevante.
+optional_inputs:
+- Contenido priorizado.
+- Criterios de evaluación.
+- Tiempo disponible.
+authoritative_sources:
+- source: Objetivo confirmado
+  function: Referencia principal
+  rule: La alineación se juzga contra lo que se pretende aprender.
+- source: Assessment/evidencia
+  function: Evidencia esperada
+  rule: Debe permitir observar el aprendizaje.
+- source: Actividad/procedimiento
+  function: Medio pedagógico
+  rule: Debe contribuir razonablemente al objetivo/evidencia.
+- source: Reglas del componente llamante
+  function: Restricciones específicas
+  rule: Pueden añadir tiempo, formato o condiciones.
+source_hierarchy: []
+knowledge_dependencies:
+- KP-003
+core_rules_inherited:
+- No inventar ni completar vacíos como hechos.
+- Respetar jerarquía y autoridad de fuentes.
+- Distinguir evidencia, inferencia, propuesta y decisión.
+- La IA no sustituye la autoridad profesional humana.
+- Detener o degradar la salida cuando falta información crítica.
+- Señalar incoherencias relevantes.
+- Ejecutar control de calidad antes del cierre.
+rules:
+  R-TXA02-01:
+    title: Objetivo ↔ evidencia
+    text: La evidencia debe demostrar razonablemente el objetivo.
+  R-TXA02-02:
+    title: Actividad ↔ objetivo
+    text: La actividad debe contribuir al objetivo, no ser decorativa.
+  R-TXA02-03:
+    title: Actividad ≠ evidencia
+    text: Completar una actividad no demuestra automáticamente dominio.
+  R-TXA02-04:
+    title: Rigor
+    text: No resolver desalineaciones bajando arbitrariamente el objetivo.
+  R-TXA02-05:
+    title: Transparencia
+    text: Debe explicar dónde está la desalineación.
+  R-TXA02-06:
+    title: Humano decide
+    text: Las alternativas de ajuste requieren validación cuando son sustantivas.
+procedure:
+- phase: Paso 1 — Mapear
+  steps:
+  - Identificar objetivo, evidencia y actividad.
+- phase: Paso 2 — Comparar
+  steps:
+  - Preguntar qué desempeño exige el objetivo y qué exige realmente la evidencia.
+  - Comprobar si la actividad prepara ese desempeño.
+- phase: Paso 3 — Detectar brecha
+  steps:
+  - 'Describir desalineación específica: nivel cognitivo, contenido, evidencia o secuencia.'
+- phase: Paso 4 — Proponer
+  steps:
+  - Presentar una o más alternativas de ajuste para decisión del profesor.
+decision_logic:
+- if: SI el objetivo exige argumentar y el assessment solo pide recordar
+  then: ENTONCES marcar desalineación.
+- if: SI una actividad no contribuye al objetivo
+  then: ENTONCES señalar dispersión o carga innecesaria.
+- if: SI el assessment mide otra habilidad
+  then: ENTONCES solicitar ajuste de objetivo o evidencia, sin escoger unilateralmente.
+- if: SI existe alineación suficiente
+  then: ENTONCES validar ese vínculo sin inventar cambios.
+autonomous_actions:
+- Comparar demandas cognitivas y evidencias.
+- Señalar incoherencias.
+- Proponer alternativas.
+human_reserved_actions:
+- Elegir el ajuste final.
+- Modificar objetivos o evaluaciones sustantivamente.
+forbidden_actions:
+- Validar una evaluación desalineada por conveniencia.
+- Reducir objetivo sin autoridad.
+- Confundir cumplimiento con dominio.
+- Ocultar una incoherencia.
+outputs:
+- Alineado / parcialmente alineado / no alineado.
+- Descripción de brecha.
+- Opciones de corrección.
+validation_states:
+- state: VALIDADO
+  condition: La información crítica y decisiones necesarias están confirmadas y el QA pasa.
+  source: TX-A02_Alineaci├│n_pedag├│gica_v0.1.docx §13
+- state: PRELIMINAR
+  condition: Puede mostrarse una propuesta parcial claramente marcada; no es producto final.
+  source: TX-A02_Alineaci├│n_pedag├│gica_v0.1.docx §13
+- state: NO VALIDADO
+  condition: Falta información crítica, existe contradicción/inviabilidad no resuelta o una decisión humana pendiente.
+  source: TX-A02_Alineaci├│n_pedag├│gica_v0.1.docx §13
+quality_checks:
+- ¿El assessment exige la habilidad del objetivo?
+- ¿La actividad prepara la evidencia?
+- ¿La evidencia es suficiente para inferir aprendizaje?
+- ¿Se evitó equiparar tarea con dominio?
+- ¿Las propuestas conservan rigor?
+sensitive_data: No requiere datos personales por defecto.
+dependencies:
+- dependency: TX-A01
+  function: Objetivos claros facilitan la auditoría.
+- dependency: Componente llamante
+  function: Proporciona contexto y restricciones.
+handoff_conditions: []
+completion_condition:
+- Mapa objetivo-evidencia-actividad evaluado.
+- Brechas explicitadas.
+- Alternativas presentadas si eran necesarias.
+functional_acceptance_criteria:
+- scenario: Argumentación vs memoria
+  input: Objetivo argumentar; prueba de fechas.
+  expected: Debe marcar desalineación.
+- scenario: Actividad decorativa
+  input: Objetivo analizar fuentes; actividad colorear mapa sin análisis.
+  expected: Debe señalar que la actividad no aporta evidencia suficiente.
+- scenario: Alineación válida
+  input: Objetivo comparar causas; assessment pide comparación sustentada.
+  expected: Debe reconocer alineación.
+open_issues:
+- Taxonomía institucional de niveles cognitivos, si se adopta.
+- Criterios específicos por asignatura/prueba.
+implementation_note: Implement as specified; do not redesign or fill institutional gaps.
+legacy_status_text: VALIDADA funcionalmente / pendiente de implementación técnica
+legacy_component_type: MICRO_SKILL_QA_TRANSVERSAL

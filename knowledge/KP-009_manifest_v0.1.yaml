@@ -1,0 +1,26 @@
+knowledge_id: KP-009
+name: PPD — Mentoría y Desarrollo Personal
+domain: PERSONA / mentoría
+authority_class: INSTITUCIONAL NORMATIVO-OPERATIVO
+status: PARCIAL — jerarquía identificada, fuentes literales faltantes
+version: '0.1'
+canonical_sources:
+- Handbook de Cultura Institucional
+- Expediente Maestro Cerros PPD
+- Arquitectura Conversacional e Instrumento de Entrevista
+- Matriz Oficial de Principios y Valores
+- Manual de Generación del Informe PPD
+source_availability:
+- Handbook de Cultura Institucional del Gimnasio de Los Cerros.pdf
+purpose: Proveer catálogo oficial, entrevista, códigos, principios, valores, DP1–DP6, reglas de completitud, informes y transferencia.
+consumers:
+- WF-P03
+- PR-S06
+- PR-S07
+owner: Área de mentoría/formación — NO DETERMINADO.
+update_triggers:
+- Cambio oficial de matriz, comportamientos, dimensiones, entrevista o formato PPD/Phidias.
+forbidden_reasoning:
+- No permitir que Ficha Rápida desplace Matriz/Handbook sin decisión.
+- No inventar comportamientos o categorías.
+notes: Jerarquía de cinco niveles está explícitamente recuperada; Ficha Rápida queda auxiliar y con tensión documental.

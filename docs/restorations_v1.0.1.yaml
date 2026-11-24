@@ -1,0 +1,547 @@
+proposal: Restore fields present in v0.1 DOCX fichas but absent from v1 YAML. No content is invented; every value is copied
+  from the named source file.
+status: APPROVED AND APPLIED 2026-11-24 (PERSONA/INSTITUCIONAL validation states use Continuidad v0.11 §9.4 general definitions)
+components:
+  FL-C01:
+    source_file: FL-C01_Coaching_de_investigación_v0.1.docx
+    rule_titles:
+      R-FLC01-01: Autoría
+      R-FLC01-02: Diagnóstico antes que respuesta
+      R-FLC01-03: Coaching
+      R-FLC01-04: Coherencia
+      R-FLC01-05: No evidencia inventada
+      R-FLC01-06: Límites
+      R-FLC01-07: Explicar el porqué
+      R-FLC01-08: Decisión intelectual
+    validation_states:
+      VALIDADO: La salida cumple reglas, preserva autoría y supera QA.
+      PRELIMINAR: Diagnóstico o feedback parcial; no equivale a producto final ni calificación.
+      NO VALIDADO: Falta evidencia, se solicita sustitución de autoría o existe un límite de autoridad.
+    source_hierarchy_notes: []
+  FL-C02:
+    source_file: FL-C02_Feedback_de_escritura_v0.1.docx
+    rule_titles:
+      R-FLC02-01: Autoría
+      R-FLC02-02: Evidencia textual
+      R-FLC02-03: Formativo
+      R-FLC02-04: Balance
+      R-FLC02-05: Adecuación
+      R-FLC02-06: No inventar
+      R-FLC02-07: Accionabilidad
+      R-FLC02-08: Especialización
+    validation_states:
+      VALIDADO: La salida cumple reglas, preserva autoría y supera QA.
+      PRELIMINAR: Diagnóstico o feedback parcial; no equivale a producto final ni calificación.
+      NO VALIDADO: Falta evidencia, se solicita sustitución de autoría o existe un límite de autoridad.
+    source_hierarchy_notes: []
+  FL-D01:
+    source_file: FL-D01_Construcci├│n_de_gu├¡as_acad├⌐micas_v0.1.docx
+    rule_titles:
+      R-FLD01-01: Planificación mínima
+      R-FLD01-02: Propósito antes que formato
+      R-FLD01-03: Fuentes del docente
+      R-FLD01-04: No invención
+      R-FLD01-05: Estructura temática
+      R-FLD01-06: Explicación + lectura
+      R-FLD01-07: Lectura
+      R-FLD01-08: APA
+      R-FLD01-09: Fuentes problemáticas
+      R-FLD01-10: Producción progresiva
+      R-FLD01-11: Control institucional
+      R-FLD01-12: Autoridad docente
+    validation_states:
+      VALIDADO: Puede emitirse como producto final cuando pasa QA y no quedan decisiones críticas pendientes.
+      PRELIMINAR: Borrador o estructura intermedia claramente marcada.
+      NO VALIDADO: Faltan fuentes, planificación, decisión humana o existe una incoherencia crítica.
+    source_hierarchy_notes:
+    - No existe tabla formal exhaustiva de prelación; sí está confirmado que la guía está subordinada a la planificación y
+      el contenido factual a las fuentes aportadas.
+    - Jerarquía exhaustiva de documentos institucionales.
+  FL-D02:
+    source_file: FL-D02_Dise├▒o_de_evaluaciones_v0.1.docx
+    rule_titles:
+      R-FLD02-01: Alineación
+      R-FLD02-02: Evidencia
+      R-FLD02-03: No invención
+      R-FLD02-04: Rigor
+      R-FLD02-05: Diversidad
+      R-FLD02-06: Trazabilidad
+      R-FLD02-07: Borrador vs validado
+      R-FLD02-08: Especialización
+    validation_states:
+      VALIDADO: Puede emitirse como producto final cuando pasa QA y no quedan decisiones críticas pendientes.
+      PRELIMINAR: Borrador o estructura intermedia claramente marcada.
+      NO VALIDADO: Faltan fuentes, planificación, decisión humana o existe una incoherencia crítica.
+    source_hierarchy_notes: []
+  FL-D03:
+    source_file: FL-D03_Dise├▒o_y_auditor├¡a_de_├¡tems_v0.1.docx
+    rule_titles:
+      R-FLD03-01: Una respuesta
+      R-FLD03-02: Ambigüedad
+      R-FLD03-03: Claridad
+      R-FLD03-04: Distractores
+      R-FLD03-05: Habilidad real
+      R-FLD03-06: Trazabilidad
+      R-FLD03-07: No causalidad
+      R-FLD03-08: Matriz
+      R-FLD03-09: Especialización Saber
+      R-FLD03-10: Contenido Saber
+    validation_states:
+      VALIDADO: Puede emitirse como producto final cuando pasa QA y no quedan decisiones críticas pendientes.
+      PRELIMINAR: Borrador o estructura intermedia claramente marcada.
+      NO VALIDADO: Faltan fuentes, planificación, decisión humana o existe una incoherencia crítica.
+    source_hierarchy_notes: []
+  FL-D04:
+    source_file: FL-D04_Dise├▒o_de_r├║bricas_y_criterios_v0.1.docx
+    rule_titles:
+      R-FLD04-01: Alineación
+      R-FLD04-02: Observabilidad
+      R-FLD04-03: No invención
+      R-FLD04-04: Rigor
+      R-FLD04-05: Estado
+    validation_states:
+      VALIDADO: Puede emitirse como producto final cuando pasa QA y no quedan decisiones críticas pendientes.
+      PRELIMINAR: Borrador o estructura intermedia claramente marcada.
+      NO VALIDADO: Faltan fuentes, planificación, decisión humana o existe una incoherencia crítica.
+    source_hierarchy_notes: []
+  FL-P01:
+    source_file: FL-P01_Arquitectura_curricular_v0.1.docx
+    rule_titles:
+      R-FLP01-01: Nivel de planificación
+      R-FLP01-02: Secuencia
+      R-FLP01-03: Progresión
+      R-FLP01-04: Carga
+      R-FLP01-05: Articulaciones
+      R-FLP01-06: Construcción guiada
+      R-FLP01-07: Transparencia
+      R-FLP01-08: Revisión
+    validation_states:
+      VALIDADO: La información crítica y decisiones necesarias están confirmadas y el QA pasa.
+      PRELIMINAR: Puede mostrarse una propuesta parcial claramente marcada; no es producto final.
+      NO VALIDADO: Falta información crítica, existe contradicción/inviabilidad no resuelta o una decisión humana pendiente.
+    source_hierarchy_notes:
+    - Jerarquía exacta Documento Maestro vs Documento Marco.
+  FL-P02:
+    source_file: FL-P02_Dise├▒o_de_unidad_v0.1.docx
+    rule_titles:
+      R-FLP02-01: Jerarquía
+      R-FLP02-02: Nivel
+      R-FLP02-03: Completitud
+      R-FLP02-04: Evaluación
+      R-FLP02-05: Alineación
+      R-FLP02-06: Conexiones
+      R-FLP02-07: No microplanificar
+      R-FLP02-08: Validación
+    validation_states:
+      VALIDADO: La información crítica y decisiones necesarias están confirmadas y el QA pasa.
+      PRELIMINAR: Puede mostrarse una propuesta parcial claramente marcada; no es producto final.
+      NO VALIDADO: Falta información crítica, existe contradicción/inviabilidad no resuelta o una decisión humana pendiente.
+    source_hierarchy_notes: []
+  FL-P03:
+    source_file: 07_Especificacion_Componente_FL-P03_Planificacion_Semanal_y_Sesion_v0.1.docx
+    rule_titles:
+      R-FLP03-01: Unidad documental
+      R-FLP03-02: Sesiones
+      R-FLP03-03: Grade
+      R-FLP03-04: Subject
+      R-FLP03-05: Length
+      R-FLP03-06: Objetivos
+      R-FLP03-07: Forma del objetivo
+      R-FLP03-08: Calidad del objetivo
+      R-FLP03-09: Secuencia de diseño
+      R-FLP03-10: Assessment type
+      R-FLP03-11: Summative
+      R-FLP03-12: Evidencia
+      R-FLP03-13: Procedure
+      R-FLP03-14: Tiempo
+      R-FLP03-15: Metodologías
+      R-FLP03-16: 3W/3T
+      R-FLP03-17: Uso de 3T
+      R-FLP03-18: Interacción pedagógica
+      R-FLP03-19: Datos administrativos
+      R-FLP03-20: Memoria de caso
+      R-FLP03-21: Separación
+      R-FLP03-22: Idioma final
+      R-FLP03-23: Idioma conversación
+      R-FLP03-24: Cierre
+    validation_states:
+      VALIDADO: Puede emitirse el Lesson Planner final.
+      PRELIMINAR: Puede mostrarse una propuesta parcial claramente marcada.
+      NO VALIDADO: No debe emitirse como planner final.
+    source_hierarchy_notes: []
+  FL-P04:
+    source_file: FL-P04_An├ílisis_de_carga_acad├⌐mica_v0.1.docx
+    rule_titles:
+      R-FLP04-01: No invención
+      R-FLP04-02: Campos mínimos
+      R-FLP04-03: Métricas
+      R-FLP04-04: ALTA
+      R-FLP04-05: MEDIA
+      R-FLP04-06: BAJA
+      R-FLP04-07: Audiencias
+      R-FLP04-08: No juicio
+      R-FLP04-09: Mapa estudiante
+      R-FLP04-10: Focos
+    validation_states:
+      VALIDADO: La información crítica y decisiones necesarias están confirmadas y el QA pasa.
+      PRELIMINAR: Puede mostrarse una propuesta parcial claramente marcada; no es producto final.
+      NO VALIDADO: Falta información crítica, existe contradicción/inviabilidad no resuelta o una decisión humana pendiente.
+    source_hierarchy_notes:
+    - Existe un riesgo lógico abierto sobre precedencia entre criterios ALTA/MEDIA/BAJA; el implementador no debe resolverlo
+      silenciosamente.
+    - Precedencia exacta cuando se cumplen simultáneamente criterios de distintas categorías.
+  IN-S01:
+    source_file: IN-S01_Análisis_técnico_de_convivencia_v0.1.docx
+    rule_titles:
+      R-INS01-01: Separación
+      R-INS01-02: Contradicciones
+      R-INS01-03: Certeza
+      R-INS01-04: Participantes
+      R-INS01-05: Vacíos
+      R-INS01-06: No diagnóstico
+    validation_states: NOT DEFINED IN v0.1 (decision needed)
+    source_hierarchy_notes: []
+  IN-S02:
+    source_file: IN-S02_Clasificación_y_gravedad_de_convivencia_v0.1.docx
+    rule_titles:
+      R-INS02-01: Preliminar
+      R-INS02-02: Seis criterios
+      R-INS02-03: Justificación
+      R-INS02-04: Cálculo
+      R-INS02-05: Individualización
+      R-INS02-06: Norma versionada
+    validation_states: NOT DEFINED IN v0.1 (decision needed)
+    source_hierarchy_notes: []
+  IN-S03:
+    source_file: IN-S03_Redacción_de_reporte_de_convivencia_v0.1.docx
+    rule_titles:
+      R-INS03-01: Presunción
+      R-INS03-02: Trazabilidad
+      R-INS03-03: Contradicciones
+      R-INS03-04: Autoridad
+      R-INS03-05: Neutralidad
+    validation_states: NOT DEFINED IN v0.1 (decision needed)
+    source_hierarchy_notes: []
+  IN-S04:
+    source_file: IN-S04_Auditoría_de_evidencia_académica_v0.1.docx
+    rule_titles:
+      R-INS04-01: Unidad estricta
+      R-INS04-02: Trazabilidad
+      R-INS04-03: Vacíos visibles
+      R-INS04-04: Factores
+      R-INS04-05: Intervención
+      R-INS04-06: Resultado
+      R-INS04-07: No psicologizar
+      R-INS04-08: Bloqueo
+    validation_states: NOT DEFINED IN v0.1 (decision needed)
+    source_hierarchy_notes: []
+  PR-S01:
+    source_file: PR-S01_Análisis_de_barreras_y_apoyos_v0.1.docx
+    rule_titles:
+      R-PRS01-01: Barrera contextual
+      R-PRS01-02: Etiqueta ≠ barrera
+      R-PRS01-03: Apoyo proporcional
+      R-PRS01-04: Autonomía
+      R-PRS01-05: Viabilidad
+      R-PRS01-06: Seguimiento
+    validation_states: NOT DEFINED IN v0.1 (decision needed)
+    source_hierarchy_notes: []
+  PR-S02:
+    source_file: PR-S02_Diseño_de_ajustes_pedagógicos_v0.1.docx
+    rule_titles:
+      R-PRS02-01: Objetivo
+      R-PRS02-02: Proporcionalidad
+      R-PRS02-03: Rigor
+      R-PRS02-04: Trazabilidad
+      R-PRS02-05: Temporalidad
+    validation_states: NOT DEFINED IN v0.1 (decision needed)
+    source_hierarchy_notes: []
+  PR-S03:
+    source_file: PR-S03_Traducción_pedagógica_de_información_especializada_v0.1.docx
+    rule_titles:
+      R-PRS03-01: Fidelidad
+      R-PRS03-02: No diagnóstico
+      R-PRS03-03: No receta
+      R-PRS03-04: Contexto
+      R-PRS03-05: Límite clínico
+    validation_states: NOT DEFINED IN v0.1 (decision needed)
+    source_hierarchy_notes: []
+  PR-S04:
+    source_file: PR-S04_Seguimiento_de_apoyos_v0.1.docx
+    rule_titles:
+      R-PRS04-01: Comparabilidad
+      R-PRS04-02: Causalidad prudente
+      R-PRS04-03: Autonomía
+      R-PRS04-04: Fallo
+      R-PRS04-05: Trazabilidad
+    validation_states: NOT DEFINED IN v0.1 (decision needed)
+    source_hierarchy_notes: []
+  PR-S05:
+    source_file: PR-S05_Síntesis_CTA_basada_en_evidencia_v0.1.docx
+    rule_titles:
+      R-PRS05-01: Conducta observable
+      R-PRS05-02: No intención
+      R-PRS05-03: Orientación
+      R-PRS05-04: No valoración oficial
+    validation_states: NOT DEFINED IN v0.1 (decision needed)
+    source_hierarchy_notes: []
+  PR-S06:
+    source_file: PR-S06_Análisis_longitudinal_de_trayectoria_v0.1.docx
+    rule_titles:
+      R-PRS06-01: Comparabilidad
+      R-PRS06-02: Contexto
+      R-PRS06-03: No identidad
+      R-PRS06-04: No causalidad
+      R-PRS06-05: Vacíos
+    validation_states: NOT DEFINED IN v0.1 (decision needed)
+    source_hierarchy_notes: []
+  PR-S07:
+    source_file: PR-S07_Transferencia_de_acompañamiento_v0.1.docx
+    rule_titles:
+      R-PRS07-01: Minimización
+      R-PRS07-02: Contexto
+      R-PRS07-03: Dignidad
+      R-PRS07-04: Pendientes
+      R-PRS07-05: Autorización
+    validation_states: NOT DEFINED IN v0.1 (decision needed)
+    source_hierarchy_notes: []
+  SP-C01:
+    source_file: SP-C01_Periodismo_escolar_v0.1.docx
+    rule_titles:
+      R-SPC01-01: Editor-profesor
+      R-SPC01-02: Fidelidad
+      R-SPC01-03: Revisión por secciones
+      R-SPC01-04: Conteo
+      R-SPC01-05: Feedback grupal
+      R-SPC01-06: Precisión periodística
+      R-SPC01-07: Claridad lingüística
+      R-SPC01-08: Nivel escolar
+      R-SPC01-09: Balance
+      R-SPC01-10: No generación autónoma
+    validation_states:
+      VALIDADO: La salida cumple reglas, preserva autoría y supera QA.
+      PRELIMINAR: Diagnóstico o feedback parcial; no equivale a producto final ni calificación.
+      NO VALIDADO: Falta evidencia, se solicita sustitución de autoría o existe un límite de autoridad.
+    source_hierarchy_notes: []
+  TX-A01:
+    source_file: TX-A01_Formulaci├│n_de_objetivos_de_aprendizaje_v0.1.docx
+    rule_titles:
+      R-TXA01-01: Fuente
+      R-TXA01-02: Observabilidad
+      R-TXA01-03: Viabilidad
+      R-TXA01-04: Actividad ≠ objetivo
+      R-TXA01-05: Especificidad
+      R-TXA01-06: No invención
+      R-TXA01-07: Formato heredado
+    validation_states:
+      VALIDADO: La información crítica y decisiones necesarias están confirmadas y el QA pasa.
+      PRELIMINAR: Puede mostrarse una propuesta parcial claramente marcada; no es producto final.
+      NO VALIDADO: Falta información crítica, existe contradicción/inviabilidad no resuelta o una decisión humana pendiente.
+    source_hierarchy_notes: []
+  TX-A02:
+    source_file: TX-A02_Alineaci├│n_pedag├│gica_v0.1.docx
+    rule_titles:
+      R-TXA02-01: Objetivo ↔ evidencia
+      R-TXA02-02: Actividad ↔ objetivo
+      R-TXA02-03: Actividad ≠ evidencia
+      R-TXA02-04: Rigor
+      R-TXA02-05: Transparencia
+      R-TXA02-06: Humano decide
+    validation_states:
+      VALIDADO: La información crítica y decisiones necesarias están confirmadas y el QA pasa.
+      PRELIMINAR: Puede mostrarse una propuesta parcial claramente marcada; no es producto final.
+      NO VALIDADO: Falta información crítica, existe contradicción/inviabilidad no resuelta o una decisión humana pendiente.
+    source_hierarchy_notes: []
+  TX-D01:
+    source_file: TX-D01_Redacci├│n_pedag├│gica_sustentada_v0.1.docx
+    rule_titles:
+      R-TXD01-01: Fidelidad
+      R-TXD01-02: No fuentes inventadas
+      R-TXD01-03: Claridad
+      R-TXD01-04: Propósito
+      R-TXD01-05: Complementariedad
+      R-TXD01-06: Citación
+    validation_states:
+      VALIDADO: Puede emitirse como producto final cuando pasa QA y no quedan decisiones críticas pendientes.
+      PRELIMINAR: Borrador o estructura intermedia claramente marcada.
+      NO VALIDADO: Faltan fuentes, planificación, decisión humana o existe una incoherencia crítica.
+    source_hierarchy_notes: []
+  TX-D02:
+    source_file: TX-D02_Dise├▒o_de_pr├íctica_v0.1.docx
+    rule_titles:
+      R-TXD02-01: Alineación
+      R-TXD02-02: Práctica ≠ evaluación
+      R-TXD02-03: Progresión
+      R-TXD02-04: Rigor
+      R-TXD02-05: Fuentes
+      R-TXD02-06: Dominio
+    validation_states:
+      VALIDADO: Puede emitirse como producto final cuando pasa QA y no quedan decisiones críticas pendientes.
+      PRELIMINAR: Borrador o estructura intermedia claramente marcada.
+      NO VALIDADO: Faltan fuentes, planificación, decisión humana o existe una incoherencia crítica.
+    source_hierarchy_notes: []
+  TX-I01:
+    source_file: TX-I01_Detección_de_alertas_no_clínicas_v0.1.docx
+    rule_titles:
+      R-TXI01-01: No diagnóstico
+      R-TXI01-02: Evidencia
+      R-TXI01-03: Prudencia
+    validation_states: NOT DEFINED IN v0.1 (decision needed)
+    source_hierarchy_notes: []
+  TX-I02:
+    source_file: TX-I02_Redacción_institucional_trazable_v0.1.docx
+    rule_titles:
+      R-TXI02-01: Trazabilidad
+      R-TXI02-02: Neutralidad
+      R-TXI02-03: Audiencia
+      R-TXI02-04: Vacíos
+      R-TXI02-05: Género
+    validation_states: NOT DEFINED IN v0.1 (decision needed)
+    source_hierarchy_notes: []
+  TX-I03:
+    source_file: TX-I03_Gestión_de_compromisos_v0.1.docx
+    rule_titles:
+      R-TXI03-01: No inventar
+      R-TXI03-02: Responsable
+      R-TXI03-03: Fecha
+      R-TXI03-04: Seguimiento
+    validation_states: NOT DEFINED IN v0.1 (decision needed)
+    source_hierarchy_notes: []
+  TX-P01:
+    source_file: TX-P01_Revisión_de_accesibilidad_y_barreras_v0.1.docx
+    rule_titles:
+      R-TXP01-01: Objetivo primero
+      R-TXP01-02: Barrera innecesaria
+      R-TXP01-03: Recomendación
+      R-TXP01-04: Minimización
+      R-TXP01-05: Complemento
+    validation_states: NOT DEFINED IN v0.1 (decision needed)
+    source_hierarchy_notes: []
+  WF-A01:
+    source_file: WF-A01_Recuperaci├│n_intensiva_v0.1.docx
+    rule_titles:
+      R-WFA01-01: Modelo temporal
+      R-WFA01-02: Propósito
+      R-WFA01-03: Rigor
+      R-WFA01-04: Diagnóstico
+      R-WFA01-05: Priorización
+      R-WFA01-06: Cobertura
+      R-WFA01-07: Alineación
+      R-WFA01-08: Objetivos
+      R-WFA01-09: Fuentes
+      R-WFA01-10: Supervisión
+      R-WFA01-11: Evaluación final
+      R-WFA01-12: IA en ítems
+    validation_states:
+      VALIDADO: La información crítica y decisiones necesarias están confirmadas y el QA pasa.
+      PRELIMINAR: Puede mostrarse una propuesta parcial claramente marcada; no es producto final.
+      NO VALIDADO: Falta información crítica, existe contradicción/inviabilidad no resuelta o una decisión humana pendiente.
+    source_hierarchy_notes:
+    - La jerarquía exhaustiva entre programa, guía, docente, PIAR y otras fuentes no está completamente determinada; las contradicciones
+      deben escalarse.
+    - Jerarquía exacta ante fuentes contradictorias.
+  WF-C01:
+    source_file: WF-C01_Extended_Essay_IB_2027_v0.1.docx
+    rule_titles:
+      R-WFC01-01: Autoría
+      R-WFC01-02: No ghostwriting
+      R-WFC01-03: Supervisor
+      R-WFC01-04: Examinador
+      R-WFC01-05: Fuentes
+      R-WFC01-06: Pregunta
+      R-WFC01-07: Itinerarios
+      R-WFC01-08: Coherencia
+      R-WFC01-09: RPPF
+      R-WFC01-10: Diagnóstico
+    validation_states:
+      VALIDADO: La salida cumple reglas, preserva autoría y supera QA.
+      PRELIMINAR: Diagnóstico o feedback parcial; no equivale a producto final ni calificación.
+      NO VALIDADO: Falta evidencia, se solicita sustitución de autoría o existe un límite de autoridad.
+    source_hierarchy_notes: []
+  WF-I01:
+    source_file: WF-I01_Reunión_colegio–familia_v0.1.docx
+    rule_titles:
+      R-WFI01-01: Ambigüedad
+      R-WFI01-02: Cobertura
+      R-WFI01-03: Por asignatura
+      R-WFI01-04: Metas
+      R-WFI01-05: Compromisos
+      R-WFI01-06: Dos salidas
+      R-WFI01-07: Ausencia ≠ negativo
+    validation_states: NOT DEFINED IN v0.1 (decision needed)
+    source_hierarchy_notes: []
+  WF-I02:
+    source_file: WF-I02_Acompañamiento_EDP_v0.1.docx
+    rule_titles:
+      R-WFI02-01: No evaluador
+      R-WFI02-02: No formulario
+      R-WFI02-03: No copiable
+      R-WFI02-04: Evidencia
+      R-WFI02-05: Rol/momento
+      R-WFI02-06: Alineación
+      R-WFI02-07: Cierre
+    validation_states: NOT DEFINED IN v0.1 (decision needed)
+    source_hierarchy_notes: []
+  WF-I03:
+    source_file: WF-I03_Reconocimiento_institucional_v0.1.docx
+    rule_titles:
+      R-WFI03-01: Un estudiante
+      R-WFI03-02: Cuatro preguntas
+      R-WFI03-03: Generación
+      R-WFI03-04: Categoría
+      R-WFI03-05: Frase
+      R-WFI03-06: Certificado
+      R-WFI03-07: Sobriedad
+      R-WFI03-08: Cierre
+      R-WFI03-09: Límite
+    validation_states: NOT DEFINED IN v0.1 (decision needed)
+    source_hierarchy_notes: []
+  WF-I04:
+    source_file: WF-I04_Informe_académico_individual_v0.1.docx
+    rule_titles:
+      R-WFI04-01: Auditar primero
+      R-WFI04-02: Unidad
+      R-WFI04-03: Conclusión
+      R-WFI04-04: Recomendaciones
+      R-WFI04-05: Vacíos
+      R-WFI04-06: Audiencias
+      R-WFI04-07: Autoridad
+    validation_states: NOT DEFINED IN v0.1 (decision needed)
+    source_hierarchy_notes: []
+  WF-P01:
+    source_file: WF-P01_Perfil_Pedagógico_Inicial_v0.1.docx
+    rule_titles:
+      R-WFP01-01: Secuencia
+      R-WFP01-02: Fortalezas
+      R-WFP01-03: Diagnóstico
+      R-WFP01-04: Evidencia
+      R-WFP01-05: Propósito
+      R-WFP01-06: Estado
+    validation_states: NOT DEFINED IN v0.1 (decision needed)
+    source_hierarchy_notes: []
+  WF-P02:
+    source_file: WF-P02_PIAE_v0.1.docx
+    rule_titles:
+      R-WFP02-01: Integración
+      R-WFP02-02: Responsabilidad
+      R-WFP02-03: Seguimiento
+      R-WFP02-04: Escalamiento
+      R-WFP02-05: No permanencia automática
+    validation_states: NOT DEFINED IN v0.1 (decision needed)
+    source_hierarchy_notes: []
+  WF-P03:
+    source_file: WF-P03_PPD_v0.1.docx
+    rule_titles:
+      R-WFP03-01: Evidencia
+      R-WFP03-02: Mentor decide
+      R-WFP03-03: Coherencia
+      R-WFP03-04: Dignidad
+      R-WFP03-05: Longitudinalidad
+      R-WFP03-06: Completitud
+      R-WFP03-07: Catálogo
+      R-WFP03-08: Prudencia
+    validation_states: NOT DEFINED IN v0.1 (decision needed)
+    source_hierarchy_notes:
+    - La Ficha Rápida del Mentor presenta divergencias y no debe prevalecer sobre Matriz/Handbook sin decisión institucional.
+    - 'Derivada de Cerros PPD: jerarquía explícita de cinco fuentes, entrevista, completitud, principios/valores/dimensiones,
+      prudencia y soberanía del mentor.'

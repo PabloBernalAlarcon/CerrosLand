@@ -1,0 +1,138 @@
+schema_version: '1.0'
+component_id: TX-I02
+component_type: MICRO_SKILL
+traits:
+- transversal
+name: Redacción institucional trazable
+domain: INSTITUTIONAL
+head: null
+version: '0.1'
+lifecycle_status: PROVISIONAL
+architecture_status: READY_WITH_CONDITIONS
+implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+deployment_status: PILOT_OR_BLOCKED
+purpose: Convertir evidencia validada en texto institucional claro, neutral y adecuado a la audiencia sin alterar hechos,
+  ocultar incertidumbres ni homogeneizar géneros documentales distintos.
+users:
+  primary: otros componentes institucionales
+triggers:
+- Otro workflow necesita redactar documento institucional.
+- Se requiere adaptar lenguaje a audiencia interna/externa.
+required_inputs:
+- Evidencia validada.
+- Propósito/documento.
+- Audiencia.
+- Product spec correspondiente.
+optional_inputs: []
+authoritative_sources:
+- source: Evidencia validada
+  function: Contenido
+  limit: No modificar.
+- source: Product spec
+  function: Estructura/tono
+  limit: Cada género conserva reglas propias.
+- source: Lenguaje/Cultura institucional
+  function: Estilo
+  limit: No sustituye evidencia.
+source_hierarchy: []
+knowledge_dependencies:
+- KP-001
+core_rules_inherited:
+- No inventar ni completar vacíos como hechos.
+- Separar hechos, versiones, inferencias, propuestas y decisiones.
+- Respetar jerarquía de fuentes y conservar contradicciones relevantes.
+- La IA no sustituye la autoridad institucional o profesional humana.
+- Bloquear o degradar la salida ante vacíos críticos.
+- Ejecutar control de calidad antes del cierre.
+- Usar lenguaje profesional, neutral y trazable.
+- No convertir análisis técnico en sanción, calificación, diagnóstico o decisión administrativa.
+- Separar productos internos de documentos destinados a familias/estudiantes.
+- Conservar responsables, fechas y fuentes cuando son parte de la trazabilidad.
+- Tratar la información personal/sensible como datos de caso, no conocimiento institucional permanente.
+rules:
+  R-TXI02-01:
+    title: Trazabilidad
+    text: Afirmaciones materiales deben conservar vínculo con evidencia.
+  R-TXI02-02:
+    title: Neutralidad
+    text: Evitar lenguaje moralizante o acusatorio.
+  R-TXI02-03:
+    title: Audiencia
+    text: Adaptar lenguaje sin cambiar contenido.
+  R-TXI02-04:
+    title: Vacíos
+    text: No suavizar o borrar información no documentada.
+  R-TXI02-05:
+    title: Género
+    text: No imponer una plantilla universal a acta, reporte, reconocimiento o informe.
+procedure:
+- phase: Paso 1
+  steps:
+  - Identificar audiencia/product spec.
+- phase: Paso 2
+  steps:
+  - Redactar desde evidencia validada.
+- phase: Paso 3
+  steps:
+  - Revisar neutralidad/trazabilidad.
+- phase: Paso 4
+  steps:
+  - Verificar que no se perdió incertidumbre/vacío.
+decision_logic:
+- if: SI evidencia es incierta
+  then: ENTONCES conservar lenguaje de incertidumbre.
+- if: SI audiencia cambia
+  then: ENTONCES adaptar forma, no hechos.
+- if: SI product spec contradice otro género
+  then: ENTONCES seguir el del workflow llamante.
+autonomous_actions:
+- Redactar/editar.
+- Ajustar tono.
+- Detectar lenguaje impropio.
+human_reserved_actions:
+- Aprobar documento final cuando requiera autoridad institucional.
+forbidden_actions:
+- Alterar evidencia.
+- Ocultar vacíos.
+- Convertir hipótesis en hecho.
+- Homogeneizar todos los productos.
+outputs:
+- Borrador institucional.
+- Versión por audiencia.
+validation_states:
+- state: VALIDADO
+  condition: Puede emitirse como producto final dentro de la lógica funcional, sujeto a autoridad humana correspondiente.
+  source: Documento Maestro de Continuidad v0.11 §9.4 (default general, aprobado 2026-11-24)
+- state: PRELIMINAR
+  condition: Borrador o estado intermedio; faltan elementos no críticos o validación.
+  source: Documento Maestro de Continuidad v0.11 §9.4 (default general, aprobado 2026-11-24)
+- state: NO VALIDADO
+  condition: Falta información crítica, existe contradicción importante o la autoridad requerida no ha decidido.
+  source: Documento Maestro de Continuidad v0.11 §9.4 (default general, aprobado 2026-11-24)
+quality_checks:
+- ¿Hechos intactos?
+- ¿Tono neutral?
+- ¿Vacíos visibles?
+- ¿Género correcto?
+sensitive_data: Hereda sensibilidad del workflow llamante.
+dependencies:
+- dependency: Workflow llamante
+  function: Estructura y audiencia.
+- dependency: Core
+  function: Verdad/trazabilidad.
+handoff_conditions: []
+completion_condition:
+- Texto consistente con evidencia y audiencia.
+functional_acceptance_criteria:
+- scenario: Hipótesis
+  input: Fuente dice 'posiblemente'.
+  expected: Debe conservar cautela.
+- scenario: Cambio de audiencia
+  input: Interno→familia.
+  expected: Debe adaptar tono/alcance sin inventar ni revelar datos internos.
+open_issues:
+- Manual de estilo institucional transversal.
+- Reglas por audiencia.
+implementation_note: Implement as specified; do not infer institutional authority or data governance.
+legacy_status_text: PROVISIONAL FUERTE / pendiente de normalización estilística institucional
+legacy_component_type: MICRO_SKILL_TRANSVERSAL

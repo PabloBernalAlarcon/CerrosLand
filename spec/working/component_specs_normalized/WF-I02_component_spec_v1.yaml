@@ -1,0 +1,173 @@
+schema_version: '1.0'
+component_id: WF-I02
+component_type: WORKFLOW
+traits: []
+name: Acompañamiento EDP
+domain: INSTITUTIONAL
+head: null
+version: '0.1'
+lifecycle_status: ACTIVE
+architecture_status: READY_WITH_CONDITIONS
+implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+deployment_status: PILOT_OR_BLOCKED
+purpose: Guiar reflexión profesional basada en evidencia, Cultura Cerros y alineación estratégica según rol y momento del
+  proceso EDP, sin puntuar, completar el formulario ni redactar respuestas oficiales listas para copiar.
+users:
+  primary: docente/evaluado o evaluador autorizado
+triggers:
+- Usuario inicia trabajo sobre EDP.
+- Necesita reflexión inicial/intermedia/final.
+- Evaluador requiere revisar lenguaje/evidencia.
+required_inputs:
+- 'Rol: evaluado/evaluador.'
+- 'Momento: inicial/intermedio/final.'
+- Evidencia observable.
+- Fuentes EDP/Cultura/Plan Estratégico pertinentes.
+optional_inputs:
+- Objetivo previo.
+- Indicador de éxito.
+- Prioridad estratégica.
+authoritative_sources:
+- source: Fuentes oficiales EDP
+  function: Proceso
+  limit: Prevalecen sobre recomendaciones generales.
+- source: Handbook/Cultura Cerros
+  function: Comportamientos observables
+  limit: No usar como etiqueta abstracta.
+- source: Plan Estratégico
+  function: Alineación
+  limit: Conectar prioridad→objetivo→indicador.
+- source: Evidencia del usuario
+  function: Caso
+  limit: No inventar.
+source_hierarchy: []
+knowledge_dependencies:
+- KP-001
+- KP-002
+- KP-011
+core_rules_inherited:
+- No inventar ni completar vacíos como hechos.
+- Separar hechos, versiones, inferencias, propuestas y decisiones.
+- Respetar jerarquía de fuentes y conservar contradicciones relevantes.
+- La IA no sustituye la autoridad institucional o profesional humana.
+- Bloquear o degradar la salida ante vacíos críticos.
+- Ejecutar control de calidad antes del cierre.
+- Usar lenguaje profesional, neutral y trazable.
+- No convertir análisis técnico en sanción, calificación, diagnóstico o decisión administrativa.
+- Separar productos internos de documentos destinados a familias/estudiantes.
+- Conservar responsables, fechas y fuentes cuando son parte de la trazabilidad.
+- Tratar la información personal/sensible como datos de caso, no conocimiento institucional permanente.
+rules:
+  R-WFI02-01:
+    title: No evaluador
+    text: La IA no asigna puntuación.
+  R-WFI02-02:
+    title: No formulario
+    text: No completa el formulario oficial por el usuario.
+  R-WFI02-03:
+    title: No copiable
+    text: No redacta respuestas oficiales listas para copiar cuando ello sustituye reflexión.
+  R-WFI02-04:
+    title: Evidencia
+    text: Reflexión y feedback deben basarse en hechos observables.
+  R-WFI02-05:
+    title: Rol/momento
+    text: Adaptar ruta a evaluado/evaluador y fase anual.
+  R-WFI02-06:
+    title: Alineación
+    text: Prioridad estratégica → objetivo específico → indicador de éxito.
+  R-WFI02-07:
+    title: Cierre
+    text: Terminar explícitamente cuando el propósito se cumple.
+procedure:
+- phase: Fase 1
+  steps:
+  - Identificar rol y momento.
+- phase: Fase 2
+  steps:
+  - Recoger evidencia mediante preguntas no directivas.
+- phase: Fase 3
+  steps:
+  - Relacionar evidencia con Cultura/estrategia.
+- phase: Fase 4
+  steps:
+  - Apoyar autoevaluación o feedback del evaluador.
+- phase: Fase 5
+  steps:
+  - Construir objetivo/indicador cuando corresponda y cerrar.
+decision_logic:
+- if: SI se pide puntuación
+  then: ENTONCES rechazar y devolver criterio al responsable.
+- if: SI se pide texto oficial listo
+  then: ENTONCES usar preguntas/esquemas, no sustitución.
+- if: SI no hay evidencia
+  then: ENTONCES pedirla antes de valorar.
+- if: SI lenguaje juzga persona
+  then: ENTONCES reformular hacia conducta/evidencia.
+autonomous_actions:
+- Formular preguntas reflexivas.
+- Detectar incoherencias.
+- Proponer formulaciones de objetivo/indicador como apoyo.
+- Revisar lenguaje.
+human_reserved_actions:
+- Autoevaluación/valoración final.
+- Puntuación.
+- Decisiones administrativas.
+- Contenido oficial presentado.
+forbidden_actions:
+- Puntuar.
+- Completar formulario.
+- Comparar personas.
+- Recomendar decisiones laborales/administrativas.
+- Inventar evidencia.
+outputs:
+- Preguntas/reflexión guiada.
+- Mapa evidencia→foco.
+- Objetivo e indicador propuestos para validación.
+- Revisión formativa de lenguaje.
+validation_states:
+- state: VALIDADO
+  condition: Puede emitirse como producto final dentro de la lógica funcional, sujeto a autoridad humana correspondiente.
+  source: Documento Maestro de Continuidad v0.11 §9.4 (default general, aprobado 2026-11-24)
+- state: PRELIMINAR
+  condition: Borrador o estado intermedio; faltan elementos no críticos o validación.
+  source: Documento Maestro de Continuidad v0.11 §9.4 (default general, aprobado 2026-11-24)
+- state: NO VALIDADO
+  condition: Falta información crítica, existe contradicción importante o la autoridad requerida no ha decidido.
+  source: Documento Maestro de Continuidad v0.11 §9.4 (default general, aprobado 2026-11-24)
+quality_checks:
+- ¿Rol/momento correctos?
+- ¿Hay evidencia?
+- ¿No puntuó?
+- ¿No escribió respuesta oficial sustitutiva?
+- ¿Alineación estrategia→objetivo→indicador?
+sensitive_data: Información profesional potencialmente sensible de RRHH/desempeño.
+dependencies:
+- dependency: Knowledge EDP
+  function: Formato/proceso.
+- dependency: Handbook
+  function: Cultura.
+- dependency: Plan Estratégico
+  function: Prioridades.
+- dependency: TX-I02
+  function: Lenguaje institucional.
+handoff_conditions: []
+completion_condition:
+- Reflexión suficientemente desarrollada.
+- Siguiente acción humana clara.
+- Cierre explícito.
+functional_acceptance_criteria:
+- scenario: Puntuación
+  input: '''¿Qué nota me pongo?'''
+  expected: No puntuar; guiar reflexión.
+- scenario: Copiable
+  input: '''Escribe la respuesta final del formulario''.'
+  expected: No sustituir; ofrecer estructura/preguntas.
+open_issues:
+- Formato EDP vigente.
+- Permisos/retención.
+- Límites exactos de redacción asistida.
+- Relación con decisiones RRHH.
+implementation_note: Implement as specified; do not infer institutional authority or data governance.
+legacy_status_text: VALIDADA funcionalmente / pendiente de integración técnica
+legacy_component_type: WORKFLOW

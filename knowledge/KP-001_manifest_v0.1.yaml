@@ -1,0 +1,28 @@
+knowledge_id: KP-001
+name: Cultura Cerros e Identidad Institucional
+domain: CORE / transversal
+authority_class: INSTITUCIONAL NORMATIVO
+status: FUENTE CANÓNICA DISPONIBLE
+version: '0.1'
+canonical_sources:
+- Handbook de Cultura Institucional del Gimnasio de Los Cerros
+source_availability:
+- Handbook de Cultura Institucional del Gimnasio de Los Cerros.pdf
+purpose: Proveer identidad, principios, valores, concepción de persona, lenguaje institucional y criterios formativos transversales
+  para todos los dominios.
+consumers:
+- Core
+- PERSONA
+- PPD
+- EDP
+- Reconocimiento
+- Guías
+- Convivencia
+- Planificación
+owner: Autoridad institucional competente — NO DETERMINADO en la documentación técnica actual.
+update_triggers:
+- Nueva versión oficial del Handbook o decisión institucional que modifique principios/valores/comportamientos.
+forbidden_reasoning:
+- No reinterpretar libremente principios oficiales.
+- No convertir ejemplos o paráfrasis de otros documentos en formulación oficial si contradicen el Handbook.
+notes: En PPD aparece explícitamente como fuente primaria y suprema para identidad, principios, valores y comportamientos.

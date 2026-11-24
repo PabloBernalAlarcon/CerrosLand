@@ -1,0 +1,23 @@
+knowledge_id: KP-015
+name: Actas de Reunión Colegio–Familia
+domain: INSTITUCIONAL / familias
+authority_class: INSTITUCIONAL OPERATIVO
+status: PARCIAL — flujo recuperado; formato literal pendiente
+version: '0.1'
+canonical_sources:
+- Formato institucional de Acta de Reunión con Familia
+- Reglas de panorama académico por asignatura
+- Formato de Resumen Ejecutivo Interno
+source_availability: []
+purpose: Proveer estructura exacta del acta, cobertura académica, firmas y campos de compromisos.
+consumers:
+- WF-I01
+- TX-I03
+- TX-I02
+owner: Dirección de Curso / autoridad institucional — NO DETERMINADO.
+update_triggers:
+- Cambio de formato, áreas obligatorias o política de firma/seguimiento.
+forbidden_reasoning:
+- No mezclar resumen interno con acta familiar.
+- No convertir área no mencionada en “sin alertas”.
+notes: La configuración recuperada exige Ciencias, Matemáticas, Español, Inglés y Sociales.

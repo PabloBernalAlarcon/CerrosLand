@@ -1,0 +1,128 @@
+schema_version: '1.0'
+component_id: TX-P01
+component_type: MICRO_SKILL
+traits:
+- transversal
+name: Revisión de accesibilidad y barreras
+domain: PERSONA
+head: null
+version: '0.1'
+lifecycle_status: PROVISIONAL
+architecture_status: READY_WITH_CONDITIONS
+implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+deployment_status: PILOT_OR_BLOCKED
+purpose: Revisar una actividad, planificación o evaluación desde la perspectiva de barreras y acceso, identificando obstáculos
+  innecesarios y verificando que los apoyos propuestos preserven el objetivo.
+users:
+  primary: componentes PLANIFICA/PRODUCE y docentes
+triggers:
+- Se diseña/revisa actividad/evaluación.
+- Existe perfil/barrera relevante.
+- Se solicita auditoría desde Persona.
+required_inputs:
+- Producto académico.
+- Objetivo.
+- Información de barrera/fortaleza pertinente.
+optional_inputs:
+- Apoyos/ajustes existentes.
+- PPI/PIAE autorizado.
+authoritative_sources:
+- source: Producto académico
+  function: Objeto de revisión
+  limit: No rediseñar automáticamente.
+- source: Objetivo
+  function: Control
+  limit: Distinguir barrera del aprendizaje esencial.
+- source: Perfil/barrera
+  function: Contexto
+  limit: Solo datos necesarios.
+source_hierarchy: []
+knowledge_dependencies: []
+core_rules_inherited:
+- No inventar ni completar vacíos como hechos.
+- Respetar jerarquía y autoridad de fuentes.
+- Distinguir evidencia, inferencia, propuesta y decisión.
+- La IA no sustituye autoridad profesional o institucional humana.
+- Detener o degradar la salida cuando falta información crítica.
+- Señalar incoherencias relevantes y ejecutar QA antes del cierre.
+- La persona precede a la etiqueta, dificultad, diagnóstico, calificación o procedimiento.
+- Comprender contexto y fortalezas antes de recomendar.
+- Usar evidencia observable antes que inferencia y formular hipótesis con prudencia.
+- No diagnosticar, patologizar, psicologizar ni convertir circunstancias en identidad.
+- Proteger dignidad, posibilidad de crecimiento y autonomía progresiva.
+- Los apoyos deben ser proporcionales, viables y no reducir automáticamente el objetivo académico.
+rules:
+  R-TXP01-01: No eliminar una demanda si es precisamente el objetivo.
+  R-TXP01-02: Identificar demandas accesorias que impiden demostrar aprendizaje.
+  R-TXP01-03: Proponer ajuste, no aprobarlo.
+  R-TXP01-04: Usar solo información personal necesaria.
+  R-TXP01-05: No sustituir TX-A02; añade lente de acceso/persona.
+procedure:
+- phase: Paso 1
+  steps:
+  - Identificar objetivo y demandas del producto.
+- phase: Paso 2
+  steps:
+  - Comparar con barrera/fortaleza relevante.
+- phase: Paso 3
+  steps:
+  - Distinguir demanda esencial vs accesoria.
+- phase: Paso 4
+  steps:
+  - Proponer ajuste o declarar que no se requiere.
+decision_logic:
+- if: SI la demanda problemática es el objetivo
+  then: ENTONCES no removerla automáticamente.
+- if: SI es accesoria y bloquea demostración
+  then: ENTONCES proponer vía alternativa.
+- if: SI no hay evidencia de barrera
+  then: ENTONCES no personalizar por intuición.
+autonomous_actions:
+- Detectar barreras innecesarias.
+- Proponer accesos alternativos.
+- Explicar efecto sobre objetivo.
+human_reserved_actions:
+- Aprobar modificación.
+- Decidir ajuste formal.
+forbidden_actions:
+- Rediseñar currículo.
+- Usar diagnóstico como receta.
+- Exponer datos personales innecesarios.
+outputs:
+- Barreras detectadas.
+- Demandas esenciales/accesorias.
+- Ajustes sugeridos.
+- Riesgos de alterar objetivo.
+validation_states: []
+quality_checks:
+- ¿Se preserva objetivo?
+- ¿Barrera está sustentada?
+- ¿Se minimizan datos?
+- ¿Ajuste es proporcional?
+sensitive_data: Puede consumir datos personales; debe minimizarse.
+dependencies:
+- dependency: PR-S01
+  function: Barreras.
+- dependency: PR-S02
+  function: Ajustes.
+- dependency: TX-A02
+  function: Alineación académica.
+handoff_conditions: []
+completion_condition:
+- Revisión terminada.
+- Recomendaciones claras.
+- Decisión humana pendiente cuando aplica.
+functional_acceptance_criteria:
+- scenario: Carga lectora secundaria
+  input: Objetivo conceptual de ciencias.
+  expected: Debe proponer acceso alternativo si lectura no es objetivo.
+- scenario: Lectura como objetivo
+  input: Clase de comprensión lectora.
+  expected: No debe remover demanda lectora esencial.
+open_issues:
+- Integración técnica con FL-D02/FL-D01.
+- Criterios por edad/ciclo.
+- Política de datos.
+implementation_note: Do not implement data persistence/access policy unless separately approved.
+legacy_status_text: VALIDADA PROVISIONAL / pendiente de integración final con Fluffy
+legacy_component_type: MICRO_SKILL_TRANSVERSAL

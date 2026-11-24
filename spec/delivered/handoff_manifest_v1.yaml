@@ -1,0 +1,15 @@
+handoff_version: '1.0'
+architecture_version: Cerros AI v1.0
+entry_document: Handoff_Final_Ingeniero_Cerros_AI_v1.0.docx
+master_spec: Especificacion_Maestra_Cerros_AI_v1.0.docx
+canonical_contract: NORMALIZACION_PRE_V1/cerros_component_contract_v1.schema.json
+canonical_registry: NORMALIZACION_PRE_V1/component_readiness_registry_v1.yaml
+canonical_map: NORMALIZACION_PRE_V1/master_dependency_map_v1.yaml
+component_specs: NORMALIZACION_PRE_V1/component_specs_normalized/
+inventory:
+  components: 39
+  active: 27
+  provisional: 11
+  disabled: 1
+  gaps: 1
+implementation_principle: Technology adapts to Cerros AI; Cerros AI must not be deformed to fit a platform.

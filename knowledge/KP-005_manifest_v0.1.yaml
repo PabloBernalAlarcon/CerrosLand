@@ -1,0 +1,28 @@
+knowledge_id: KP-005
+name: Marco Institucional para Guías e IA Educativa
+domain: ACADÉMICO / PRODUCE
+authority_class: 'MIXTO: institucional normativo + operativo'
+status: PARCIAL
+version: '0.1'
+canonical_sources:
+- Cultura Cerros
+- Plan Estratégico Institucional
+- Proyecto Marco Cerros.AI
+- Lineamientos Generales del Uso de IA
+source_availability:
+- Handbook de Cultura Institucional del Gimnasio de Los Cerros.pdf
+- _Presentación Plan estratégico.pdf
+purpose: Definir los límites institucionales para producir guías y recursos con IA, subordinando la guía a planificación y
+  fuentes docentes.
+consumers:
+- FL-D01
+- TX-D01
+- TX-D02
+owner: Autoridad institucional de IA/área académica — NO DETERMINADO.
+update_triggers:
+- Cambio en lineamientos de IA, proyecto marco o formato institucional de guías.
+forbidden_reasoning:
+- No usar conocimiento general como sustituto de fuentes disciplinares aportadas.
+- No atribuir al colegio políticas de IA no presentes en fuente oficial.
+notes: Proyecto Marco Cerros.AI y Lineamientos Generales de IA fueron identificados por el expediente, pero no están actualmente
+  en el corpus disponible.

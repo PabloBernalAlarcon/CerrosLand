@@ -1,0 +1,43 @@
+contract_version: '1.0'
+principles:
+- One component has exactly one primary component_type.
+- Traits describe cross-cutting characteristics; they never replace component_type.
+- Lifecycle, architecture, implementation and deployment are distinct dimensions.
+- GAP is not a component_type and must not have an executable component spec.
+- Unknown institutional decisions remain open_issues; they are not inferred by the implementer.
+component_type_enum:
+- SKILL
+- MICRO_SKILL
+- WORKFLOW
+- SPECIALIZATION
+trait_enum:
+- qa
+- transversal
+- specialized
+- bridge
+- analytics
+- conversational
+- workflow_embedded
+lifecycle_status_enum:
+- ACTIVE
+- PROVISIONAL
+- DISABLED
+gap_policy:
+  representation: Registry/map node only; no executable component YAML.
+  status: GAP
+  implementation: NOT_IMPLEMENTABLE
+  deployment: NOT_DEPLOYABLE
+architecture_status_enum:
+- READY
+- READY_WITH_CONDITIONS
+- NOT_READY
+implementation_status_enum:
+- IMPLEMENTABLE
+- IMPLEMENTABLE_WITH_CONDITIONS
+- NOT_IMPLEMENTABLE
+deployment_status_enum:
+- ELIGIBLE_FOR_TECHNICAL_QA
+- BLOCKED_BY_GOVERNANCE
+- BLOCKED_BY_KNOWLEDGE
+- PILOT_OR_BLOCKED
+- NOT_DEPLOYABLE

@@ -1,0 +1,151 @@
+schema_version: '1.0'
+component_id: IN-S01
+component_type: SKILL
+traits: []
+name: Análisis técnico de convivencia
+domain: INSTITUTIONAL
+head: null
+version: '0.1'
+lifecycle_status: ACTIVE
+architecture_status: READY_WITH_CONDITIONS
+implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+deployment_status: PILOT_OR_BLOCKED
+purpose: Estructurar un caso de convivencia separando hechos, versiones, inferencias e incertidumbres, individualizando conductas
+  y determinando si existe información suficiente para un análisis posterior.
+users:
+  primary: profesional institucional autorizado
+triggers:
+- Se recibe reporte o versiones sobre incidente de convivencia.
+- Se necesita preparar caso antes de clasificación/reporte.
+required_inputs:
+- Relatos/versiones disponibles.
+- Identificación de participantes.
+- Evidencias/documentos disponibles.
+- Contexto temporal.
+optional_inputs:
+- Antecedentes autorizados.
+- Registros institucionales pertinentes.
+authoritative_sources:
+- source: Versiones de participantes
+  function: Evidencia declarativa
+  limit: Conservar autoría y contradicciones.
+- source: Documentos/evidencias
+  function: Soporte
+  limit: No extrapolar más allá de su contenido.
+- source: Manual/normativa convivencia
+  function: Marco
+  limit: No aplicar sanción; sirve para análisis posterior.
+source_hierarchy: []
+knowledge_dependencies:
+- KP-001
+- KP-010
+core_rules_inherited:
+- No inventar ni completar vacíos como hechos.
+- Separar hechos, versiones, inferencias, propuestas y decisiones.
+- Respetar jerarquía de fuentes y conservar contradicciones relevantes.
+- La IA no sustituye la autoridad institucional o profesional humana.
+- Bloquear o degradar la salida ante vacíos críticos.
+- Ejecutar control de calidad antes del cierre.
+- Usar lenguaje profesional, neutral y trazable.
+- No convertir análisis técnico en sanción, calificación, diagnóstico o decisión administrativa.
+- Separar productos internos de documentos destinados a familias/estudiantes.
+- Conservar responsables, fechas y fuentes cuando son parte de la trazabilidad.
+- Tratar la información personal/sensible como datos de caso, no conocimiento institucional permanente.
+rules:
+  R-INS01-01:
+    title: Separación
+    text: Hecho, versión e inferencia deben estar diferenciados.
+  R-INS01-02:
+    title: Contradicciones
+    text: Conservar contradicciones, no fusionarlas.
+  R-INS01-03:
+    title: Certeza
+    text: Hacer visible nivel de certeza.
+  R-INS01-04:
+    title: Participantes
+    text: Individualizar conductas cuando hay múltiples personas.
+  R-INS01-05:
+    title: Vacíos
+    text: Preguntar/bloquear ante información crítica faltante.
+  R-INS01-06:
+    title: No diagnóstico
+    text: No inferir condiciones psicológicas desde conductas.
+procedure:
+- phase: Paso 1 — Intake
+  steps:
+  - Identificar participantes, fecha, contexto y fuentes.
+- phase: Paso 2 — Separación
+  steps:
+  - Organizar cada versión por fuente.
+  - Extraer hechos corroborados y puntos controvertidos.
+- phase: Paso 3 — Suficiencia
+  steps:
+  - Detectar vacíos y contradicciones.
+  - Determinar si puede pasar a clasificación.
+decision_logic:
+- if: SI dos versiones contradicen
+  then: ENTONCES conservar ambas y marcar incertidumbre.
+- if: SI falta información crítica
+  then: ENTONCES pedirla y no cerrar análisis.
+- if: SI una conducta se atribuye a grupo
+  then: ENTONCES individualizar antes de clasificar cuando sea posible.
+autonomous_actions:
+- Organizar versiones.
+- Detectar contradicciones/vacíos.
+- Describir hechos presuntivos con nivel de certeza.
+human_reserved_actions:
+- Determinar responsabilidad final.
+- Tomar decisiones disciplinarias.
+- Autorizar uso institucional final.
+forbidden_actions:
+- Sancionar.
+- Declarar culpabilidad.
+- Psicologizar.
+- Inventar hechos.
+outputs:
+- Análisis técnico preliminar.
+- Vacíos críticos.
+- Mapa de participantes/conductas.
+- Nivel de certeza.
+validation_states:
+- state: VALIDADO
+  condition: Puede emitirse como producto final dentro de la lógica funcional, sujeto a autoridad humana correspondiente.
+  source: Documento Maestro de Continuidad v0.11 §9.4 (default general, aprobado 2026-11-24)
+- state: PRELIMINAR
+  condition: Borrador o estado intermedio; faltan elementos no críticos o validación.
+  source: Documento Maestro de Continuidad v0.11 §9.4 (default general, aprobado 2026-11-24)
+- state: NO VALIDADO
+  condition: Falta información crítica, existe contradicción importante o la autoridad requerida no ha decidido.
+  source: Documento Maestro de Continuidad v0.11 §9.4 (default general, aprobado 2026-11-24)
+quality_checks:
+- ¿Versiones separadas?
+- ¿Contradicciones visibles?
+- ¿Conductas individualizadas?
+- ¿Sin diagnósticos/sanciones?
+sensitive_data: 'Muy sensible: menores, convivencia, posibles agresiones y testimonios.'
+dependencies:
+- dependency: IN-S02
+  function: Clasificación/gravedad tras análisis suficiente.
+- dependency: TX-I01
+  function: Alertas no clínicas cuando proceda.
+- dependency: Normativa convivencia
+  function: Knowledge versionado.
+handoff_conditions: []
+completion_condition:
+- Suficiencia evaluada.
+- Vacíos explícitos.
+- Caso listo o no listo para clasificación.
+functional_acceptance_criteria:
+- scenario: Versiones opuestas
+  input: Dos estudiantes narran hechos incompatibles.
+  expected: Debe preservar contradicción.
+- scenario: Grupo
+  input: '''Todos molestaron''.'
+  expected: Debe pedir individualización antes de atribuir conductas.
+open_issues:
+- Protocolos de evidencia/adjuntos.
+- Niveles formales de certeza.
+- Acceso por roles.
+implementation_note: Implement as specified; do not infer institutional authority or data governance.
+legacy_status_text: VALIDADA funcionalmente / pendiente de implementación técnica
+legacy_component_type: SKILL

@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cerros-runtime"
+version = "0.1.0"
+description = "Runtime for the Cerros AI v1.0 architecture"
+requires-python = ">=3.10"
+dependencies = ["pyyaml>=6", "jsonschema>=4.18"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+api = ["anthropic"]
+
+[tool.setuptools]
+packages = ["cerros_runtime"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

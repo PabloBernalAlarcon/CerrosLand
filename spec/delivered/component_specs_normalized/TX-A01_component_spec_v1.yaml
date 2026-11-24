@@ -1,0 +1,137 @@
+schema_version: '1.0'
+component_id: TX-A01
+component_type: MICRO_SKILL
+traits:
+- transversal
+name: Formulación de objetivos de aprendizaje
+domain: Académico
+head: Transversal a PLANIFICA / PRODUCE
+version: '0.1'
+lifecycle_status: ACTIVE
+architecture_status: READY_WITH_CONDITIONS
+implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+deployment_status: PILOT_OR_BLOCKED
+purpose: Formular, reformular y auditar objetivos de aprendizaje observables, alcanzables, verificables y coherentes con la
+  fuente curricular, sin confundir objetivos con actividades.
+users:
+  primary: otros componentes de Cerros AI y profesores
+  secondary: []
+triggers:
+- Un objetivo está ausente, ambiguo, demasiado amplio o formulado como actividad.
+- Otra skill necesita comprobar la calidad de un objetivo.
+- Un proceso remedial requiere convertir objetivos vagos en objetivos verificables.
+required_inputs:
+- Fuente curricular o intención pedagógica confirmada.
+- Nivel de planificación donde se usará el objetivo.
+- Tiempo/alcance disponible cuando sea relevante.
+optional_inputs:
+- Evidencia esperada.
+- Contexto de evaluación.
+- Verbo o formulación inicial del profesor.
+authoritative_sources:
+- source: Fuente curricular del caso
+  function: Contenido y alcance
+  rule: No inventar aprendizaje esperado.
+- source: Decisión docente confirmada
+  function: Intención pedagógica
+  rule: La IA puede reformular, no sustituir la intención.
+- source: Reglas específicas del componente llamante
+  function: Formato
+  rule: 'Ej.: FL-P03 exige máximo dos objetivos y fórmula en inglés.'
+source_hierarchy: []
+knowledge_dependencies: []
+core_rules_inherited:
+- No inventar ni completar vacíos como hechos.
+- Respetar jerarquía y autoridad de fuentes.
+- Distinguir evidencia, inferencia, propuesta y decisión.
+- La IA no sustituye la autoridad profesional humana.
+- Detener o degradar la salida cuando falta información crítica.
+- Señalar incoherencias relevantes.
+- Ejecutar control de calidad antes del cierre.
+rules:
+  R-TXA01-01: Todo objetivo debe derivarse de fuente o intención confirmada.
+  R-TXA01-02: Debe describir un desempeño observable/verificable.
+  R-TXA01-03: Debe ser alcanzable en el tiempo y nivel de planificación correspondiente.
+  R-TXA01-04: No formular el objetivo como simple realización de una tarea.
+  R-TXA01-05: Debe evitar vaguedad y amplitud excesiva.
+  R-TXA01-06: No crear objetivos curriculares para llenar vacíos sin fuente suficiente.
+  R-TXA01-07: Si la skill llamante exige un formato específico, debe respetarlo.
+procedure:
+- phase: Paso 1 — Identificar aprendizaje esperado
+  steps:
+  - Localizar fuente/intención confirmada.
+  - Distinguir contenido, habilidad y evidencia esperada.
+- phase: Paso 2 — Formular
+  steps:
+  - Redactar desempeño observable y verificable.
+  - Ajustar alcance al nivel/tiempo disponible.
+- phase: Paso 3 — Auditar
+  steps:
+  - Comprobar que no sea una actividad disfrazada.
+  - Comprobar que exista una forma razonable de obtener evidencia.
+- phase: Paso 4 — Validar
+  steps:
+  - Si la reformulación cambia el sentido, solicitar aprobación docente.
+decision_logic:
+- if: SI no existe fuente/intención suficiente
+  then: ENTONCES no formular un objetivo definitivo.
+- if: SI el objetivo es una actividad
+  then: ENTONCES reformular hacia el aprendizaje/desempeño.
+- if: SI el objetivo excede el tiempo disponible
+  then: ENTONCES advertir y proponer reducción/priorización.
+- if: SI la reformulación cambia sustantivamente la intención
+  then: ENTONCES esperar validación humana.
+autonomous_actions:
+- Detectar vaguedad, amplitud o formulación como actividad.
+- Proponer redacciones alternativas manteniendo el sentido.
+- Comprobar observabilidad y viabilidad.
+human_reserved_actions:
+- Aprobar cambios sustantivos de intención.
+- Definir el aprendizaje esperado cuando no exista fuente suficiente.
+forbidden_actions:
+- Inventar objetivos curriculares.
+- Reducir exigencia para hacerlos fáciles.
+- Confundir actividad con aprendizaje.
+- Imponer un formato de otro componente.
+outputs:
+- Objetivo propuesto/reformulado.
+- Diagnóstico de problema del objetivo.
+- Alternativas cuando existan varias formulaciones razonables.
+validation_states: []
+quality_checks:
+- ¿Proviene de una fuente/intención confirmada?
+- ¿Es observable?
+- ¿Es verificable?
+- ¿Es viable?
+- ¿Describe aprendizaje y no solo actividad?
+- ¿Respeta restricciones del componente llamante?
+sensitive_data: No necesita datos personales por defecto.
+dependencies:
+- dependency: Fuente curricular / intención confirmada
+  function: Base semántica del objetivo.
+- dependency: Componente llamante
+  function: Aporta formato, cantidad máxima y restricciones.
+- dependency: TX-A02
+  function: Puede verificar posteriormente alineación con evidencia/actividad.
+handoff_conditions: []
+completion_condition:
+- Objetivo suficientemente claro y verificable.
+- Si hubo cambio sustantivo, validación humana obtenida.
+- Formato específico del componente respetado.
+functional_acceptance_criteria:
+- scenario: Actividad como objetivo
+  input: '''Complete worksheet 3''.'
+  expected: Debe reformular hacia el aprendizaje esperado, no validar la tarea como objetivo.
+- scenario: Objetivo enorme
+  input: '''Understand all causes and consequences of World War I'' para 40 min.'
+  expected: Debe advertir amplitud y proponer una versión viable.
+- scenario: Sin fuente
+  input: Usuario pide inventar objetivo de una unidad desconocida.
+  expected: Debe solicitar información curricular.
+open_issues:
+- Taxonomía institucional de verbos/complexidad, si se decide crear.
+- Reglas específicas por edad/ciclo.
+- Relación futura con estándares externos por asignatura.
+implementation_note: Implement as specified; do not redesign or fill institutional gaps.
+legacy_status_text: VALIDADA funcionalmente / pendiente de implementación técnica
+legacy_component_type: MICRO_SKILL_TRANSVERSAL

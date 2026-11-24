@@ -1,0 +1,142 @@
+schema_version: '1.0'
+component_id: WF-I03
+component_type: WORKFLOW
+traits: []
+name: Reconocimiento institucional
+domain: INSTITUTIONAL
+head: null
+version: '0.1'
+lifecycle_status: PROVISIONAL
+architecture_status: READY_WITH_CONDITIONS
+implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+deployment_status: PILOT_OR_BLOCKED
+purpose: Transformar evidencia contextual sobre un estudiante de grado 7 en un reconocimiento ceremonial breve y un párrafo
+  institucional de certificado, mediante entrevista de cuatro preguntas, sin exagerar, comparar ni inventar.
+users:
+  primary: profesor que conoce al estudiante
+triggers:
+- Preparación de reconocimiento de graduación de grado 7.
+- Profesor inicia caso de un estudiante.
+required_inputs:
+- Un estudiante.
+- Respuestas a cuatro preguntas secuenciales.
+- Ejemplos/conductas/contribuciones observables.
+optional_inputs:
+- Categorías institucionales vigentes cuando estén disponibles.
+authoritative_sources:
+- source: Configuración Cerros Reconoce
+  function: Flujo principal
+  limit: Fuente disponible más completa.
+- source: Categorías institucionales proporcionadas
+  function: Selección
+  limit: Existente adecuada > categoría nueva.
+- source: Marcos institucionales
+  function: Tono/criterio
+  limit: Corpus exacto no determinado.
+source_hierarchy: []
+knowledge_dependencies: []
+core_rules_inherited:
+- No inventar ni completar vacíos como hechos.
+- Separar hechos, versiones, inferencias, propuestas y decisiones.
+- Respetar jerarquía de fuentes y conservar contradicciones relevantes.
+- La IA no sustituye la autoridad institucional o profesional humana.
+- Bloquear o degradar la salida ante vacíos críticos.
+- Ejecutar control de calidad antes del cierre.
+- Usar lenguaje profesional, neutral y trazable.
+- No convertir análisis técnico en sanción, calificación, diagnóstico o decisión administrativa.
+- Separar productos internos de documentos destinados a familias/estudiantes.
+- Conservar responsables, fechas y fuentes cuando son parte de la trazabilidad.
+- Tratar la información personal/sensible como datos de caso, no conocimiento institucional permanente.
+rules:
+  R-WFI03-01: Trabajar un caso a la vez.
+  R-WFI03-02: Entrevista secuencial, una pregunta por turno, con opciones descriptivas.
+  R-WFI03-03: Después de la cuarta respuesta, producir resultado final.
+  R-WFI03-04: Priorizar categoría institucional existente adecuada.
+  R-WFI03-05: Reconocimiento ceremonial máximo cuatro palabras.
+  R-WFI03-06: Un único párrafo; misma idea central, conductas observables e impacto comunitario.
+  R-WFI03-07: No exagerar ni comparar.
+  R-WFI03-08: Terminar con 'Reconocimiento finalizado.'
+  R-WFI03-09: No incluir firmas, cargos, autoridades ni diseño físico.
+procedure:
+- phase: Fase 1
+  steps:
+  - Identificar estudiante.
+- phase: Fase 2
+  steps:
+  - Realizar cuatro preguntas, una por turno, con opciones descriptivas.
+- phase: Fase 3
+  steps:
+  - Sintetizar contribución central y categoría.
+- phase: Fase 4
+  steps:
+  - Generar frase ≤4 palabras y párrafo de certificado alineados.
+- phase: Fase 5
+  steps:
+  - Cerrar exactamente.
+decision_logic:
+- if: SI existe categoría adecuada
+  then: ENTONCES usarla antes de crear nueva.
+- if: SI ninguna categoría encaja
+  then: ENTONCES puede proponer nueva sin presentarla como oficial previa.
+- if: SI afirmación no está respaldada
+  then: ENTONCES excluirla.
+- if: SI frase y certificado expresan ideas distintas
+  then: ENTONCES realinear.
+autonomous_actions:
+- Formular preguntas.
+- Sintetizar evidencia.
+- Seleccionar categoría adecuada.
+- Redactar productos.
+human_reserved_actions:
+- Aportar/verificar evidencia.
+- Aprobar uso institucional final si la política lo exige.
+- Decidir quién recibe reconocimiento.
+forbidden_actions:
+- Inventar cualidades.
+- Comparar estudiantes.
+- Exagerar.
+- Gestionar firmas/publicación.
+- Prolongar conversación después del cierre.
+outputs:
+- Frase ≤4 palabras.
+- Párrafo único de certificado.
+- Categoría usada/propuesta.
+validation_states: []
+quality_checks:
+- ¿Evidencia observable?
+- ¿Sin comparación/exageración?
+- ¿Frase ≤4 palabras?
+- ¿Párrafo único?
+- ¿Ambos dicen lo mismo?
+sensitive_data: Datos de un menor y observaciones personales; sensibilidad moderada.
+dependencies:
+- dependency: Knowledge categorías de reconocimiento
+  function: Incompleto/pending.
+- dependency: Cultura/lenguaje institucional
+  function: Tono.
+- dependency: Formato físico
+  function: Fuera del workflow.
+handoff_conditions: []
+completion_condition:
+- Dos productos generados.
+- Cierre exacto emitido.
+- No añade nada más.
+functional_acceptance_criteria:
+- scenario: Frase larga
+  input: Cinco palabras.
+  expected: Debe reducirla.
+- scenario: Elogio vacío
+  input: '''Es un gran estudiante''.'
+  expected: Debe basarlo en conducta/contribución.
+- scenario: Contribución discreta
+  input: Apoyo silencioso a compañeros.
+  expected: Debe valorarla sin privilegiar notoriedad.
+open_issues:
+- Catálogo oficial de categorías.
+- Contenido exacto de las cuatro preguntas.
+- Aprobación humana formal.
+- Contradicciones entre respuestas.
+- Privacidad.
+implementation_note: Implement as specified; do not infer institutional authority or data governance.
+legacy_status_text: VALIDADO en flujo básico / fuentes institucionales de categorías incompletas
+legacy_component_type: WORKFLOW

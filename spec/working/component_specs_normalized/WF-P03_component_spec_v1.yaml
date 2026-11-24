@@ -1,0 +1,196 @@
+schema_version: '1.0'
+component_id: WF-P03
+component_type: WORKFLOW
+traits: []
+name: PPD
+domain: PERSONA
+head: null
+version: '0.1'
+lifecycle_status: ACTIVE
+architecture_status: READY_WITH_CONDITIONS
+implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+deployment_status: PILOT_OR_BLOCKED
+purpose: Conducir una entrevista estructurada que transforme evidencia observable en un PPD coherente con Cultura Cerros,
+  preserve dignidad y continuidad longitudinal y produzca salidas institucionales sin sustituir el criterio del mentor.
+users:
+  primary: mentor
+triggers:
+- El mentor inicia/actualiza PPD.
+- Se requiere reconstrucción longitudinal.
+- Se prepara transferencia entre mentores.
+required_inputs:
+- Identidad/curso/momento.
+- Evidencia académica, organización, convivencia, desarrollo, intereses/motivaciones/contexto.
+- Selecciones de principios/valores/dimensión cuando corresponda.
+- PPD anteriores si existen.
+optional_inputs:
+- Acontecimientos relevantes.
+- Información familiar prudente.
+- Documentos previos.
+authoritative_sources:
+- source: Handbook Cultura Cerros
+  function: Nivel 1
+  limit: Máxima autoridad.
+- source: Expediente Maestro PPD
+  function: Nivel 2
+  limit: Propósito/metodología.
+- source: Arquitectura Conversacional
+  function: Nivel 3
+  limit: Entrevista/completitud.
+- source: Matriz Oficial Principios y Valores
+  function: Nivel 4
+  limit: Códigos/comportamientos.
+- source: Manual de Generación
+  function: Nivel 5
+  limit: Redacción/salidas.
+source_hierarchy:
+- level: 1
+  source: Handbook Cultura Cerros
+- level: 2
+  source: Expediente Maestro PPD
+- level: 3
+  source: Arquitectura Conversacional
+- level: 4
+  source: Matriz Oficial Principios y Valores
+- level: 5
+  source: Manual de Generación
+- note: La Ficha Rápida del Mentor presenta divergencias y no debe prevalecer sobre Matriz/Handbook sin decisión institucional.
+  source: WF-P03_PPD_v0.1.docx
+knowledge_dependencies:
+- KP-001
+- KP-009
+core_rules_inherited:
+- No inventar ni completar vacíos como hechos.
+- Respetar jerarquía y autoridad de fuentes.
+- Distinguir evidencia, inferencia, propuesta y decisión.
+- La IA no sustituye autoridad profesional o institucional humana.
+- Detener o degradar la salida cuando falta información crítica.
+- Señalar incoherencias relevantes y ejecutar QA antes del cierre.
+- La persona precede a la etiqueta, dificultad, diagnóstico, calificación o procedimiento.
+- Comprender contexto y fortalezas antes de recomendar.
+- Usar evidencia observable antes que inferencia y formular hipótesis con prudencia.
+- No diagnosticar, patologizar, psicologizar ni convertir circunstancias en identidad.
+- Proteger dignidad, posibilidad de crecimiento y autonomía progresiva.
+- Los apoyos deben ser proporcionales, viables y no reducir automáticamente el objetivo académico.
+rules:
+  R-WFP03-01:
+    title: Evidencia
+    text: Interpretar solo evidencia observable.
+  R-WFP03-02:
+    title: Mentor decide
+    text: Selección final de principio, valor y dimensiones permanece humana.
+  R-WFP03-03:
+    title: Coherencia
+    text: Si selección no está sustentada, señalar y sugerir alternativas compatibles.
+  R-WFP03-04:
+    title: Dignidad
+    text: No etiquetar ni convertir circunstancia en identidad.
+  R-WFP03-05:
+    title: Longitudinalidad
+    text: Si existen PPD previos, incorporar continuidad sin perder contexto.
+  R-WFP03-06:
+    title: Completitud
+    text: No cerrar con vacíos/contradicciones sustantivas.
+  R-WFP03-07:
+    title: Catálogo
+    text: No inventar principios, valores, códigos o categorías externas.
+  R-WFP03-08:
+    title: Prudencia
+    text: Entre varias interpretaciones plausibles, explicitar incertidumbre.
+procedure:
+- phase: Fase 1 — Entrevista
+  steps:
+  - Recoger información según arquitectura conversacional.
+  - Detectar vacíos/ambigüedades.
+- phase: Fase 2 — Contraste institucional
+  steps:
+  - Relacionar evidencia con principios, valores y DP1–DP6.
+  - Señalar incompatibilidades y sugerir alternativas sin decidir.
+- phase: Fase 3 — Longitudinalidad
+  steps:
+  - Comparar PPD previos cuando existan.
+  - Identificar crecimiento, persistencia y cambio.
+- phase: Fase 4 — Productos
+  steps:
+  - Preparar PPD/Informe y salidas longitudinales/transferencia según corresponda.
+- phase: Fase 5 — QA
+  steps:
+  - Revisar evidencia, dignidad, coherencia, completitud y utilidad.
+decision_logic:
+- if: SI mentor selecciona categoría no sustentada
+  then: ENTONCES señalar inconsistencia y sugerir opciones; mentor decide.
+- if: SI faltan elementos esenciales
+  then: ENTONCES NO VALIDADO y no cierre.
+- if: SI fuentes contradicen
+  then: ENTONCES prevalece mayor jerarquía.
+- if: SI una interpretación psicologiza
+  then: ENTONCES reformular o detener.
+autonomous_actions:
+- Controlar completitud.
+- Contrastar evidencia con marcos.
+- Sugerir alternativas.
+- Redactar borradores institucionales.
+- Detectar tendencias longitudinales sustentadas.
+human_reserved_actions:
+- Selección final de principios/valores/dimensiones.
+- Juicio profesional del mentor.
+- Validación/carga institucional.
+forbidden_actions:
+- Diagnosticar/psicologizar.
+- Inventar evidencia.
+- Usar categorías externas.
+- Definir rasgos permanentes.
+- Aceptar acríticamente una selección incompatible.
+outputs:
+- PPD listo para carga.
+- Informe narrativo.
+- Reconstrucción/registro longitudinal según fuente.
+- Resumen de transferencia/fotografía pedagógica según definición pendiente.
+validation_states:
+- state: VALIDADO
+  condition: Puede emitirse como producto final dentro de la lógica funcional, sujeto a autoridad humana correspondiente.
+  source: Documento Maestro de Continuidad v0.11 §9.4 (default general, aprobado 2026-11-24)
+- state: PRELIMINAR
+  condition: Borrador o estado intermedio; faltan elementos no críticos o validación.
+  source: Documento Maestro de Continuidad v0.11 §9.4 (default general, aprobado 2026-11-24)
+- state: NO VALIDADO
+  condition: Falta información crítica, existe contradicción importante o la autoridad requerida no ha decidido.
+  source: Documento Maestro de Continuidad v0.11 §9.4 (default general, aprobado 2026-11-24)
+quality_checks:
+- ¿Toda interpretación tiene evidencia?
+- ¿Selecciones son coherentes con Handbook?
+- ¿Se preserva dignidad/crecimiento?
+- ¿Completitud suficiente?
+- ¿Se distinguió hecho, interpretación y recomendación?
+sensitive_data: 'Muy sensible: vida personal, familia, convivencia, dimensión espiritual/social/física, trayectoria longitudinal.'
+dependencies:
+- dependency: PR-S06
+  function: Análisis longitudinal.
+- dependency: PR-S07
+  function: Transferencia.
+- dependency: Knowledge PPD
+  function: Códigos A/O/C/D, P/V y DP1–DP6.
+- dependency: Phidias
+  function: Destino de producto; integración técnica no definida.
+handoff_conditions: []
+completion_condition:
+- Entrevista completa.
+- Contradicciones resueltas o visibles.
+- Productos marcados con estado correcto.
+- Criterio final del mentor preservado.
+functional_acceptance_criteria:
+- scenario: Selección débil
+  input: Mentor elige valor no sustentado.
+  expected: Debe señalar y sugerir opciones, no bloquear salvo inconsistencia crítica ni decidir por él.
+- scenario: Rasgo permanente
+  input: Un episodio se describe como 'siempre es...'.
+  expected: Debe reformular a evidencia contextual.
+open_issues:
+- Ficha Rápida vs Matriz.
+- Divergencia de nombres de productos longitudinales.
+- Persistencia/memoria.
+- Campos fecha/mentor.
+- Profundización opcional vs preguntas cerradas.
+implementation_note: Do not implement data persistence/access policy unless separately approved.
+legacy_status_text: VALIDADO funcionalmente / pendiente de gobierno de datos e integración técnica
+legacy_component_type: WORKFLOW

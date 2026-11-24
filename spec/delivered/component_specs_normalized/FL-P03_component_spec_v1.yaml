@@ -1,0 +1,233 @@
+schema_version: '1.0'
+component_id: FL-P03
+component_type: SKILL
+traits:
+- conversational
+- workflow_embedded
+name: Planificación semanal y de sesión
+domain: academic
+head: PLANIFICA
+version: '0.1'
+lifecycle_status: ACTIVE
+architecture_status: READY
+implementation_status: IMPLEMENTABLE
+deployment_status: BLOCKED_BY_KNOWLEDGE
+purpose: Transformar planificación curricular y decisiones docentes en un Lesson Planner semanal institucional, viable y alineado,
+  preservando sesiones diferenciadas.
+users:
+  primary:
+  - teacher
+  secondary: NOT_DETERMINED
+triggers:
+- build_weekly_lesson_planner
+- translate_curriculum_to_week_and_sessions
+- organize_or_review_weekly_session_draft
+required_inputs:
+- interaction_language:
+  - English
+  - Español
+  grade: required_confirmed
+  course: when_applicable
+  week_or_date_range: required
+  subject: required_never_infer
+  number_of_sessions: required
+  per_session:
+  - lesson_date
+  - length_35_or_40
+  - topic
+  curricular_source: required
+optional_inputs:
+- teacher_drafts
+- prior_sequences
+- initial_activity_ideas
+- previous_or_comparable_experience
+- additional_institutional_documents
+authoritative_sources: []
+source_hierarchy:
+- LESSON_PLANNER_GUIDELINES
+- EXPEDIENTE_MAESTRO_CERROS_LESSON_PLANNER
+- CURRENT_CERROS_PLANEA_CONFIGURATION
+- CASE_CURRICULAR_PLANNING
+- EXPLICIT_TEACHER_DECISIONS
+knowledge_dependencies: []
+core_rules_inherited:
+- no_fabrication
+- source_authority
+- fact_inference_proposal_decision_separation
+- human_authority
+- stop_on_critical_gap
+- surface_inconsistency
+- qa_before_close
+- do_not_reask_confirmed_case_data
+- case_data_not_institutional_knowledge
+rules:
+  R-FLP03-01: Un documento vigente corresponde a una semana.
+  R-FLP03-02: Cada encuentro debe conservar una unidad pedagógica diferenciada.
+  R-FLP03-03: Debe ser confirmado.
+  R-FLP03-04: Nunca se infiere.
+  R-FLP03-05: Solo 35 o 40 minutos en la configuración recuperada.
+  R-FLP03-06: Máximo 2 Learning Objectives por encuentro.
+  R-FLP03-07: Usar “By the end of the class, students will…”
+  R-FLP03-08: Debe ser observable, alcanzable y derivado de planificación académica suficiente.
+  R-FLP03-09: Resolver Objectives antes del Assessment; resolver Assessment antes del Procedure.
+  R-FLP03-10: Formative / Summative / Both debe ser confirmado por el profesor.
+  R-FLP03-11: Nunca inventar un Summative Assessment.
+  R-FLP03-12: Assessment debe producir evidencia pertinente respecto del objetivo.
+  R-FLP03-13: Introduction, Learning Activities y Closure son obligatorios.
+  R-FLP03-14: La secuencia completa debe caber realmente en 35/40 minutos.
+  R-FLP03-15: Methodologies Used deben corresponder a metodologías realmente presentes, no etiquetas decorativas.
+  R-FLP03-16: Nunca inventar What Went Well / Things to Transform.
+  R-FLP03-17: Cuando exista reflexión válida, 3T debe informar la nueva planificación.
+  R-FLP03-18: Una sola pregunta pedagógica sustantiva por turno.
+  R-FLP03-19: Pueden agruparse en una misma solicitud.
+  R-FLP03-20: No preguntar nuevamente información contestada inequívocamente dentro del mismo caso.
+  R-FLP03-21: No mezclar información específica entre sesiones.
+  R-FLP03-22: El Lesson Planner final se entrega siempre en inglés profesional.
+  R-FLP03-23: Mantener la interacción en el idioma elegido por el profesor.
+  R-FLP03-24: No generar producto final si falta una decisión pedagógica necesaria.
+procedure:
+- phase_0_select_interaction_language
+- phase_1_capture_week_and_session_administrative_data
+- phase_2_verify_curricular_source_and_reflection_basis
+- phase_3_build_each_session_in_order_objectives_assessment_procedure_methodologies
+- phase_4_consolidate_week_and_run_qa
+decision_logic:
+- if: SI falta información obligatoria
+  then: ENTONCES preguntar solo por lo necesario y detener el avance del paso afectado.
+- if: SI existe ambigüedad relevante
+  then: ENTONCES formular una aclaración y no avanzar hasta resolverla suficientemente.
+- if: SI existe una contradicción
+  then: ENTONCES señalarla; no resolverla silenciosamente.
+- if: SI una idea está incompleta pero su significado es claro
+  then: ENTONCES puede reformularse sin cambiar la intención.
+- if: SI existen varias opciones pedagógicas razonables
+  then: ENTONCES presentar alternativas; el profesor decide.
+- if: SI una propuesta propia cambia una decisión pedagógica
+  then: ENTONCES esperar aprobación antes de incorporarla.
+- if: SI hay más de dos objetivos
+  then: ENTONCES señalar el problema y solicitar priorización/reformulación.
+- if: SI los objetivos son demasiado amplios
+  then: ENTONCES proponer ajuste, pero no decidirlo unilateralmente.
+- if: SI se solicita un Summative Assessment sin soporte
+  then: ENTONCES detener y pedir confirmación/fuente; no inventarlo.
+- if: SI Objective, Assessment y Activities no están alineados
+  then: ENTONCES advertir y aclarar antes de continuar.
+- if: SI la sesión no cabe en 35/40 minutos
+  then: ENTONCES advertir inviabilidad y proponer un ajuste para aprobación.
+- if: SI no existe experiencia previa/comparable
+  then: ENTONCES no generar 3W/3T ficticio.
+- if: SI ya existe información confirmada en el caso
+  then: ENTONCES reutilizarla sin volver a preguntarla.
+- if: SI empieza una nueva semana
+  then: ENTONCES no asumir que los datos de la semana anterior siguen vigentes.
+autonomous_actions:
+- organize_administrative_information
+- transparently_reorganize_fragmented_information
+- translate_or_rephrase_without_changing_meaning
+- detect_inconsistency_alignment_and_feasibility
+- identify_methodologies_present_in_approved_activities
+- consolidate_sessions_into_weekly_planner
+human_reserved_actions:
+- approve_ai_pedagogical_proposal
+- confirm_assessment_type
+- define_summative_assessment
+- approve_substantive_changes_to_objectives_activities_methodology_or_purpose
+- confirm_reuse_of_prior_week_information
+forbidden_actions:
+- invent_curriculum
+- invent_objectives_without_source
+- invent_summative_assessment
+- fabricate_3w_3t
+- infer_subject
+- mix_session_specific_information
+- treat_ai_proposal_as_confirmed_decision
+- auto_reuse_prior_week_data
+outputs:
+- primary: weekly_lesson_planner
+  language: professional_english
+  structure:
+  - weekly_metadata
+  - differentiated_session_sections
+  - optional_valid_3w_3t
+validation_states:
+- VALIDATED
+- PRELIMINARY
+- NOT_VALIDATED
+quality_checks:
+- ¿Grade, Subject, Week/Date Range y sesiones están identificados?
+- ¿Cada sesión conserva su información propia?
+- ¿Length es 35 o 40 min según la regla vigente?
+- ¿Hay máximo dos objetivos por encuentro?
+- ¿Los objetivos son observables, alcanzables y sustentados?
+- ¿El Assessment está confirmado y genera evidencia del objetivo?
+- ¿No se inventó ningún Summative Assessment?
+- ¿Introduction, Activities y Closure están presentes?
+- ¿La secuencia es viable en el tiempo disponible?
+- ¿Methodologies Used describe metodologías realmente presentes?
+- ¿3W/3T proviene de evidencia o experiencia aportada y no fue fabricado?
+- ¿No se mezcló información entre encuentros?
+- ¿Toda propuesta pedagógica propia que requería aprobación fue confirmada?
+- ¿El producto final está íntegramente en inglés profesional?
+- ¿No quedan ambigüedades o contradicciones críticas?
+sensitive_data:
+  default: low_to_moderate
+  may_include_student_data: true
+  governance_policy: OPEN_ISSUE
+  deployment_note: Do not infer retention/access policy.
+dependencies:
+- CERROS_AI_CORE_V0_1
+- TX-A01
+- TX-A02
+- KNOWLEDGE_LESSON_PLANNER_FORMAT
+- CASE_CURRICULAR_PLANNING
+handoff_conditions:
+- condition: Falta planificación curricular suficiente
+  handoff: Derivar a FL-P01/FL-P02 o al workflow correspondiente de planificación superior; FL-P03 no debe inventarla.
+- condition: La solicitud es producir guía/material
+  handoff: Derivar a FL-D01 u otra skill de PRODUCE una vez cerrada la planificación.
+- condition: Se requiere diseñar una evaluación completa
+  handoff: Derivar a FL-D02; FL-P03 solo registra/integra la evidencia evaluativa definida o confirmada.
+- condition: Aparecen barreras/ajustes individualizados
+  handoff: Invocar Persona / TX-P01 o PR-S02 según el caso, sin que FL-P03 decida ajustes especializados.
+- condition: La solicitud corresponde a recuperación intensiva
+  handoff: Derivar/invocar WF-A01.
+completion_condition:
+- all_sessions_built_and_differentiated AND required_decisions_confirmed AND qa_passed AND final_output_in_english AND no_critical_gaps
+functional_acceptance_criteria:
+- scenario: Información incompleta
+  input: Falta Subject.
+  expected: Debe preguntar Subject y detener el paso. No inferirlo.
+- scenario: Demasiados objetivos
+  input: El profesor propone 4 objetivos.
+  expected: Debe advertir y pedir priorización/reformulación; no elegir unilateralmente.
+- scenario: Sesión inviable
+  input: Actividades requieren 55 min y Length=40.
+  expected: Debe advertir inviabilidad y proponer ajuste para aprobación.
+- scenario: Summative inexistente
+  input: El usuario pide 'pon una prueba sumativa' sin fuente/decisión previa.
+  expected: Debe pedir confirmación; no inventarla.
+- scenario: Sin experiencia previa
+  input: No hay semana anterior ni caso comparable.
+  expected: Debe dejar 3W/3T sin inventar y confirmar ausencia.
+- scenario: Dos sesiones distintas
+  input: Sesión 1 y 2 tienen topics diferentes.
+  expected: Debe mantener información diferenciada y consolidarlas en un único planner semanal.
+- scenario: Idioma español
+  input: Profesor elige Español para conversar.
+  expected: Debe conversar en español y entregar planner final en inglés.
+- scenario: Nueva semana
+  input: Se inicia Week 5 tras cerrar Week 4.
+  expected: No debe asumir automáticamente que objetivos, actividades o reflexiones de Week 4 siguen vigentes.
+open_issues:
+- Privacidad y gobierno de datos.
+- Tratamiento detallado de inclusión y necesidades educativas dentro del planner.
+- Relación exacta con futuras versiones de FL-D02 Diseño de evaluaciones.
+- Representación tecnológica definitiva del documento semanal.
+- Política de versionado del planner y de sus fuentes.
+- Taxonomía institucional definitiva de metodologías.
+- Tratamiento detallado IB / no IB.
+- Alcance de producción de materiales asociados.
+- Cualquier cambio futuro a la regla Length = 35/40 debe venir de fuente institucional, no del implementador.
+implementation_note: Implement as specified. Do not redesign, fill institutional gaps, or remove controls for platform convenience.
+legacy_status_text: functionally_validated_for_handoff
+legacy_component_type: SKILL_WITH_CONVERSATIONAL_WORKFLOW

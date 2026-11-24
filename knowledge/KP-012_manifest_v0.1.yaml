@@ -1,0 +1,22 @@
+knowledge_id: KP-012
+name: Reconocimientos Institucionales de Graduación
+domain: INSTITUCIONAL / cultura
+authority_class: INSTITUCIONAL OPERATIVO
+status: INCOMPLETO — configuración disponible, catálogo y preguntas canónicas faltantes
+version: '0.1'
+canonical_sources:
+- Configuración Cerros Reconoce
+- Catálogo institucional de categorías
+- Cuatro preguntas oficiales
+- Marco institucional de reconocimiento
+source_availability: []
+purpose: Proveer categorías, entrevista, tono y reglas de frase ceremonial/certificado.
+consumers:
+- WF-I03
+owner: Responsable institucional de graduación/reconocimientos — NO DETERMINADO.
+update_triggers:
+- Cambio de categorías, preguntas o formato ceremonial.
+forbidden_reasoning:
+- No presentar una categoría nueva como oficial.
+- No inventar evidencia o elogio.
+notes: La lógica básica está recuperada; faltan los elementos literales necesarios para reconstrucción total.

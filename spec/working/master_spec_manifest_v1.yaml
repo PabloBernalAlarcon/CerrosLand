@@ -1,0 +1,803 @@
+specification:
+  name: Cerros AI Master Specification
+  version: '1.0'
+  date: '2026-10-09'
+  status: ARCHITECTURE_FROZEN
+  definition: Architecture frozen; deployment readiness remains component-specific.
+system_formula: CORE + COMPONENTS + KNOWLEDGE_PACKS + ORCHESTRATION_MAP + HUMAN_AUTHORITY
+canonical_contract:
+  contract_version: '1.0'
+  principles:
+  - One component has exactly one primary component_type.
+  - Traits describe cross-cutting characteristics; they never replace component_type.
+  - Lifecycle, architecture, implementation and deployment are distinct dimensions.
+  - GAP is not a component_type and must not have an executable component spec.
+  - Unknown institutional decisions remain open_issues; they are not inferred by the implementer.
+  component_type_enum:
+  - SKILL
+  - MICRO_SKILL
+  - WORKFLOW
+  - SPECIALIZATION
+  trait_enum:
+  - qa
+  - transversal
+  - specialized
+  - bridge
+  - analytics
+  - conversational
+  - workflow_embedded
+  lifecycle_status_enum:
+  - ACTIVE
+  - PROVISIONAL
+  - DISABLED
+  gap_policy:
+    representation: Registry/map node only; no executable component YAML.
+    status: GAP
+    implementation: NOT_IMPLEMENTABLE
+    deployment: NOT_DEPLOYABLE
+  architecture_status_enum:
+  - READY
+  - READY_WITH_CONDITIONS
+  - NOT_READY
+  implementation_status_enum:
+  - IMPLEMENTABLE
+  - IMPLEMENTABLE_WITH_CONDITIONS
+  - NOT_IMPLEMENTABLE
+  deployment_status_enum:
+  - ELIGIBLE_FOR_TECHNICAL_QA
+  - BLOCKED_BY_GOVERNANCE
+  - BLOCKED_BY_KNOWLEDGE
+  - PILOT_OR_BLOCKED
+  - NOT_DEPLOYABLE
+counts:
+  components: 39
+  active: 27
+  provisional: 11
+  disabled: 1
+  gaps: 1
+  knowledge_packs: 16
+  human_authorities: 11
+  map_nodes: 67
+  map_edges: 156
+domains:
+  PLANIFICA:
+  - FL-P01
+  - FL-P02
+  - FL-P03
+  - FL-P04
+  - WF-A01
+  - TX-A01
+  - TX-A02
+  PRODUCE:
+  - FL-D01
+  - FL-D02
+  - FL-D03
+  - FL-D04
+  - TX-D01
+  - TX-D02
+  ACOMPAÑA:
+  - FL-C01
+  - FL-C02
+  - WF-C01
+  - SP-C01
+  PERSONA:
+  - WF-P01
+  - PR-S01
+  - PR-S02
+  - PR-S03
+  - WF-P02
+  - PR-S04
+  - PR-S05
+  - WF-P03
+  - PR-S06
+  - PR-S07
+  - TX-P01
+  INSTITUCIONAL:
+  - WF-I01
+  - IN-S01
+  - IN-S02
+  - TX-I01
+  - IN-S03
+  - WF-I02
+  - WF-I03
+  - IN-S04
+  - WF-I04
+  - TX-I02
+  - TX-I03
+core_rules:
+- id: CORE-01
+  rule: No inventar ni completar vacíos.
+  implication: La ausencia de información debe permanecer visible.
+- id: CORE-02
+  rule: Respetar jerarquía de fuentes.
+  implication: Las fuentes de mayor autoridad prevalecen; si la jerarquía no está resuelta, se señala la tensión.
+- id: CORE-03
+  rule: Distinguir evidencia, inferencia, propuesta y decisión.
+  implication: Ninguna inferencia debe presentarse como hecho ni una propuesta como decisión institucional.
+- id: CORE-04
+  rule: No sustituir autoridad humana.
+  implication: La IA asiste; no asume sanción, diagnóstico, aprobación, calificación oficial, decisión de promoción u otras
+    competencias reservadas.
+- id: CORE-05
+  rule: Detener o degradar ante falta de información crítica.
+  implication: Un producto no debe parecer más completo de lo que realmente está documentado.
+- id: CORE-06
+  rule: Señalar incoherencias relevantes.
+  implication: Las contradicciones no se suavizan para producir una salida más elegante.
+- id: CORE-07
+  rule: Ejecutar QA antes del cierre.
+  implication: Cada componente verifica sus criterios de calidad antes de entregar.
+- id: CORE-08
+  rule: No volver a pedir información inequívocamente confirmada.
+  implication: Se preserva continuidad conversacional sin sacrificar la validación.
+- id: CORE-09
+  rule: Diferenciar datos de caso y conocimiento institucional.
+  implication: La experiencia individual no se convierte automáticamente en regla general.
+components:
+  FL-C01:
+    name: Coaching de investigación
+    family: ACOMPAÑA
+    component_type: SKILL
+    traits: []
+    lifecycle_status: ACTIVE
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+    knowledge_dependencies:
+    - KP-007
+    human_authority: HUM-SUPERVISOR
+  FL-C02:
+    name: Feedback de escritura
+    family: ACOMPAÑA
+    component_type: SKILL
+    traits: []
+    lifecycle_status: ACTIVE
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+    knowledge_dependencies: []
+    human_authority: HUM-PROFESOR
+  FL-D01:
+    name: Construcción de guías académicas
+    family: PRODUCE
+    component_type: SKILL
+    traits:
+    - workflow_embedded
+    lifecycle_status: ACTIVE
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+    knowledge_dependencies:
+    - KP-001
+    - KP-002
+    - KP-005
+    human_authority: HUM-PROFESOR
+  FL-D02:
+    name: Diseño de evaluaciones
+    family: PRODUCE
+    component_type: SKILL
+    traits: []
+    lifecycle_status: PROVISIONAL
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+    knowledge_dependencies:
+    - KP-003
+    - KP-005
+    human_authority: HUM-PROFESOR
+  FL-D03:
+    name: Diseño y auditoría de ítems
+    family: PRODUCE
+    component_type: SKILL
+    traits:
+    - specialized
+    lifecycle_status: ACTIVE
+    architecture_status: READY
+    implementation_status: IMPLEMENTABLE
+    deployment_status: BLOCKED_BY_KNOWLEDGE
+    knowledge_dependencies:
+    - KP-006
+    human_authority: HUM-PROFESOR
+  FL-D04:
+    name: Diseño de rúbricas y criterios
+    family: PRODUCE
+    component_type: SKILL
+    traits: []
+    lifecycle_status: DISABLED
+    architecture_status: NOT_READY
+    implementation_status: NOT_IMPLEMENTABLE
+    deployment_status: NOT_DEPLOYABLE
+    knowledge_dependencies:
+    - KP-003
+    human_authority: HUM-PROFESOR
+  FL-P01:
+    name: Arquitectura curricular
+    family: PLANIFICA
+    component_type: SKILL
+    traits: []
+    lifecycle_status: ACTIVE
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+    knowledge_dependencies:
+    - KP-001
+    - KP-002
+    - KP-003
+    human_authority: HUM-PROFESOR
+  FL-P02:
+    name: Diseño de unidad
+    family: PLANIFICA
+    component_type: SKILL
+    traits: []
+    lifecycle_status: ACTIVE
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+    knowledge_dependencies:
+    - KP-001
+    - KP-003
+    human_authority: HUM-PROFESOR
+  FL-P03:
+    name: Planificación semanal y de sesión
+    family: PLANIFICA
+    component_type: SKILL
+    traits:
+    - conversational
+    - workflow_embedded
+    lifecycle_status: ACTIVE
+    architecture_status: READY
+    implementation_status: IMPLEMENTABLE
+    deployment_status: BLOCKED_BY_KNOWLEDGE
+    knowledge_dependencies:
+    - KP-003
+    - KP-004
+    human_authority: HUM-PROFESOR
+  FL-P04:
+    name: Análisis de carga académica
+    family: PLANIFICA
+    component_type: SKILL
+    traits:
+    - analytics
+    - qa
+    lifecycle_status: ACTIVE
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+    knowledge_dependencies:
+    - KP-003
+    human_authority: HUM-PROFESOR
+  IN-S01:
+    name: Análisis técnico de convivencia
+    family: INSTITUCIONAL
+    component_type: SKILL
+    traits: []
+    lifecycle_status: ACTIVE
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+    knowledge_dependencies:
+    - KP-001
+    - KP-010
+    human_authority: HUM-CONVIVENCIA
+  IN-S02:
+    name: Clasificación y gravedad de convivencia
+    family: INSTITUCIONAL
+    component_type: SKILL
+    traits:
+    - specialized
+    lifecycle_status: PROVISIONAL
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+    knowledge_dependencies:
+    - KP-010
+    human_authority: HUM-CONVIVENCIA
+  IN-S03:
+    name: Redacción de reporte de convivencia
+    family: INSTITUCIONAL
+    component_type: SKILL
+    traits: []
+    lifecycle_status: ACTIVE
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+    knowledge_dependencies:
+    - KP-010
+    human_authority: HUM-CONVIVENCIA
+  IN-S04:
+    name: Auditoría de evidencia académica
+    family: INSTITUCIONAL
+    component_type: SKILL
+    traits:
+    - qa
+    lifecycle_status: PROVISIONAL
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+    knowledge_dependencies:
+    - KP-014
+    human_authority: HUM-COMITE
+  PR-S01:
+    name: Análisis de barreras y apoyos
+    family: PERSONA
+    component_type: SKILL
+    traits: []
+    lifecycle_status: ACTIVE
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+    knowledge_dependencies:
+    - KP-008
+    human_authority: HUM-ED
+  PR-S02:
+    name: Diseño de ajustes pedagógicos
+    family: PERSONA
+    component_type: SKILL
+    traits:
+    - bridge
+    lifecycle_status: ACTIVE
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+    knowledge_dependencies:
+    - KP-008
+    human_authority: HUM-ED
+  PR-S03:
+    name: Traducción pedagógica de información especializada
+    family: PERSONA
+    component_type: SKILL
+    traits: []
+    lifecycle_status: ACTIVE
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+    knowledge_dependencies:
+    - KP-008
+    human_authority: HUM-ED
+  PR-S04:
+    name: Seguimiento de apoyos
+    family: PERSONA
+    component_type: SKILL
+    traits: []
+    lifecycle_status: ACTIVE
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+    knowledge_dependencies:
+    - KP-008
+    human_authority: HUM-ED
+  PR-S05:
+    name: Síntesis CTA basada en evidencia
+    family: PERSONA
+    component_type: SKILL
+    traits: []
+    lifecycle_status: PROVISIONAL
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+    knowledge_dependencies:
+    - KP-013
+    human_authority: HUM-PROFESOR
+  PR-S06:
+    name: Análisis longitudinal de trayectoria
+    family: PERSONA
+    component_type: SKILL
+    traits: []
+    lifecycle_status: ACTIVE
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+    knowledge_dependencies:
+    - KP-009
+    human_authority: HUM-MENTOR
+  PR-S07:
+    name: Transferencia de acompañamiento
+    family: PERSONA
+    component_type: SKILL
+    traits: []
+    lifecycle_status: ACTIVE
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+    knowledge_dependencies:
+    - KP-009
+    human_authority: HUM-MENTOR
+  SP-C01:
+    name: Periodismo escolar
+    family: ACOMPAÑA
+    component_type: SPECIALIZATION
+    traits: []
+    lifecycle_status: ACTIVE
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+    knowledge_dependencies: []
+    human_authority: HUM-EDITOR
+  TX-A01:
+    name: Formulación de objetivos de aprendizaje
+    family: PLANIFICA
+    component_type: MICRO_SKILL
+    traits:
+    - transversal
+    lifecycle_status: ACTIVE
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+    knowledge_dependencies:
+    - KP-003
+    - KP-004
+    human_authority: HUM-PROFESOR
+  TX-A02:
+    name: Alineación pedagógica
+    family: PLANIFICA
+    component_type: MICRO_SKILL
+    traits:
+    - qa
+    - transversal
+    lifecycle_status: ACTIVE
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+    knowledge_dependencies:
+    - KP-003
+    human_authority: HUM-PROFESOR
+  TX-D01:
+    name: Redacción pedagógica sustentada
+    family: PRODUCE
+    component_type: MICRO_SKILL
+    traits:
+    - transversal
+    lifecycle_status: ACTIVE
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+    knowledge_dependencies:
+    - KP-005
+    human_authority: HUM-PROFESOR
+  TX-D02:
+    name: Diseño de práctica
+    family: PRODUCE
+    component_type: MICRO_SKILL
+    traits:
+    - transversal
+    lifecycle_status: PROVISIONAL
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+    knowledge_dependencies:
+    - KP-005
+    human_authority: HUM-PROFESOR
+  TX-I01:
+    name: Detección de alertas no clínicas
+    family: INSTITUCIONAL
+    component_type: MICRO_SKILL
+    traits: []
+    lifecycle_status: PROVISIONAL
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+    knowledge_dependencies:
+    - KP-010
+    human_authority: HUM-PSICOLOGIA
+  TX-I02:
+    name: Redacción institucional trazable
+    family: INSTITUCIONAL
+    component_type: MICRO_SKILL
+    traits:
+    - transversal
+    lifecycle_status: PROVISIONAL
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+    knowledge_dependencies:
+    - KP-001
+    human_authority: HUM-PROFESOR
+  TX-I03:
+    name: Gestión de compromisos
+    family: INSTITUCIONAL
+    component_type: MICRO_SKILL
+    traits:
+    - transversal
+    lifecycle_status: PROVISIONAL
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+    knowledge_dependencies:
+    - KP-015
+    human_authority: HUM-PROFESOR
+  TX-P01:
+    name: Revisión de accesibilidad y barreras
+    family: PERSONA
+    component_type: MICRO_SKILL
+    traits:
+    - transversal
+    lifecycle_status: PROVISIONAL
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+    knowledge_dependencies:
+    - KP-008
+    human_authority: HUM-PROFESOR
+  WF-A01:
+    name: Recuperación intensiva
+    family: PLANIFICA
+    component_type: WORKFLOW
+    traits: []
+    lifecycle_status: ACTIVE
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+    knowledge_dependencies:
+    - KP-003
+    - KP-008
+    human_authority: HUM-PROFESOR
+  WF-C01:
+    name: Extended Essay IB 2027
+    family: ACOMPAÑA
+    component_type: WORKFLOW
+    traits:
+    - specialized
+    lifecycle_status: ACTIVE
+    architecture_status: READY
+    implementation_status: IMPLEMENTABLE
+    deployment_status: BLOCKED_BY_GOVERNANCE
+    knowledge_dependencies:
+    - KP-007
+    human_authority: HUM-SUPERVISOR
+  WF-I01:
+    name: Reunión colegio–familia
+    family: INSTITUCIONAL
+    component_type: WORKFLOW
+    traits: []
+    lifecycle_status: ACTIVE
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+    knowledge_dependencies:
+    - KP-015
+    human_authority: HUM-PROFESOR
+  WF-I02:
+    name: Acompañamiento EDP
+    family: INSTITUCIONAL
+    component_type: WORKFLOW
+    traits: []
+    lifecycle_status: ACTIVE
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+    knowledge_dependencies:
+    - KP-001
+    - KP-002
+    - KP-011
+    human_authority: HUM-EDP
+  WF-I03:
+    name: Reconocimiento institucional
+    family: INSTITUCIONAL
+    component_type: WORKFLOW
+    traits: []
+    lifecycle_status: PROVISIONAL
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+    knowledge_dependencies:
+    - KP-001
+    - KP-012
+    human_authority: HUM-RECONOCIMIENTO
+  WF-I04:
+    name: Informe académico individual
+    family: INSTITUCIONAL
+    component_type: WORKFLOW
+    traits: []
+    lifecycle_status: ACTIVE
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+    knowledge_dependencies:
+    - KP-014
+    human_authority: HUM-COMITE
+  WF-P01:
+    name: Perfil Pedagógico Inicial
+    family: PERSONA
+    component_type: WORKFLOW
+    traits: []
+    lifecycle_status: ACTIVE
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+    knowledge_dependencies:
+    - KP-001
+    - KP-008
+    human_authority: HUM-ED
+  WF-P02:
+    name: PIAE
+    family: PERSONA
+    component_type: WORKFLOW
+    traits: []
+    lifecycle_status: PROVISIONAL
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+    knowledge_dependencies:
+    - KP-001
+    - KP-008
+    human_authority: HUM-ED
+  WF-P03:
+    name: PPD
+    family: PERSONA
+    component_type: WORKFLOW
+    traits: []
+    lifecycle_status: ACTIVE
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+    knowledge_dependencies:
+    - KP-001
+    - KP-009
+    human_authority: HUM-MENTOR
+gaps:
+  GAP-C01:
+    name: Comprensión lectora
+    instruction: Do not implement by inference.
+knowledge_packs:
+  KP-001:
+    name: Cultura Cerros e Identidad Institucional
+    status: FUENTE CANÓNICA DISPONIBLE
+    authority_class: INSTITUCIONAL NORMATIVO
+    consumers:
+    - Core
+    - PERSONA
+    - PPD
+    - EDP
+    - Reconocimiento
+    - Guías
+    - Convivencia
+    - Planificación
+    owner: Autoridad institucional competente — NO DETERMINADO en la documentación técnica actual.
+  KP-002:
+    name: Plan Estratégico Institucional
+    status: FUENTE DISPONIBLE
+    authority_class: INSTITUCIONAL NORMATIVO-ESTRATÉGICO
+    consumers:
+    - WF-I02 EDP
+    - FL-D01 Guías
+    - Arquitectura curricular cuando aplique
+    owner: Órgano institucional responsable del Plan Estratégico — NO DETERMINADO aquí.
+  KP-003:
+    name: Arquitectura de Planificación Académica
+    status: PARCIAL — documentos canónicos identificados, corpus incompleto
+    authority_class: INSTITUCIONAL OPERATIVO
+    consumers:
+    - FL-P01
+    - FL-P02
+    - FL-P03
+    - FL-D02
+    owner: Área académica responsable — NO DETERMINADO aquí.
+  KP-004:
+    name: Lesson Planner Institucional
+    status: PARCIAL — lógica recuperada; fuentes literales no incorporadas al corpus actual
+    authority_class: INSTITUCIONAL OPERATIVO
+    consumers:
+    - FL-P03
+    - TX-A01
+    - TX-A02
+    owner: Área académica responsable del planner — NO DETERMINADO aquí.
+  KP-005:
+    name: Marco Institucional para Guías e IA Educativa
+    status: PARCIAL
+    authority_class: 'MIXTO: institucional normativo + operativo'
+    consumers:
+    - FL-D01
+    - TX-D01
+    - TX-D02
+    owner: Autoridad institucional de IA/área académica — NO DETERMINADO.
+  KP-006:
+    name: Evaluación Matemática y Pruebas Saber
+    status: PARCIAL — estructura recuperada; fuentes canónicas faltantes
+    authority_class: 'MIXTO: estándar externo + matriz institucional'
+    consumers:
+    - FL-D03
+    - FL-D02 cuando especialización está activa
+    owner: Área de Matemáticas/autoridad académica — NO DETERMINADO.
+  KP-007:
+    name: Extended Essay IB — Primera evaluación 2027
+    status: PARCIAL — knowledge identificado; guía oficial no incorporada al corpus actual
+    authority_class: EXTERNO NORMATIVO + INSTITUCIONAL OPERATIVO
+    consumers:
+    - WF-C01
+    - FL-C01
+    - FL-C02 cuando workflow EE está activo
+    owner: IB / coordinación institucional responsable de EE.
+  KP-008:
+    name: Educación Centrada en la Persona, Educación Diferencial y Apoyos
+    status: PARCIAL — múltiples fuentes identificadas, no todas presentes
+    authority_class: 'MIXTO: institucional normativo-operativo + referente técnico'
+    consumers:
+    - WF-P01
+    - PR-S01
+    - PR-S02
+    - PR-S03
+    - WF-P02
+    - PR-S04
+    - TX-P01
+    owner: Educación Diferencial / área institucional competente — NO DETERMINADO.
+  KP-009:
+    name: PPD — Mentoría y Desarrollo Personal
+    status: PARCIAL — jerarquía identificada, fuentes literales faltantes
+    authority_class: INSTITUCIONAL NORMATIVO-OPERATIVO
+    consumers:
+    - WF-P03
+    - PR-S06
+    - PR-S07
+    owner: Área de mentoría/formación — NO DETERMINADO.
+  KP-010:
+    name: Convivencia, Debido Proceso y Artículo 24
+    status: PARCIAL — marco identificado; fuentes canónicas no incorporadas
+    authority_class: LEGAL + INSTITUCIONAL NORMATIVO
+    consumers:
+    - IN-S01
+    - IN-S02
+    - IN-S03
+    - TX-I01
+    owner: Autoridad institucional responsable de convivencia.
+  KP-011:
+    name: EDP — Evaluación de Desempeño Profesional
+    status: PARCIAL — lógica funcional recuperada; formulario/fuentes canónicas faltantes
+    authority_class: INSTITUCIONAL OPERATIVO
+    consumers:
+    - WF-I02
+    owner: Autoridad institucional responsable de EDP — NO DETERMINADO.
+  KP-012:
+    name: Reconocimientos Institucionales de Graduación
+    status: INCOMPLETO — configuración disponible, catálogo y preguntas canónicas faltantes
+    authority_class: INSTITUCIONAL OPERATIVO
+    consumers:
+    - WF-I03
+    owner: Responsable institucional de graduación/reconocimientos — NO DETERMINADO.
+  KP-013:
+    name: CTA — Observación Académica Institucional
+    status: INCOMPLETO
+    authority_class: INSTITUCIONAL OPERATIVO
+    consumers:
+    - PR-S05
+    owner: Autoridad institucional CTA — NO DETERMINADO.
+  KP-014:
+    name: Protocolo de Validación e Informe Académico Individual
+    status: PARCIAL — reglas recuperadas; protocolo literal y fundamento de algunos umbrales pendientes
+    authority_class: INSTITUCIONAL OPERATIVO
+    consumers:
+    - IN-S04
+    - WF-I04
+    owner: Área académica/calidad institucional — NO DETERMINADO.
+  KP-015:
+    name: Actas de Reunión Colegio–Familia
+    status: PARCIAL — flujo recuperado; formato literal pendiente
+    authority_class: INSTITUCIONAL OPERATIVO
+    consumers:
+    - WF-I01
+    - TX-I03
+    - TX-I02
+    owner: Dirección de Curso / autoridad institucional — NO DETERMINADO.
+  KP-016:
+    name: Evidencia externa sobre IA en educación
+    status: FUENTES DISPONIBLES
+    authority_class: EXTERNO — NO NORMATIVO
+    consumers:
+    - Documentación teórica Cerros AI
+    - futuras decisiones de arquitectura y gobernanza
+    owner: Equipo de diseño/investigación Cerros AI.
+human_authorities:
+  HUM-PROFESOR: Profesor / docente titular
+  HUM-MENTOR: Mentor
+  HUM-ED: Educación Diferencial / profesional especializado
+  HUM-PSICOLOGIA: Psicología / profesional clínico competente
+  HUM-CONVIVENCIA: Autoridad / órgano de convivencia
+  HUM-EDP: Evaluado / evaluador / autoridad EDP
+  HUM-COMITE: Comité / autoridad académica
+  HUM-FAMILIA: Familia / participantes de reunión
+  HUM-SUPERVISOR: Supervisor oficial EE
+  HUM-EDITOR: Profesor/editor / autoridad de publicación
+  HUM-RECONOCIMIENTO: Profesor / autoridad de ceremonia
+execution_rule: Only edges with edge_class=ORCHESTRATION and executable=true transfer component control.
+deployment_blocker: Sensitive-data deployment requires approved institutional governance for access, minimization, persistence,
+  retention, deletion and transfer.
+next_deliverable: Final Engineer Handoff

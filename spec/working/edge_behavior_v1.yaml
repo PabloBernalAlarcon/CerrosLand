@@ -1,0 +1,382 @@
+generated_from:
+- master_dependency_map_v1.yaml
+- runtime_policy_v1.yaml
+edges:
+- edge_id: E001
+  from: FL-P01
+  to: FL-P02
+  semantics: TRANSFER_CONTROL
+  conditional: false
+  governed_by: RT-01
+  target_lifecycle: ACTIVE
+  target_deployment: PILOT_OR_BLOCKED
+  offer_reason: Arquitectura anual validada alimenta diseño de unidad.
+- edge_id: E002
+  from: FL-P02
+  to: FL-P03
+  semantics: TRANSFER_CONTROL
+  conditional: false
+  governed_by: RT-01
+  target_lifecycle: ACTIVE
+  target_deployment: BLOCKED_BY_KNOWLEDGE
+  offer_reason: Unidad validada alimenta semana/sesión.
+- edge_id: E009
+  from: WF-A01
+  to: TX-A01
+  semantics: CALL_COMPONENT
+  conditional: false
+  governed_by: AUTO
+  target_lifecycle: ACTIVE
+  target_deployment: PILOT_OR_BLOCKED
+  offer_reason: Objetivos observables y verificables.
+- edge_id: E010
+  from: WF-A01
+  to: TX-A02
+  semantics: CALL_COMPONENT
+  conditional: false
+  governed_by: AUTO
+  target_lifecycle: ACTIVE
+  target_deployment: PILOT_OR_BLOCKED
+  offer_reason: Alineación del proceso remedial.
+- edge_id: E011
+  from: WF-A01
+  to: TX-D02
+  semantics: CALL_COMPONENT
+  conditional: false
+  governed_by: AUTO
+  target_lifecycle: PROVISIONAL
+  target_deployment: PILOT_OR_BLOCKED
+  offer_reason: Práctica autónoma/guiada.
+- edge_id: E012
+  from: WF-A01
+  to: FL-D02
+  semantics: CALL_COMPONENT
+  conditional: false
+  governed_by: AUTO
+  target_lifecycle: PROVISIONAL
+  target_deployment: PILOT_OR_BLOCKED
+  offer_reason: Verificación final de dominio.
+- edge_id: E013
+  from: WF-A01
+  to: FL-D03
+  semantics: CALL_COMPONENT
+  conditional: false
+  governed_by: AUTO
+  target_lifecycle: ACTIVE
+  target_deployment: BLOCKED_BY_KNOWLEDGE
+  offer_reason: Ítems cuando el instrumento lo requiere.
+- edge_id: E014
+  from: WF-A01
+  to: PR-S02
+  semantics: TRANSFER_CONTROL
+  conditional: true
+  governed_by: RT-01
+  target_lifecycle: ACTIVE
+  target_deployment: PILOT_OR_BLOCKED
+  offer_reason: Ajustes cuando existe necesidad autorizada.
+- edge_id: E015
+  from: FL-D01
+  to: TX-D01
+  semantics: CALL_COMPONENT
+  conditional: false
+  governed_by: AUTO
+  target_lifecycle: ACTIVE
+  target_deployment: PILOT_OR_BLOCKED
+  offer_reason: Explicación y lectura sustentadas.
+- edge_id: E016
+  from: FL-D01
+  to: TX-D02
+  semantics: CALL_COMPONENT
+  conditional: false
+  governed_by: AUTO
+  target_lifecycle: PROVISIONAL
+  target_deployment: PILOT_OR_BLOCKED
+  offer_reason: Ejercicios de refuerzo.
+- edge_id: E019
+  from: FL-D02
+  to: FL-D03
+  semantics: CALL_COMPONENT
+  conditional: false
+  governed_by: AUTO
+  target_lifecycle: ACTIVE
+  target_deployment: BLOCKED_BY_KNOWLEDGE
+  offer_reason: Construcción/auditoría de ítems.
+- edge_id: E022
+  from: TX-D02
+  to: FL-D02
+  semantics: TRANSFER_CONTROL
+  conditional: false
+  governed_by: RT-01
+  target_lifecycle: PROVISIONAL
+  target_deployment: PILOT_OR_BLOCKED
+  offer_reason: Si la práctica se convierte en evaluación formal.
+- edge_id: E023
+  from: FL-C01
+  to: FL-C02
+  semantics: CALL_COMPONENT
+  conditional: true
+  governed_by: RT-02
+  target_lifecycle: ACTIVE
+  target_deployment: PILOT_OR_BLOCKED
+  offer_reason: Feedback de escritura dentro de investigación.
+- edge_id: E024
+  from: WF-C01
+  to: FL-C01
+  semantics: CALL_COMPONENT
+  conditional: false
+  governed_by: AUTO
+  target_lifecycle: ACTIVE
+  target_deployment: PILOT_OR_BLOCKED
+  offer_reason: Motor de coaching investigativo.
+- edge_id: E025
+  from: WF-C01
+  to: FL-C02
+  semantics: CALL_COMPONENT
+  conditional: false
+  governed_by: AUTO
+  target_lifecycle: ACTIVE
+  target_deployment: PILOT_OR_BLOCKED
+  offer_reason: Feedback sobre borradores.
+- edge_id: E030
+  from: WF-P01
+  to: PR-S01
+  semantics: CALL_COMPONENT
+  conditional: false
+  governed_by: AUTO
+  target_lifecycle: ACTIVE
+  target_deployment: PILOT_OR_BLOCKED
+  offer_reason: Identificación de barreras/apoyos.
+- edge_id: E031
+  from: WF-P01
+  to: PR-S03
+  semantics: CALL_COMPONENT
+  conditional: true
+  governed_by: RT-02
+  target_lifecycle: ACTIVE
+  target_deployment: PILOT_OR_BLOCKED
+  offer_reason: Traducción de información especializada si existe.
+- edge_id: E032
+  from: WF-P01
+  to: PR-S02
+  semantics: CALL_COMPONENT
+  conditional: true
+  governed_by: RT-02
+  target_lifecycle: ACTIVE
+  target_deployment: PILOT_OR_BLOCKED
+  offer_reason: Ajustes cuando se requieren.
+- edge_id: E033
+  from: WF-P01
+  to: WF-P02
+  semantics: TRANSFER_CONTROL
+  conditional: false
+  governed_by: RT-01
+  target_lifecycle: PROVISIONAL
+  target_deployment: PILOT_OR_BLOCKED
+  offer_reason: PPI puede alimentar PIAE.
+- edge_id: E034
+  from: PR-S01
+  to: PR-S02
+  semantics: TRANSFER_CONTROL
+  conditional: false
+  governed_by: RT-01
+  target_lifecycle: ACTIVE
+  target_deployment: PILOT_OR_BLOCKED
+  offer_reason: Barrera/apoyo se traduce en ajuste concreto.
+- edge_id: E035
+  from: PR-S02
+  to: PR-S04
+  semantics: TRANSFER_CONTROL
+  conditional: false
+  governed_by: RT-01
+  target_lifecycle: ACTIVE
+  target_deployment: PILOT_OR_BLOCKED
+  offer_reason: Ajustes implementados requieren seguimiento.
+- edge_id: E036
+  from: WF-P02
+  to: PR-S04
+  semantics: CALL_COMPONENT
+  conditional: false
+  governed_by: AUTO
+  target_lifecycle: ACTIVE
+  target_deployment: PILOT_OR_BLOCKED
+  offer_reason: Seguimiento del plan de apoyos.
+- edge_id: E037
+  from: WF-P03
+  to: PR-S06
+  semantics: CALL_COMPONENT
+  conditional: false
+  governed_by: AUTO
+  target_lifecycle: ACTIVE
+  target_deployment: PILOT_OR_BLOCKED
+  offer_reason: Longitudinalidad PPD.
+- edge_id: E038
+  from: WF-P03
+  to: PR-S07
+  semantics: CALL_COMPONENT
+  conditional: false
+  governed_by: AUTO
+  target_lifecycle: ACTIVE
+  target_deployment: PILOT_OR_BLOCKED
+  offer_reason: Transferencia entre mentores.
+- edge_id: E042
+  from: TX-P01
+  to: FL-P03
+  semantics: TRANSFER_CONTROL
+  conditional: true
+  governed_by: RT-05
+  target_lifecycle: ACTIVE
+  target_deployment: BLOCKED_BY_KNOWLEDGE
+  offer_reason: Revisión de planner cuando existen barreras autorizadas.
+- edge_id: E043
+  from: TX-P01
+  to: FL-D01
+  semantics: TRANSFER_CONTROL
+  conditional: true
+  governed_by: RT-05
+  target_lifecycle: ACTIVE
+  target_deployment: PILOT_OR_BLOCKED
+  offer_reason: Revisión de guías.
+- edge_id: E044
+  from: TX-P01
+  to: FL-D02
+  semantics: TRANSFER_CONTROL
+  conditional: true
+  governed_by: RT-05
+  target_lifecycle: PROVISIONAL
+  target_deployment: PILOT_OR_BLOCKED
+  offer_reason: Revisión de evaluaciones.
+- edge_id: E045
+  from: WF-I01
+  to: TX-I03
+  semantics: CALL_COMPONENT
+  conditional: false
+  governed_by: AUTO
+  target_lifecycle: PROVISIONAL
+  target_deployment: PILOT_OR_BLOCKED
+  offer_reason: Compromisos con responsable/fecha.
+- edge_id: E046
+  from: WF-I01
+  to: TX-I02
+  semantics: CALL_COMPONENT
+  conditional: false
+  governed_by: AUTO
+  target_lifecycle: PROVISIONAL
+  target_deployment: PILOT_OR_BLOCKED
+  offer_reason: Redacción diferenciada por audiencia.
+- edge_id: E047
+  from: IN-S01
+  to: IN-S02
+  semantics: TRANSFER_CONTROL
+  conditional: false
+  governed_by: RT-01
+  target_lifecycle: PROVISIONAL
+  target_deployment: PILOT_OR_BLOCKED
+  offer_reason: Caso estructurado pasa a clasificación/gravedad.
+- edge_id: E048
+  from: IN-S01
+  to: TX-I01
+  semantics: CALL_COMPONENT
+  conditional: true
+  governed_by: RT-02
+  target_lifecycle: PROVISIONAL
+  target_deployment: PILOT_OR_BLOCKED
+  offer_reason: Alertas no clínicas si procede.
+- edge_id: E049
+  from: IN-S02
+  to: IN-S03
+  semantics: TRANSFER_CONTROL
+  conditional: false
+  governed_by: RT-01
+  target_lifecycle: ACTIVE
+  target_deployment: PILOT_OR_BLOCKED
+  offer_reason: Clasificación técnica alimenta reporte.
+- edge_id: E050
+  from: IN-S03
+  to: TX-I02
+  semantics: CALL_COMPONENT
+  conditional: false
+  governed_by: AUTO
+  target_lifecycle: PROVISIONAL
+  target_deployment: PILOT_OR_BLOCKED
+  offer_reason: Redacción institucional trazable.
+- edge_id: E051
+  from: IN-S03
+  to: TX-I01
+  semantics: CALL_COMPONENT
+  conditional: true
+  governed_by: RT-02
+  target_lifecycle: PROVISIONAL
+  target_deployment: PILOT_OR_BLOCKED
+  offer_reason: Alertas sustentadas opcionales.
+- edge_id: E052
+  from: TX-I01
+  to: WF-P01
+  semantics: TRANSFER_CONTROL
+  conditional: true
+  governed_by: RT-01
+  target_lifecycle: ACTIVE
+  target_deployment: PILOT_OR_BLOCKED
+  offer_reason: Señal educativa puede requerir comprensión pedagógica.
+- edge_id: E054
+  from: WF-I02
+  to: TX-I02
+  semantics: CALL_COMPONENT
+  conditional: false
+  governed_by: AUTO
+  target_lifecycle: PROVISIONAL
+  target_deployment: PILOT_OR_BLOCKED
+  offer_reason: Lenguaje profesional y trazable.
+- edge_id: E055
+  from: IN-S04
+  to: WF-I04
+  semantics: TRANSFER_CONTROL
+  conditional: false
+  governed_by: RT-01
+  target_lifecycle: ACTIVE
+  target_deployment: PILOT_OR_BLOCKED
+  offer_reason: Auditar antes de redactar.
+- edge_id: E056
+  from: IN-S04
+  to: TX-I02
+  semantics: CALL_COMPONENT
+  conditional: false
+  governed_by: AUTO
+  target_lifecycle: PROVISIONAL
+  target_deployment: PILOT_OR_BLOCKED
+  offer_reason: Redacción técnica interna.
+- edge_id: E057
+  from: WF-I04
+  to: TX-I02
+  semantics: CALL_COMPONENT
+  conditional: false
+  governed_by: AUTO
+  target_lifecycle: PROVISIONAL
+  target_deployment: PILOT_OR_BLOCKED
+  offer_reason: Informe por audiencia.
+- edge_id: E058
+  from: FL-P03
+  to: FL-D01
+  semantics: TRANSFER_CONTROL
+  conditional: false
+  governed_by: RT-01
+  target_lifecycle: ACTIVE
+  target_deployment: PILOT_OR_BLOCKED
+  offer_reason: Planificación cerrada puede producir guía.
+- edge_id: E059
+  from: FL-P03
+  to: FL-D02
+  semantics: TRANSFER_CONTROL
+  conditional: false
+  governed_by: RT-01
+  target_lifecycle: PROVISIONAL
+  target_deployment: PILOT_OR_BLOCKED
+  offer_reason: Planificación cerrada puede producir evaluación.
+- edge_id: E060
+  from: FL-P02
+  to: WF-A01
+  semantics: TRANSFER_CONTROL
+  conditional: true
+  governed_by: RT-01
+  target_lifecycle: ACTIVE
+  target_deployment: PILOT_OR_BLOCKED
+  offer_reason: Recuperación consume objetivos/contenidos priorizados, no sustituye planificación.

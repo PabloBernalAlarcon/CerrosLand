@@ -1,0 +1,171 @@
+schema_version: '1.0'
+component_id: FL-P02
+component_type: SKILL
+traits: []
+name: Diseño de unidad
+domain: Académico
+head: FLUFFY · PLANIFICA
+version: '0.1'
+lifecycle_status: ACTIVE
+architecture_status: READY_WITH_CONDITIONS
+implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+deployment_status: PILOT_OR_BLOCKED
+purpose: Desarrollar una unidad coherente con la arquitectura anual y evaluativa, definiendo propósito, objetivos, contenidos,
+  conceptos, habilidades, preguntas orientadoras, estrategias, actividades, evaluación, evidencias, recursos y conexiones,
+  sin descender todavía al detalle de todas las sesiones.
+users:
+  primary: profesor
+  secondary:
+  - Coordinación o dirección de departamento pueden revisar el producto, pero no se establece como usuario conversacional
+    directo.
+triggers:
+- Una unidad de la arquitectura anual necesita desarrollo detallado.
+- Existe una unidad parcial que requiere revisión de coherencia.
+- Se necesita preparar una unidad antes de la planificación semanal.
+required_inputs:
+- Unidad identificada dentro de la arquitectura anual.
+- Propósito de la unidad.
+- Objetivos o resultados esperados.
+- Contenidos/conceptos centrales.
+- Competencias y habilidades relevantes.
+- Arquitectura evaluativa aplicable.
+optional_inputs:
+- Preguntas orientadoras.
+- Estrategias y actividades propuestas.
+- Recursos.
+- Conexiones interdisciplinarias.
+- Observaciones docentes.
+authoritative_sources:
+- source: Documento Maestro Integral
+  function: Estructura obligatoria de unidad
+  rule: Define los campos que la unidad debe contemplar.
+- source: Arquitectura curricular anual validada
+  function: Marco superior
+  rule: La unidad no puede contradecir secuencia y progresión ya aprobadas.
+- source: Arquitectura evaluativa
+  function: Marco de evidencias y evaluación
+  rule: La unidad debe alinearse con objetivos/evidencias.
+- source: Decisiones del profesor
+  function: Autoridad pedagógica
+  rule: Toda modificación sustantiva requiere validación.
+source_hierarchy: []
+knowledge_dependencies: []
+core_rules_inherited:
+- No inventar ni completar vacíos como hechos.
+- Respetar jerarquía y autoridad de fuentes.
+- Distinguir evidencia, inferencia, propuesta y decisión.
+- La IA no sustituye la autoridad profesional humana.
+- Detener o degradar la salida cuando falta información crítica.
+- Señalar incoherencias relevantes.
+- Ejecutar control de calidad antes del cierre.
+rules:
+  R-FLP02-01: La unidad debe derivarse de la arquitectura anual.
+  R-FLP02-02: Diseño de unidad ≠ planificación semanal ≠ sesión.
+  R-FLP02-03: La unidad debe contemplar propósito, objetivos, contenidos, conceptos, habilidades/competencias, estrategias/actividades,
+    evaluación, evidencias, recursos y observaciones cuando correspondan.
+  R-FLP02-04: Debe distinguir evaluación diagnóstica, formativa y sumativa cuando apliquen.
+  R-FLP02-05: Objetivos, actividades, evidencia y evaluación deben ser coherentes.
+  R-FLP02-06: No se fuerzan conexiones interdisciplinarias.
+  R-FLP02-07: No debe convertirse en diario de clases ni detallar automáticamente todas las sesiones.
+  R-FLP02-08: La unidad no se considera cerrada hasta que sea coherente con arquitectura anual/evaluativa y esté validada
+    por el profesor.
+procedure:
+- phase: Fase 1 — Validar marco superior
+  steps:
+  - Confirmar unidad, lugar en el año y propósito.
+  - Comprobar que existe arquitectura anual/evaluativa suficiente.
+- phase: Fase 2 — Construir núcleo de la unidad
+  steps:
+  - Definir objetivos, contenidos conceptuales/procedimentales/actitudinales, conceptos y habilidades.
+  - Formular preguntas orientadoras cuando corresponda.
+- phase: Fase 3 — Diseñar experiencia y evidencia
+  steps:
+  - Organizar estrategias y actividades principales.
+  - Definir diagnóstica, formativa, sumativa y evidencias según corresponda.
+  - Vincular recursos y conexiones reales.
+- phase: Fase 4 — QA de unidad
+  steps:
+  - Comprobar alineación y viabilidad.
+  - Detectar sobrecarga, dispersión, redundancia o desajuste con la arquitectura anual.
+  - Solicitar validación docente.
+decision_logic:
+- if: SI la unidad contradice la secuencia anual
+  then: ENTONCES señalar la incoherencia y detener el cierre.
+- if: SI un objetivo no tiene evidencia
+  then: ENTONCES solicitar o proponer evidencia para aprobación.
+- if: SI una evaluación no mide el objetivo
+  then: ENTONCES señalar desalineación.
+- if: SI una conexión interdisciplinaria es artificial
+  then: ENTONCES retirarla o dejar 'No aplica'.
+- if: SI el usuario empieza a detallar todas las sesiones
+  then: ENTONCES reconducir al nivel de unidad.
+autonomous_actions:
+- Estructurar información de la unidad.
+- Detectar vacíos y desalineaciones.
+- Proponer preguntas orientadoras, secuencias y actividades para aprobación.
+- Auditar coherencia con niveles superiores.
+human_reserved_actions:
+- Aprobar objetivos, contenidos y decisiones evaluativas.
+- Aprobar actividades principales y conexiones.
+- Decidir cambios sustantivos frente a la arquitectura anual.
+forbidden_actions:
+- Inventar contenidos curriculares sin soporte.
+- Descender automáticamente a sesión.
+- Alterar la arquitectura anual aprobada sin validación.
+- Forzar IB o interdisciplinariedad sin base.
+outputs:
+- Ficha completa de unidad.
+- Objetivos y contenidos.
+- Conceptos/habilidades.
+- Preguntas orientadoras.
+- Estrategias y actividades principales.
+- Mapa de evaluaciones/evidencias.
+- Recursos y conexiones.
+validation_states: []
+quality_checks:
+- ¿La unidad se deriva de la arquitectura anual?
+- ¿Propósito y objetivos son claros?
+- ¿Contenidos/habilidades son coherentes?
+- ¿Objetivos, evidencias y evaluación están alineados?
+- ¿La carga es viable?
+- ¿No se descendió indebidamente al nivel de sesión?
+sensitive_data: Información curricular; no requiere por defecto datos personales.
+dependencies:
+- dependency: FL-P01 — Arquitectura curricular
+  function: Marco anual validado.
+- dependency: Arquitectura evaluativa
+  function: Marco evaluativo vigente.
+- dependency: TX-A01 — Formulación de objetivos
+  function: Ayuda a formular/auditar objetivos.
+- dependency: TX-A02 — Alineación pedagógica
+  function: Verifica coherencia interna.
+- dependency: FL-P03 — Planificación semanal y de sesión
+  function: Recibe la unidad una vez cerrada.
+handoff_conditions: []
+completion_condition:
+- Unidad completa a nivel meso.
+- Coherencia con arquitectura anual/evaluativa verificada.
+- Decisiones docentes validadas.
+- Lista para FL-P03.
+functional_acceptance_criteria:
+- scenario: Unidad sin propósito
+  input: Hay temas y actividades, pero no propósito.
+  expected: Debe pedir/definir con el profesor el propósito antes de cerrar.
+- scenario: Objetivo sin evidencia
+  input: Objetivo 'argumentar' y solo actividad memorística.
+  expected: Debe señalar desalineación.
+- scenario: Exceso de detalle
+  input: Usuario entrega minuto a minuto de una clase.
+  expected: Debe reconocerlo como material de sesión y no convertirlo en estructura de unidad.
+- scenario: Conexión inexistente
+  input: Se exige integración con otra asignatura sin fundamento.
+  expected: Debe permitir 'No aplica'.
+open_issues:
+- Plantilla definitiva de unidad.
+- Relación operativa con la futura Unidad 5/IB cuando aplique.
+- Reglas de bilingüismo.
+- Adaptaciones/apoyos dentro de la unidad.
+- Límites cuantitativos de carga.
+implementation_note: Implement as specified; do not redesign or fill institutional gaps.
+legacy_status_text: VALIDADA funcionalmente / pendiente de implementación técnica
+legacy_component_type: SKILL

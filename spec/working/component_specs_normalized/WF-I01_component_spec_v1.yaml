@@ -1,0 +1,156 @@
+schema_version: '1.0'
+component_id: WF-I01
+component_type: WORKFLOW
+traits: []
+name: Reunión colegio–familia
+domain: INSTITUTIONAL
+head: null
+version: '0.1'
+lifecycle_status: ACTIVE
+architecture_status: READY_WITH_CONDITIONS
+implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+deployment_status: PILOT_OR_BLOCKED
+purpose: Conducir el levantamiento y documentación de una reunión colegio–familia, asegurando panorama académico suficiente,
+  metas, aportes, acuerdos, responsables y fechas, con separación entre acta oficial y resumen interno.
+users:
+  primary: Director de Curso / docente autorizado
+triggers:
+- Preparación o documentación de reunión con familia.
+- Necesidad de formalizar compromisos y seguimiento.
+required_inputs:
+- Identificación del estudiante/reunión.
+- Panorama académico.
+- Aportes del colegio y de la familia.
+- Metas/acuerdos.
+optional_inputs:
+- Antecedentes relevantes autorizados.
+- Información de seguimiento previa.
+authoritative_sources:
+- source: Datos aportados por participantes
+  function: Hechos del caso
+  limit: No inferir lo no dicho.
+- source: Formato institucional del acta
+  function: Estructura
+  limit: No sustituir por formato inventado.
+- source: Reglas académicas de revisión
+  function: Cobertura
+  limit: No equiparar asignatura no mencionada con ausencia de alerta.
+source_hierarchy: []
+knowledge_dependencies:
+- KP-015
+core_rules_inherited:
+- No inventar ni completar vacíos como hechos.
+- Separar hechos, versiones, inferencias, propuestas y decisiones.
+- Respetar jerarquía de fuentes y conservar contradicciones relevantes.
+- La IA no sustituye la autoridad institucional o profesional humana.
+- Bloquear o degradar la salida ante vacíos críticos.
+- Ejecutar control de calidad antes del cierre.
+- Usar lenguaje profesional, neutral y trazable.
+- No convertir análisis técnico en sanción, calificación, diagnóstico o decisión administrativa.
+- Separar productos internos de documentos destinados a familias/estudiantes.
+- Conservar responsables, fechas y fuentes cuando son parte de la trazabilidad.
+- Tratar la información personal/sensible como datos de caso, no conocimiento institucional permanente.
+rules:
+  R-WFI01-01:
+    title: Ambigüedad
+    text: Repreguntar ante información insuficiente.
+  R-WFI01-02:
+    title: Cobertura
+    text: Revisar obligatoriamente Ciencias, Matemáticas, Español, Inglés y Sociales según configuración recuperada.
+  R-WFI01-03:
+    title: Por asignatura
+    text: Registrar estado, fortalezas, dificultades, evidencias, acciones y prioridad.
+  R-WFI01-04:
+    title: Metas
+    text: Deben ser concretas y verificables.
+  R-WFI01-05:
+    title: Compromisos
+    text: Todo acuerdo debe tener responsable y fecha cuando corresponda.
+  R-WFI01-06:
+    title: Dos salidas
+    text: Separar acta oficial de resumen ejecutivo interno.
+  R-WFI01-07:
+    title: Ausencia ≠ negativo
+    text: Dato no mencionado no equivale a 'sin problema'.
+procedure:
+- phase: Fase 1 — Identificación
+  steps:
+  - Confirmar estudiante, fecha, participantes y propósito.
+- phase: Fase 2 — Panorama
+  steps:
+  - Recorrer áreas obligatorias.
+  - Registrar evidencia y prioridades.
+- phase: Fase 3 — Construcción de acuerdos
+  steps:
+  - Definir metas, aportes y compromisos con responsable/fecha.
+- phase: Fase 4 — Cierre
+  steps:
+  - Generar acta y, por separado, resumen interno.
+  - Ejecutar checklist de completitud.
+decision_logic:
+- if: SI una respuesta es ambigua
+  then: ENTONCES repreguntar antes de convertirla en hecho.
+- if: SI falta una asignatura obligatoria
+  then: ENTONCES solicitar información o marcarla como no documentada.
+- if: SI un compromiso no tiene responsable/fecha
+  then: ENTONCES pedir completitud antes del cierre.
+autonomous_actions:
+- Organizar información.
+- Detectar vacíos.
+- Redactar acta y resumen interno desde datos confirmados.
+- Estructurar compromisos.
+human_reserved_actions:
+- Aprobar contenido del acta.
+- Acordar metas/compromisos.
+- Decidir acciones institucionales.
+forbidden_actions:
+- Inventar acuerdos.
+- Inferir problemas/fortalezas ausentes.
+- Exponer resumen interno a familias sin regla explícita.
+outputs:
+- Acta oficial.
+- Resumen ejecutivo interno.
+- Registro de compromisos.
+validation_states:
+- state: VALIDADO
+  condition: Puede emitirse como producto final dentro de la lógica funcional, sujeto a autoridad humana correspondiente.
+  source: Documento Maestro de Continuidad v0.11 §9.4 (default general, aprobado 2026-11-24)
+- state: PRELIMINAR
+  condition: Borrador o estado intermedio; faltan elementos no críticos o validación.
+  source: Documento Maestro de Continuidad v0.11 §9.4 (default general, aprobado 2026-11-24)
+- state: NO VALIDADO
+  condition: Falta información crítica, existe contradicción importante o la autoridad requerida no ha decidido.
+  source: Documento Maestro de Continuidad v0.11 §9.4 (default general, aprobado 2026-11-24)
+quality_checks:
+- ¿Cobertura académica suficiente?
+- ¿Vacíos explícitos?
+- ¿Compromisos con responsable/fecha?
+- ¿Acta y resumen interno separados?
+sensitive_data: Contiene información sensible de estudiante y familia.
+dependencies:
+- dependency: TX-I03
+  function: Gestión de compromisos.
+- dependency: TX-I02
+  function: Redacción institucional trazable.
+- dependency: Datos académicos
+  function: Panorama del caso.
+handoff_conditions: []
+completion_condition:
+- Información crítica completa o marcada como no documentada.
+- Acuerdos confirmados.
+- Dos productos correctamente separados.
+functional_acceptance_criteria:
+- scenario: Asignatura omitida
+  input: No se habló de Inglés.
+  expected: Debe preguntar o marcar no documentado; no asumir 'sin alertas'.
+- scenario: Acuerdo vago
+  input: '''Mejorar hábitos''.'
+  expected: Debe concretar acción/responsable/fecha.
+open_issues:
+- Formato exacto vigente.
+- Política de firma/aprobación.
+- Privacidad y retención.
+- Quién puede ver el resumen interno.
+implementation_note: Implement as specified; do not infer institutional authority or data governance.
+legacy_status_text: VALIDADA funcionalmente / pendiente de implementación técnica y gobierno de datos
+legacy_component_type: WORKFLOW

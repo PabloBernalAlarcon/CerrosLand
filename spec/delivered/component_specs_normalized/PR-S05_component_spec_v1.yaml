@@ -1,0 +1,116 @@
+schema_version: '1.0'
+component_id: PR-S05
+component_type: SKILL
+traits: []
+name: Síntesis CTA basada en evidencia
+domain: PERSONA
+head: null
+version: '0.1'
+lifecycle_status: PROVISIONAL
+architecture_status: READY_WITH_CONDITIONS
+implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+deployment_status: PILOT_OR_BLOCKED
+purpose: Transformar observaciones de trabajo académico en una síntesis CTA prudente basada en conducta observable, impacto
+  y orientación, evitando etiquetas y psicologización.
+users:
+  primary: docente/profesional autorizado
+triggers:
+- Se necesita redactar/revisar observación CTA.
+- Existe lenguaje etiquetante o subjetivo que debe reformularse.
+required_inputs:
+- Evidencia observable.
+- Contexto académico.
+- Impacto en aprendizaje/trabajo.
+- Orientación formativa deseada.
+optional_inputs:
+- Frecuencia/patrón.
+- Fortalezas asociadas.
+authoritative_sources:
+- source: Evidencia del caso
+  function: Base
+  limit: No atribuir intención.
+- source: Componentes CTA institucionales
+  function: Formato/criterios
+  limit: Especificación literal aún incompleta.
+- source: Cultura Cerros
+  function: Lenguaje
+  limit: Dignidad y crecimiento.
+source_hierarchy: []
+knowledge_dependencies: []
+core_rules_inherited:
+- No inventar ni completar vacíos como hechos.
+- Respetar jerarquía y autoridad de fuentes.
+- Distinguir evidencia, inferencia, propuesta y decisión.
+- La IA no sustituye autoridad profesional o institucional humana.
+- Detener o degradar la salida cuando falta información crítica.
+- Señalar incoherencias relevantes y ejecutar QA antes del cierre.
+- La persona precede a la etiqueta, dificultad, diagnóstico, calificación o procedimiento.
+- Comprender contexto y fortalezas antes de recomendar.
+- Usar evidencia observable antes que inferencia y formular hipótesis con prudencia.
+- No diagnosticar, patologizar, psicologizar ni convertir circunstancias en identidad.
+- Proteger dignidad, posibilidad de crecimiento y autonomía progresiva.
+- Los apoyos deben ser proporcionales, viables y no reducir automáticamente el objetivo académico.
+rules:
+  R-PRS05-01: Describir qué ocurrió, no quién 'es' la persona.
+  R-PRS05-02: No afirmar que 'no quiere', 'es irresponsable', etc. sin evidencia.
+  R-PRS05-03: La síntesis debe conducir a comprensión/acción formativa.
+  R-PRS05-04: La skill no asigna valoración CTA oficial.
+procedure:
+- phase: Paso 1
+  steps:
+  - Extraer observación concreta.
+- phase: Paso 2
+  steps:
+  - Eliminar etiquetas/atribuciones.
+- phase: Paso 3
+  steps:
+  - Explicar impacto educativo.
+- phase: Paso 4
+  steps:
+  - Formular orientación prudente.
+decision_logic:
+- if: SI el texto usa etiqueta personal
+  then: ENTONCES pedir/reformular con conducta, frecuencia e impacto.
+- if: SI no hay evidencia
+  then: ENTONCES no producir valoración.
+autonomous_actions:
+- Reformular lenguaje.
+- Detectar psicologización.
+- Estructurar evidencia→impacto→orientación.
+human_reserved_actions:
+- Asignar valoración oficial CTA.
+- Decidir consecuencias/formalizaciones.
+forbidden_actions:
+- Etiquetar.
+- Diagnosticar.
+- Atribuir intención.
+- Asignar valoración oficial.
+outputs:
+- Síntesis evidencia-impacto-orientación.
+- Alertas sobre lenguaje.
+validation_states: []
+quality_checks:
+- ¿Se basa en conducta observable?
+- ¿Evita identidad/intención?
+- ¿Es formativo?
+sensitive_data: Información individual académica.
+dependencies:
+- dependency: Knowledge CTA
+  function: Pendiente de completar.
+- dependency: Core Personas
+  function: Lenguaje y dignidad.
+handoff_conditions: []
+completion_condition:
+- Comentario sustentado y prudente.
+- Sin valoración oficial generada.
+functional_acceptance_criteria:
+- scenario: Etiqueta
+  input: '''Juan es irresponsable y no quiere trabajar''.'
+  expected: Debe pedir evidencia y reformular sin etiqueta.
+open_issues:
+- Formato/catálogo CTA oficial.
+- Relación exacta con valoración institucional.
+- Responsable de aprobación.
+implementation_note: Do not implement data persistence/access policy unless separately approved.
+legacy_status_text: PROVISIONAL — CTA integrado en Cerros Persona pero especificación institucional exacta pendiente
+legacy_component_type: SKILL_PROVISIONAL

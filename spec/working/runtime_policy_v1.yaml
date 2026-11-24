@@ -1,0 +1,93 @@
+policy_version: '1.2'
+status: APPROVED
+note: Runtime decisions taken during implementation. These rules sit on top of the frozen map.
+precedence:
+  - Core rules and human_reserved_actions always prevail over any runtime rule.
+  - Runtime rules may only RESTRICT what the map allows. No rule makes a non-executable edge executable.
+  - Every executable ORCHESTRATION edge is governed by exactly one of RT-01, RT-02, RT-05 or AUTO (checked by tools/build_edge_behavior.py).
+  - If two rules could apply to the same situation, the more restrictive one wins.
+rules:
+  RT-01:
+    resolves: ISSUE_REGISTER A1
+    approved: 2026-11-24 (user)
+    title: Handoffs wait for validation and user consent
+    applies_to: executable ORCHESTRATION edges with semantics TRANSFER_CONTROL
+    rule: >
+      Control transfers to the target only when (1) the source component has reached VALIDADO,
+      including every human approval its spec reserves, and (2) the user requests the next step
+      or accepts it when offered. Otherwise the source stops and may offer the next step.
+      For conditional edges, the map note is used as the reason shown when offering.
+  RT-02:
+    resolves: ISSUE_REGISTER A2
+    approved: 2026-11-24 (delegated by user to implementer)
+    title: Conditional internal calls ask first
+    applies_to: executable ORCHESTRATION edges with semantics CALL_COMPONENT and conditional=true
+    rule: >
+      The calling component states what it wants to call and why, and runs the call only after
+      the user agrees. The result returns to the caller; control never leaves the caller.
+  AUTO:
+    applies_to: executable ORCHESTRATION edges with semantics CALL_COMPONENT and conditional=false
+    rule: >
+      Part of the caller's own procedure; runs without asking. The result returns to the caller.
+      The target's lifecycle and deployment status still apply (see B1 once decided).
+  RT-03:
+    resolves: ISSUE_REGISTER A3
+    approved: 2026-11-24 (delegated by user to implementer)
+    title: '"Derivar" / "remitir" without an edge means stop and recommend'
+    applies_to: any spec text (rules, decision_logic, handoff_conditions, dependencies) that sends work to a component or person with no executable ORCHESTRATION edge from the source
+    rule: >
+      The source stops the affected step, tells the user which component or human authority should
+      take it and why, and transfers nothing. The user may start that component as a new request.
+      Where an executable edge exists, the edge's own rule (RT-01/RT-02/AUTO) applies instead.
+  RT-04:
+    resolves: ISSUE_REGISTER A4 (QUALITY direction)
+    approved: 2026-11-24 (delegated by user to implementer)
+    title: QUALITY edges are read reviewer-to-reviewed
+    rule: >
+      In every QUALITY edge the reviewer is the micro-skill with the qa/transversal role
+      (TX-A02 or TX-P01); the other node is the reviewed component. The map file is not edited;
+      the loader normalizes direction. QUALITY edges never transfer control.
+    edges_normalized: [E017, E018, E021]
+  RT-05:
+    resolves: ISSUE_REGISTER A4 (E042-E044)
+    approved: 2026-11-24 (delegated by user to implementer; map author unavailable)
+    title: TX-P01 does not take control of the products it reviews
+    edges_treated_as_dormant: [E042, E043, E044]
+    evidence:
+      - TX-P01 spec R-TXP01-03 "Proponer ajuste, no aprobarlo" and source limit "No rediseñar automáticamente".
+      - FL-D01 spec lists TX-P01 as a reviewer ("Puede revisar barreras/accesibilidad"); E018 models FL-D01 -> TX-P01 as QUALITY.
+      - FL-P03 handoff_conditions send barrier cases to TX-P01, i.e. the product calls the reviewer, not the reverse.
+    rule: >
+      E042-E044 are not executed. An accessibility/barrier review is offered by the product component
+      (FL-P03, FL-D01, FL-D02) under RT-03; TX-P01 returns proposals to that component, and the teacher
+      decides what to apply there. Reversible: restore the edges if the institution confirms the original direction.
+  RT-06:
+    resolves: ISSUE_REGISTER B1
+    approved: 2026-11-24 (user)
+    title: Effective status inherits from mandatory callees
+    rule: >
+      Registry statuses are never changed. At runtime a component's effective status is the most
+      restrictive of its own status and the status of every target it must call (AUTO edges).
+      If a mandatory callee is PROVISIONAL, the caller is presented as PROVISIONAL. If a mandatory
+      callee is not invocable or is BLOCKED_BY_KNOWLEDGE/BLOCKED_BY_GOVERNANCE, the caller stops at
+      that step and says why. Promotion of any component remains an institutional decision.
+  RT-07:
+    resolves: ISSUE_REGISTER B2, B3
+    approved: 2026-11-24 (user)
+    title: Deployment statuses are honored as written
+    rule: >
+      PILOT_OR_BLOCKED, BLOCKED_BY_KNOWLEDGE and BLOCKED_BY_GOVERNANCE all mean development or pilot
+      use only, with fictitious data. No component handles real personal data until GOV-01 is decided.
+      The criteria behind B2/B3 are listed as questions for the institution.
+  RT-08:
+    resolves: ISSUE_REGISTER C7
+    approved: 2026-11-24 (user)
+    title: Family comes from the manifest
+    rule: The runtime takes each component's family from master_spec_manifest_v1.yaml (domains); spec fields domain/head are kept untouched and ignored for routing.
+  RT-09:
+    resolves: ISSUE_REGISTER D1
+    approved: 2026-11-24 (user)
+    title: Family agreement is recorded by the teacher
+    rule: >
+      In WF-I01 and TX-I03, a commitment involving the family stays PENDING until the teacher records
+      that the family accepted it. No authority edge is added for HUM-FAMILIA.

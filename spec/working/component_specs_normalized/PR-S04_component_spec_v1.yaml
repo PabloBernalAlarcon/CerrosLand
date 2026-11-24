@@ -1,0 +1,144 @@
+schema_version: '1.0'
+component_id: PR-S04
+component_type: SKILL
+traits: []
+name: Seguimiento de apoyos
+domain: PERSONA
+head: null
+version: '0.1'
+lifecycle_status: ACTIVE
+architecture_status: READY_WITH_CONDITIONS
+implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+deployment_status: PILOT_OR_BLOCKED
+purpose: Comparar un apoyo implementado con evidencia posterior para valorar continuidad, ajuste, reducción, retiro o escalamiento
+  sin atribuir causalidad no demostrada.
+users:
+  primary: docente/profesional autorizado
+triggers:
+- Existe apoyo/ajuste previamente implementado.
+- Se realiza actualización de seguimiento.
+- Se necesita decidir si mantener o revisar una intervención.
+required_inputs:
+- Apoyo aplicado.
+- Objetivo/barrera que pretendía abordar.
+- Evidencia posterior.
+- Periodo/fecha.
+optional_inputs:
+- Observaciones de varios profesionales.
+- Resultados académicos.
+- Percepción del estudiante/familia cuando sea pertinente y autorizada.
+authoritative_sources:
+- source: Plan previo
+  function: Referencia
+  limit: Qué se esperaba lograr.
+- source: Evidencia posterior
+  function: Base
+  limit: No confundir coincidencia con causalidad.
+- source: Profesionales responsables
+  function: Autoridad
+  limit: Deciden cambios formales.
+source_hierarchy: []
+knowledge_dependencies:
+- KP-008
+core_rules_inherited:
+- No inventar ni completar vacíos como hechos.
+- Respetar jerarquía y autoridad de fuentes.
+- Distinguir evidencia, inferencia, propuesta y decisión.
+- La IA no sustituye autoridad profesional o institucional humana.
+- Detener o degradar la salida cuando falta información crítica.
+- Señalar incoherencias relevantes y ejecutar QA antes del cierre.
+- La persona precede a la etiqueta, dificultad, diagnóstico, calificación o procedimiento.
+- Comprender contexto y fortalezas antes de recomendar.
+- Usar evidencia observable antes que inferencia y formular hipótesis con prudencia.
+- No diagnosticar, patologizar, psicologizar ni convertir circunstancias en identidad.
+- Proteger dignidad, posibilidad de crecimiento y autonomía progresiva.
+- Los apoyos deben ser proporcionales, viables y no reducir automáticamente el objetivo académico.
+rules:
+  R-PRS04-01:
+    title: Comparabilidad
+    text: Comparar contra objetivo/barrera inicial.
+  R-PRS04-02:
+    title: Causalidad prudente
+    text: No afirmar que el apoyo causó un cambio sin sustento.
+  R-PRS04-03:
+    title: Autonomía
+    text: Si mejora autonomía, considerar reducción gradual del apoyo.
+  R-PRS04-04:
+    title: Fallo
+    text: No declarar apoyo fallido sin evidencia suficiente.
+  R-PRS04-05:
+    title: Trazabilidad
+    text: Registrar qué cambió, qué se observó y qué se recomienda.
+procedure:
+- phase: Paso 1
+  steps:
+  - Recuperar apoyo y propósito.
+- phase: Paso 2
+  steps:
+  - Examinar evidencia posterior.
+- phase: Paso 3
+  steps:
+  - Describir cambios/persistencias.
+- phase: Paso 4
+  steps:
+  - Recomendar mantener/ajustar/revisar/escalar.
+decision_logic:
+- if: SI no hay evidencia posterior suficiente
+  then: ENTONCES no declarar éxito/fallo.
+- if: SI aumenta autonomía
+  then: ENTONCES considerar reducción progresiva.
+- if: SI persiste barrera
+  then: ENTONCES revisar ajuste/contexto antes de aumentar intervención automáticamente.
+autonomous_actions:
+- Comparar evidencia.
+- Detectar persistencia/cambio.
+- Proponer opciones.
+human_reserved_actions:
+- Decidir continuidad/retirada formal.
+- Modificar PIAE/PIAR.
+forbidden_actions:
+- Afirmar causalidad sin evidencia.
+- Convertir apoyo temporal en permanente por defecto.
+outputs:
+- Estado del apoyo.
+- Evidencia observada.
+- Recomendación de continuidad/ajuste/escalamiento.
+validation_states:
+- state: VALIDADO
+  condition: Puede emitirse como producto final dentro de la lógica funcional, sujeto a autoridad humana correspondiente.
+  source: Documento Maestro de Continuidad v0.11 §9.4 (default general, aprobado 2026-11-24)
+- state: PRELIMINAR
+  condition: Borrador o estado intermedio; faltan elementos no críticos o validación.
+  source: Documento Maestro de Continuidad v0.11 §9.4 (default general, aprobado 2026-11-24)
+- state: NO VALIDADO
+  condition: Falta información crítica, existe contradicción importante o la autoridad requerida no ha decidido.
+  source: Documento Maestro de Continuidad v0.11 §9.4 (default general, aprobado 2026-11-24)
+quality_checks:
+- ¿Se compara contra propósito original?
+- ¿Se evita causalidad injustificada?
+- ¿La recomendación es proporcional?
+sensitive_data: Datos longitudinales sensibles.
+dependencies:
+- dependency: PR-S01/02
+  function: Definición inicial.
+- dependency: WF-P02
+  function: Actualización PIAE cuando aplique.
+handoff_conditions: []
+completion_condition:
+- Evidencia analizada.
+- Recomendación emitida.
+- Decisión humana identificada.
+functional_acceptance_criteria:
+- scenario: Sin datos
+  input: No hay observación posterior.
+  expected: Debe declarar insuficiencia.
+- scenario: Mayor autonomía
+  input: Estudiante ya realiza tarea sin recordatorios.
+  expected: Puede sugerir retirar gradualmente apoyo.
+open_issues:
+- Criterio formal de apoyo fallido.
+- Frecuencias de seguimiento.
+- Reglas de cierre del apoyo.
+implementation_note: Do not implement data persistence/access policy unless separately approved.
+legacy_status_text: VALIDADA funcionalmente / pendiente de implementación técnica
+legacy_component_type: SKILL

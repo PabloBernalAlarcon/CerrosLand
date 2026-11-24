@@ -1,0 +1,2136 @@
+map_version: '1.0'
+schema_note: Edge semantics are frozen. Only executable ORCHESTRATION edges transfer control.
+execution_rules:
+- Execute only edges with edge_class=ORCHESTRATION and executable=true.
+- QUALITY/SUPPORT/DATA/KNOWLEDGE/STRUCTURAL edges are declarative and never transfer control.
+- AUTHORITY edges reserve or transfer decisions to humans and are not component calls.
+- FUTURE edges are non-executable.
+- DISABLED and GAP targets cannot be invoked; any preserved orchestration relation to them is dormant.
+edge_semantics_catalog:
+  handoff:
+    edge_class: ORCHESTRATION
+    semantics: TRANSFER_CONTROL
+    conditional: false
+    normally_executable: true
+  conditional_handoff:
+    edge_class: ORCHESTRATION
+    semantics: TRANSFER_CONTROL
+    conditional: true
+    normally_executable: true
+  human_handoff:
+    edge_class: AUTHORITY
+    semantics: TRANSFER_TO_HUMAN
+    conditional: true
+    normally_executable: false
+  invokes:
+    edge_class: ORCHESTRATION
+    semantics: CALL_COMPONENT
+    conditional: false
+    normally_executable: true
+  conditional_invokes:
+    edge_class: ORCHESTRATION
+    semantics: CALL_COMPONENT
+    conditional: true
+    normally_executable: true
+  specialization:
+    edge_class: STRUCTURAL
+    semantics: SPECIALIZES
+    conditional: false
+    normally_executable: false
+  qa:
+    edge_class: QUALITY
+    semantics: REVIEWS
+    conditional: false
+    normally_executable: false
+  conditional_qa:
+    edge_class: QUALITY
+    semantics: REVIEWS
+    conditional: true
+    normally_executable: false
+  supports:
+    edge_class: SUPPORT
+    semantics: SUPPORTS
+    conditional: false
+    normally_executable: false
+  supplies:
+    edge_class: DATA
+    semantics: SUPPLIES
+    conditional: false
+    normally_executable: false
+  conditional_supplies:
+    edge_class: DATA
+    semantics: SUPPLIES
+    conditional: true
+    normally_executable: false
+  uses_knowledge:
+    edge_class: KNOWLEDGE
+    semantics: USES_KNOWLEDGE
+    conditional: false
+    normally_executable: false
+  human_authority:
+    edge_class: AUTHORITY
+    semantics: RESERVES_DECISION_TO
+    conditional: false
+    normally_executable: false
+  future_interaction:
+    edge_class: FUTURE
+    semantics: NON_EXECUTABLE_FUTURE_RELATION
+    conditional: true
+    normally_executable: false
+nodes:
+- id: FL-C01
+  name: Coaching de investigación
+  kind: SKILL
+  domain: ACOMPAÑA
+  status: VALIDADA funcionalmente / pendiente de implementación técnica
+  knowledge_dependencies:
+  - KP-007
+  human_authority: HUM-SUPERVISOR
+  node_kind: COMPONENT
+  component_type: SKILL
+  traits: []
+  lifecycle_status: ACTIVE
+  architecture_status: READY_WITH_CONDITIONS
+  implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+  deployment_status: PILOT_OR_BLOCKED
+- id: FL-C02
+  name: Feedback de escritura
+  kind: SKILL
+  domain: ACOMPAÑA
+  status: VALIDADA funcionalmente / pendiente de implementación técnica
+  knowledge_dependencies: []
+  human_authority: HUM-PROFESOR
+  node_kind: COMPONENT
+  component_type: SKILL
+  traits: []
+  lifecycle_status: ACTIVE
+  architecture_status: READY_WITH_CONDITIONS
+  implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+  deployment_status: PILOT_OR_BLOCKED
+- id: FL-D01
+  name: Construcción de guías académicas
+  kind: SKILL_WITH_WORKFLOW
+  domain: PRODUCE
+  status: VALIDADA funcionalmente / pendiente de implementación técnica
+  knowledge_dependencies:
+  - KP-001
+  - KP-002
+  - KP-005
+  human_authority: HUM-PROFESOR
+  node_kind: COMPONENT
+  component_type: SKILL
+  traits:
+  - workflow_embedded
+  lifecycle_status: ACTIVE
+  architecture_status: READY_WITH_CONDITIONS
+  implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+  deployment_status: PILOT_OR_BLOCKED
+- id: FL-D02
+  name: Diseño de evaluaciones
+  kind: SKILL
+  domain: PRODUCE
+  status: PROVISIONAL — arquitectura general identificada, pendiente de especificación institucional más robusta
+  knowledge_dependencies:
+  - KP-003
+  - KP-005
+  human_authority: HUM-PROFESOR
+  node_kind: COMPONENT
+  component_type: SKILL
+  traits: []
+  lifecycle_status: PROVISIONAL
+  architecture_status: READY_WITH_CONDITIONS
+  implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+  deployment_status: PILOT_OR_BLOCKED
+- id: FL-D03
+  name: Diseño y auditoría de ítems
+  kind: SKILL_WITH_SPECIALIZATION
+  domain: PRODUCE
+  status: VALIDADA con especialización Matemáticas/Saber; núcleo genérico parcialmente generalizable
+  knowledge_dependencies:
+  - KP-006
+  human_authority: HUM-PROFESOR
+  node_kind: COMPONENT
+  component_type: SKILL
+  traits:
+  - specialized
+  lifecycle_status: ACTIVE
+  architecture_status: READY
+  implementation_status: IMPLEMENTABLE
+  deployment_status: BLOCKED_BY_KNOWLEDGE
+- id: FL-D04
+  name: Diseño de rúbricas y criterios
+  kind: SKILL_CANDIDATE
+  domain: PRODUCE
+  status: PENDIENTE DE VALIDAR — no existe todavía expediente suficiente para especificación completa
+  knowledge_dependencies:
+  - KP-003
+  human_authority: HUM-PROFESOR
+  node_kind: COMPONENT
+  component_type: SKILL
+  traits: []
+  lifecycle_status: DISABLED
+  architecture_status: NOT_READY
+  implementation_status: NOT_IMPLEMENTABLE
+  deployment_status: NOT_DEPLOYABLE
+- id: FL-P01
+  name: Arquitectura curricular
+  kind: SKILL
+  domain: PLANIFICA
+  status: VALIDADA funcionalmente / pendiente de implementación técnica
+  knowledge_dependencies:
+  - KP-001
+  - KP-002
+  - KP-003
+  human_authority: HUM-PROFESOR
+  node_kind: COMPONENT
+  component_type: SKILL
+  traits: []
+  lifecycle_status: ACTIVE
+  architecture_status: READY_WITH_CONDITIONS
+  implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+  deployment_status: PILOT_OR_BLOCKED
+- id: FL-P02
+  name: Diseño de unidad
+  kind: SKILL
+  domain: PLANIFICA
+  status: VALIDADA funcionalmente / pendiente de implementación técnica
+  knowledge_dependencies:
+  - KP-001
+  - KP-003
+  human_authority: HUM-PROFESOR
+  node_kind: COMPONENT
+  component_type: SKILL
+  traits: []
+  lifecycle_status: ACTIVE
+  architecture_status: READY_WITH_CONDITIONS
+  implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+  deployment_status: PILOT_OR_BLOCKED
+- id: FL-P03
+  name: Planificación semanal y de sesión
+  kind: SKILL_WITH_CONVERSATIONAL_WORKFLOW
+  domain: PLANIFICA
+  status: functionally_validated_for_handoff
+  knowledge_dependencies:
+  - KP-003
+  - KP-004
+  human_authority: HUM-PROFESOR
+  node_kind: COMPONENT
+  component_type: SKILL
+  traits:
+  - conversational
+  - workflow_embedded
+  lifecycle_status: ACTIVE
+  architecture_status: READY
+  implementation_status: IMPLEMENTABLE
+  deployment_status: BLOCKED_BY_KNOWLEDGE
+- id: FL-P04
+  name: Análisis de carga académica
+  kind: SKILL_ANALYTICS_QA
+  domain: PLANIFICA
+  status: VALIDADA funcionalmente / pendiente de implementación técnica
+  knowledge_dependencies:
+  - KP-003
+  human_authority: HUM-PROFESOR
+  node_kind: COMPONENT
+  component_type: SKILL
+  traits:
+  - analytics
+  - qa
+  lifecycle_status: ACTIVE
+  architecture_status: READY_WITH_CONDITIONS
+  implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+  deployment_status: PILOT_OR_BLOCKED
+- id: IN-S01
+  name: Análisis técnico de convivencia
+  kind: SKILL
+  domain: INSTITUCIONAL
+  status: VALIDADA funcionalmente / pendiente de implementación técnica
+  knowledge_dependencies:
+  - KP-001
+  - KP-010
+  human_authority: HUM-CONVIVENCIA
+  node_kind: COMPONENT
+  component_type: SKILL
+  traits: []
+  lifecycle_status: ACTIVE
+  architecture_status: READY_WITH_CONDITIONS
+  implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+  deployment_status: PILOT_OR_BLOCKED
+- id: IN-S02
+  name: Clasificación y gravedad de convivencia
+  kind: SKILL_SPECIALIZED
+  domain: INSTITUCIONAL
+  status: VALIDADA funcionalmente / knowledge normativo debe mantenerse versionado
+  knowledge_dependencies:
+  - KP-010
+  human_authority: HUM-CONVIVENCIA
+  node_kind: COMPONENT
+  component_type: SKILL
+  traits:
+  - specialized
+  lifecycle_status: PROVISIONAL
+  architecture_status: READY_WITH_CONDITIONS
+  implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+  deployment_status: PILOT_OR_BLOCKED
+- id: IN-S03
+  name: Redacción de reporte de convivencia
+  kind: SKILL
+  domain: INSTITUCIONAL
+  status: VALIDADA funcionalmente / pendiente de implementación técnica
+  knowledge_dependencies:
+  - KP-010
+  human_authority: HUM-CONVIVENCIA
+  node_kind: COMPONENT
+  component_type: SKILL
+  traits: []
+  lifecycle_status: ACTIVE
+  architecture_status: READY_WITH_CONDITIONS
+  implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+  deployment_status: PILOT_OR_BLOCKED
+- id: IN-S04
+  name: Auditoría de evidencia académica
+  kind: SKILL_QA
+  domain: INSTITUCIONAL
+  status: VALIDADA funcionalmente / pendiente de decisiones institucionales abiertas
+  knowledge_dependencies:
+  - KP-014
+  human_authority: HUM-COMITE
+  node_kind: COMPONENT
+  component_type: SKILL
+  traits:
+  - qa
+  lifecycle_status: PROVISIONAL
+  architecture_status: READY_WITH_CONDITIONS
+  implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+  deployment_status: PILOT_OR_BLOCKED
+- id: PR-S01
+  name: Análisis de barreras y apoyos
+  kind: SKILL
+  domain: PERSONA
+  status: VALIDADA funcionalmente / pendiente de implementación técnica
+  knowledge_dependencies:
+  - KP-008
+  human_authority: HUM-ED
+  node_kind: COMPONENT
+  component_type: SKILL
+  traits: []
+  lifecycle_status: ACTIVE
+  architecture_status: READY_WITH_CONDITIONS
+  implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+  deployment_status: PILOT_OR_BLOCKED
+- id: PR-S02
+  name: Diseño de ajustes pedagógicos
+  kind: SKILL_BRIDGE
+  domain: PERSONA
+  status: VALIDADA funcionalmente / pendiente de implementación técnica
+  knowledge_dependencies:
+  - KP-008
+  human_authority: HUM-ED
+  node_kind: COMPONENT
+  component_type: SKILL
+  traits:
+  - bridge
+  lifecycle_status: ACTIVE
+  architecture_status: READY_WITH_CONDITIONS
+  implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+  deployment_status: PILOT_OR_BLOCKED
+- id: PR-S03
+  name: Traducción pedagógica de información especializada
+  kind: SKILL
+  domain: PERSONA
+  status: VALIDADA funcionalmente / pendiente de implementación técnica
+  knowledge_dependencies:
+  - KP-008
+  human_authority: HUM-ED
+  node_kind: COMPONENT
+  component_type: SKILL
+  traits: []
+  lifecycle_status: ACTIVE
+  architecture_status: READY_WITH_CONDITIONS
+  implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+  deployment_status: PILOT_OR_BLOCKED
+- id: PR-S04
+  name: Seguimiento de apoyos
+  kind: SKILL
+  domain: PERSONA
+  status: VALIDADA funcionalmente / pendiente de implementación técnica
+  knowledge_dependencies:
+  - KP-008
+  human_authority: HUM-ED
+  node_kind: COMPONENT
+  component_type: SKILL
+  traits: []
+  lifecycle_status: ACTIVE
+  architecture_status: READY_WITH_CONDITIONS
+  implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+  deployment_status: PILOT_OR_BLOCKED
+- id: PR-S05
+  name: Síntesis CTA basada en evidencia
+  kind: SKILL_PROVISIONAL
+  domain: PERSONA
+  status: PROVISIONAL — CTA integrado en Cerros Persona pero especificación institucional exacta pendiente
+  knowledge_dependencies:
+  - KP-013
+  human_authority: HUM-PROFESOR
+  node_kind: COMPONENT
+  component_type: SKILL
+  traits: []
+  lifecycle_status: PROVISIONAL
+  architecture_status: READY_WITH_CONDITIONS
+  implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+  deployment_status: PILOT_OR_BLOCKED
+- id: PR-S06
+  name: Análisis longitudinal de trayectoria
+  kind: SKILL
+  domain: PERSONA
+  status: VALIDADA funcionalmente / pendiente de gobierno de datos
+  knowledge_dependencies:
+  - KP-009
+  human_authority: HUM-MENTOR
+  node_kind: COMPONENT
+  component_type: SKILL
+  traits: []
+  lifecycle_status: ACTIVE
+  architecture_status: READY_WITH_CONDITIONS
+  implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+  deployment_status: PILOT_OR_BLOCKED
+- id: PR-S07
+  name: Transferencia de acompañamiento
+  kind: SKILL
+  domain: PERSONA
+  status: VALIDADA funcionalmente / pendiente de reglas de minimización de datos
+  knowledge_dependencies:
+  - KP-009
+  human_authority: HUM-MENTOR
+  node_kind: COMPONENT
+  component_type: SKILL
+  traits: []
+  lifecycle_status: ACTIVE
+  architecture_status: READY_WITH_CONDITIONS
+  implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+  deployment_status: PILOT_OR_BLOCKED
+- id: SP-C01
+  name: Periodismo escolar
+  kind: SPECIALIZATION
+  domain: ACOMPAÑA
+  status: VALIDADA funcionalmente como especialización / pendiente de decisiones editoriales institucionales
+  knowledge_dependencies: []
+  human_authority: HUM-EDITOR
+  node_kind: COMPONENT
+  component_type: SPECIALIZATION
+  traits: []
+  lifecycle_status: ACTIVE
+  architecture_status: READY_WITH_CONDITIONS
+  implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+  deployment_status: PILOT_OR_BLOCKED
+- id: TX-A01
+  name: Formulación de objetivos de aprendizaje
+  kind: MICRO_SKILL_TRANSVERSAL
+  domain: PLANIFICA
+  status: VALIDADA funcionalmente / pendiente de implementación técnica
+  knowledge_dependencies:
+  - KP-003
+  - KP-004
+  human_authority: HUM-PROFESOR
+  node_kind: COMPONENT
+  component_type: MICRO_SKILL
+  traits: &id001
+  - transversal
+  lifecycle_status: ACTIVE
+  architecture_status: READY_WITH_CONDITIONS
+  implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+  deployment_status: PILOT_OR_BLOCKED
+- id: TX-A02
+  name: Alineación pedagógica
+  kind: MICRO_SKILL_QA_TRANSVERSAL
+  domain: PLANIFICA
+  status: VALIDADA funcionalmente / pendiente de implementación técnica
+  knowledge_dependencies:
+  - KP-003
+  human_authority: HUM-PROFESOR
+  node_kind: COMPONENT
+  component_type: MICRO_SKILL
+  traits:
+  - qa
+  - transversal
+  lifecycle_status: ACTIVE
+  architecture_status: READY_WITH_CONDITIONS
+  implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+  deployment_status: PILOT_OR_BLOCKED
+- id: TX-D01
+  name: Redacción pedagógica sustentada
+  kind: MICRO_SKILL_TRANSVERSAL
+  domain: PRODUCE
+  status: VALIDADA funcionalmente / pendiente de implementación técnica
+  knowledge_dependencies:
+  - KP-005
+  human_authority: HUM-PROFESOR
+  node_kind: COMPONENT
+  component_type: MICRO_SKILL
+  traits: *id001
+  lifecycle_status: ACTIVE
+  architecture_status: READY_WITH_CONDITIONS
+  implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+  deployment_status: PILOT_OR_BLOCKED
+- id: TX-D02
+  name: Diseño de práctica
+  kind: MICRO_SKILL_TRANSVERSAL
+  domain: PRODUCE
+  status: VALIDADA PROVISIONAL / pendiente de implementación técnica
+  knowledge_dependencies:
+  - KP-005
+  human_authority: HUM-PROFESOR
+  node_kind: COMPONENT
+  component_type: MICRO_SKILL
+  traits: *id001
+  lifecycle_status: PROVISIONAL
+  architecture_status: READY_WITH_CONDITIONS
+  implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+  deployment_status: PILOT_OR_BLOCKED
+- id: TX-I01
+  name: Detección de alertas no clínicas
+  kind: MICRO_SKILL
+  domain: INSTITUCIONAL
+  status: PROVISIONAL — requiere taxonomía institucional
+  knowledge_dependencies:
+  - KP-010
+  human_authority: HUM-PSICOLOGIA
+  node_kind: COMPONENT
+  component_type: MICRO_SKILL
+  traits: []
+  lifecycle_status: PROVISIONAL
+  architecture_status: READY_WITH_CONDITIONS
+  implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+  deployment_status: PILOT_OR_BLOCKED
+- id: TX-I02
+  name: Redacción institucional trazable
+  kind: MICRO_SKILL_TRANSVERSAL
+  domain: INSTITUCIONAL
+  status: PROVISIONAL FUERTE / pendiente de normalización estilística institucional
+  knowledge_dependencies:
+  - KP-001
+  human_authority: HUM-PROFESOR
+  node_kind: COMPONENT
+  component_type: MICRO_SKILL
+  traits: *id001
+  lifecycle_status: PROVISIONAL
+  architecture_status: READY_WITH_CONDITIONS
+  implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+  deployment_status: PILOT_OR_BLOCKED
+- id: TX-I03
+  name: Gestión de compromisos
+  kind: MICRO_SKILL_TRANSVERSAL
+  domain: INSTITUCIONAL
+  status: PROVISIONAL / reutilización identificada
+  knowledge_dependencies:
+  - KP-015
+  human_authority: HUM-PROFESOR
+  node_kind: COMPONENT
+  component_type: MICRO_SKILL
+  traits: *id001
+  lifecycle_status: PROVISIONAL
+  architecture_status: READY_WITH_CONDITIONS
+  implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+  deployment_status: PILOT_OR_BLOCKED
+- id: TX-P01
+  name: Revisión de accesibilidad y barreras
+  kind: MICRO_SKILL_TRANSVERSAL
+  domain: PERSONA
+  status: VALIDADA PROVISIONAL / pendiente de integración final con Fluffy
+  knowledge_dependencies:
+  - KP-008
+  human_authority: HUM-PROFESOR
+  node_kind: COMPONENT
+  component_type: MICRO_SKILL
+  traits: *id001
+  lifecycle_status: PROVISIONAL
+  architecture_status: READY_WITH_CONDITIONS
+  implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+  deployment_status: PILOT_OR_BLOCKED
+- id: WF-A01
+  name: Recuperación intensiva
+  kind: WORKFLOW
+  domain: PLANIFICA
+  status: VALIDADO funcionalmente como workflow / pendiente de implementación técnica y de decisiones institucionales abiertas
+  knowledge_dependencies:
+  - KP-003
+  - KP-008
+  human_authority: HUM-PROFESOR
+  node_kind: COMPONENT
+  component_type: WORKFLOW
+  traits: []
+  lifecycle_status: ACTIVE
+  architecture_status: READY_WITH_CONDITIONS
+  implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+  deployment_status: PILOT_OR_BLOCKED
+- id: WF-C01
+  name: Extended Essay IB 2027
+  kind: WORKFLOW_SPECIALIZED
+  domain: ACOMPAÑA
+  status: VALIDADO funcionalmente respecto del expediente actual / requiere actualización continua de knowledge IB
+  knowledge_dependencies:
+  - KP-007
+  human_authority: HUM-SUPERVISOR
+  node_kind: COMPONENT
+  component_type: WORKFLOW
+  traits:
+  - specialized
+  lifecycle_status: ACTIVE
+  architecture_status: READY
+  implementation_status: IMPLEMENTABLE
+  deployment_status: BLOCKED_BY_GOVERNANCE
+- id: WF-I01
+  name: Reunión colegio–familia
+  kind: WORKFLOW
+  domain: INSTITUCIONAL
+  status: VALIDADA funcionalmente / pendiente de implementación técnica y gobierno de datos
+  knowledge_dependencies:
+  - KP-015
+  human_authority: HUM-PROFESOR
+  node_kind: COMPONENT
+  component_type: WORKFLOW
+  traits: []
+  lifecycle_status: ACTIVE
+  architecture_status: READY_WITH_CONDITIONS
+  implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+  deployment_status: PILOT_OR_BLOCKED
+- id: WF-I02
+  name: Acompañamiento EDP
+  kind: WORKFLOW
+  domain: INSTITUCIONAL
+  status: VALIDADA funcionalmente / pendiente de integración técnica
+  knowledge_dependencies:
+  - KP-001
+  - KP-002
+  - KP-011
+  human_authority: HUM-EDP
+  node_kind: COMPONENT
+  component_type: WORKFLOW
+  traits: []
+  lifecycle_status: ACTIVE
+  architecture_status: READY_WITH_CONDITIONS
+  implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+  deployment_status: PILOT_OR_BLOCKED
+- id: WF-I03
+  name: Reconocimiento institucional
+  kind: WORKFLOW
+  domain: INSTITUCIONAL
+  status: VALIDADO en flujo básico / fuentes institucionales de categorías incompletas
+  knowledge_dependencies:
+  - KP-001
+  - KP-012
+  human_authority: HUM-RECONOCIMIENTO
+  node_kind: COMPONENT
+  component_type: WORKFLOW
+  traits: []
+  lifecycle_status: PROVISIONAL
+  architecture_status: READY_WITH_CONDITIONS
+  implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+  deployment_status: PILOT_OR_BLOCKED
+- id: WF-I04
+  name: Informe académico individual
+  kind: WORKFLOW
+  domain: INSTITUCIONAL
+  status: VALIDADO funcionalmente / pendiente de implementación técnica
+  knowledge_dependencies:
+  - KP-014
+  human_authority: HUM-COMITE
+  node_kind: COMPONENT
+  component_type: WORKFLOW
+  traits: []
+  lifecycle_status: ACTIVE
+  architecture_status: READY_WITH_CONDITIONS
+  implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+  deployment_status: PILOT_OR_BLOCKED
+- id: WF-P01
+  name: Perfil Pedagógico Inicial
+  kind: WORKFLOW
+  domain: PERSONA
+  status: VALIDADO funcionalmente / pendiente de implementación técnica
+  knowledge_dependencies:
+  - KP-001
+  - KP-008
+  human_authority: HUM-ED
+  node_kind: COMPONENT
+  component_type: WORKFLOW
+  traits: []
+  lifecycle_status: ACTIVE
+  architecture_status: READY_WITH_CONDITIONS
+  implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+  deployment_status: PILOT_OR_BLOCKED
+- id: WF-P02
+  name: PIAE
+  kind: WORKFLOW
+  domain: PERSONA
+  status: VALIDADO PROVISIONAL / pendiente de definición institucional de autoridad exacta
+  knowledge_dependencies:
+  - KP-001
+  - KP-008
+  human_authority: HUM-ED
+  node_kind: COMPONENT
+  component_type: WORKFLOW
+  traits: []
+  lifecycle_status: PROVISIONAL
+  architecture_status: READY_WITH_CONDITIONS
+  implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+  deployment_status: PILOT_OR_BLOCKED
+- id: WF-P03
+  name: PPD
+  kind: WORKFLOW
+  domain: PERSONA
+  status: VALIDADO funcionalmente / pendiente de gobierno de datos e integración técnica
+  knowledge_dependencies:
+  - KP-001
+  - KP-009
+  human_authority: HUM-MENTOR
+  node_kind: COMPONENT
+  component_type: WORKFLOW
+  traits: []
+  lifecycle_status: ACTIVE
+  architecture_status: READY_WITH_CONDITIONS
+  implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+  deployment_status: PILOT_OR_BLOCKED
+- id: GAP-C01
+  name: Comprensión lectora
+  kind: GAP
+  domain: ACOMPAÑA
+  status: NO IMPLEMENTAR — pendiente de especificación teórica
+  knowledge_dependencies: []
+  human_authority: HUM-PROFESOR
+  node_kind: GAP
+  lifecycle_status: GAP
+  architecture_status: NOT_READY
+  implementation_status: NOT_IMPLEMENTABLE
+  deployment_status: NOT_DEPLOYABLE
+- id: KP-001
+  name: Cultura Cerros e Identidad Institucional
+  kind: KNOWLEDGE_PACK
+  domain: CORE / transversal
+  status: FUENTE CANÓNICA DISPONIBLE
+  node_kind: KNOWLEDGE
+- id: KP-002
+  name: Plan Estratégico Institucional
+  kind: KNOWLEDGE_PACK
+  domain: CORE / estrategia
+  status: FUENTE DISPONIBLE
+  node_kind: KNOWLEDGE
+- id: KP-003
+  name: Arquitectura de Planificación Académica
+  kind: KNOWLEDGE_PACK
+  domain: ACADÉMICO / PLANIFICA
+  status: PARCIAL — documentos canónicos identificados, corpus incompleto
+  node_kind: KNOWLEDGE
+- id: KP-004
+  name: Lesson Planner Institucional
+  kind: KNOWLEDGE_PACK
+  domain: ACADÉMICO / PLANIFICA
+  status: PARCIAL — lógica recuperada; fuentes literales no incorporadas al corpus actual
+  node_kind: KNOWLEDGE
+- id: KP-005
+  name: Marco Institucional para Guías e IA Educativa
+  kind: KNOWLEDGE_PACK
+  domain: ACADÉMICO / PRODUCE
+  status: PARCIAL
+  node_kind: KNOWLEDGE
+- id: KP-006
+  name: Evaluación Matemática y Pruebas Saber
+  kind: KNOWLEDGE_PACK
+  domain: ACADÉMICO / PRODUCE
+  status: PARCIAL — estructura recuperada; fuentes canónicas faltantes
+  node_kind: KNOWLEDGE
+- id: KP-007
+  name: Extended Essay IB — Primera evaluación 2027
+  kind: KNOWLEDGE_PACK
+  domain: ACADÉMICO / ACOMPAÑA
+  status: PARCIAL — knowledge identificado; guía oficial no incorporada al corpus actual
+  node_kind: KNOWLEDGE
+- id: KP-008
+  name: Educación Centrada en la Persona, Educación Diferencial y Apoyos
+  kind: KNOWLEDGE_PACK
+  domain: PERSONA
+  status: PARCIAL — múltiples fuentes identificadas, no todas presentes
+  node_kind: KNOWLEDGE
+- id: KP-009
+  name: PPD — Mentoría y Desarrollo Personal
+  kind: KNOWLEDGE_PACK
+  domain: PERSONA / mentoría
+  status: PARCIAL — jerarquía identificada, fuentes literales faltantes
+  node_kind: KNOWLEDGE
+- id: KP-010
+  name: Convivencia, Debido Proceso y Artículo 24
+  kind: KNOWLEDGE_PACK
+  domain: INSTITUCIONAL / convivencia
+  status: PARCIAL — marco identificado; fuentes canónicas no incorporadas
+  node_kind: KNOWLEDGE
+- id: KP-011
+  name: EDP — Evaluación de Desempeño Profesional
+  kind: KNOWLEDGE_PACK
+  domain: INSTITUCIONAL / desarrollo profesional
+  status: PARCIAL — lógica funcional recuperada; formulario/fuentes canónicas faltantes
+  node_kind: KNOWLEDGE
+- id: KP-012
+  name: Reconocimientos Institucionales de Graduación
+  kind: KNOWLEDGE_PACK
+  domain: INSTITUCIONAL / cultura
+  status: INCOMPLETO — configuración disponible, catálogo y preguntas canónicas faltantes
+  node_kind: KNOWLEDGE
+- id: KP-013
+  name: CTA — Observación Académica Institucional
+  kind: KNOWLEDGE_PACK
+  domain: PERSONA / INSTITUCIONAL
+  status: INCOMPLETO
+  node_kind: KNOWLEDGE
+- id: KP-014
+  name: Protocolo de Validación e Informe Académico Individual
+  kind: KNOWLEDGE_PACK
+  domain: INSTITUCIONAL / calidad académica
+  status: PARCIAL — reglas recuperadas; protocolo literal y fundamento de algunos umbrales pendientes
+  node_kind: KNOWLEDGE
+- id: KP-015
+  name: Actas de Reunión Colegio–Familia
+  kind: KNOWLEDGE_PACK
+  domain: INSTITUCIONAL / familias
+  status: PARCIAL — flujo recuperado; formato literal pendiente
+  node_kind: KNOWLEDGE
+- id: KP-016
+  name: Evidencia externa sobre IA en educación
+  kind: KNOWLEDGE_PACK
+  domain: SUSTENTO / investigación
+  status: FUENTES DISPONIBLES
+  node_kind: KNOWLEDGE
+- id: HUM-PROFESOR
+  name: Profesor / docente titular
+  kind: HUMAN_AUTHORITY
+  node_kind: HUMAN_AUTHORITY
+- id: HUM-MENTOR
+  name: Mentor
+  kind: HUMAN_AUTHORITY
+  node_kind: HUMAN_AUTHORITY
+- id: HUM-ED
+  name: Educación Diferencial / profesional especializado
+  kind: HUMAN_AUTHORITY
+  node_kind: HUMAN_AUTHORITY
+- id: HUM-PSICOLOGIA
+  name: Psicología / profesional clínico competente
+  kind: HUMAN_AUTHORITY
+  node_kind: HUMAN_AUTHORITY
+- id: HUM-CONVIVENCIA
+  name: Autoridad / órgano de convivencia
+  kind: HUMAN_AUTHORITY
+  node_kind: HUMAN_AUTHORITY
+- id: HUM-EDP
+  name: Evaluado / evaluador / autoridad EDP
+  kind: HUMAN_AUTHORITY
+  node_kind: HUMAN_AUTHORITY
+- id: HUM-COMITE
+  name: Comité / autoridad académica
+  kind: HUMAN_AUTHORITY
+  node_kind: HUMAN_AUTHORITY
+- id: HUM-FAMILIA
+  name: Familia / participantes de reunión
+  kind: HUMAN_AUTHORITY
+  node_kind: HUMAN_AUTHORITY
+- id: HUM-SUPERVISOR
+  name: Supervisor oficial EE
+  kind: HUMAN_AUTHORITY
+  node_kind: HUMAN_AUTHORITY
+- id: HUM-EDITOR
+  name: Profesor/editor / autoridad de publicación
+  kind: HUMAN_AUTHORITY
+  node_kind: HUMAN_AUTHORITY
+- id: HUM-RECONOCIMIENTO
+  name: Profesor / autoridad de ceremonia
+  kind: HUMAN_AUTHORITY
+  node_kind: HUMAN_AUTHORITY
+edges:
+- edge_id: E001
+  from: FL-P01
+  to: FL-P02
+  edge_class: ORCHESTRATION
+  semantics: TRANSFER_CONTROL
+  conditional: false
+  executable: true
+  note: Arquitectura anual validada alimenta diseño de unidad.
+  state_guard: target_must_be_invocable
+- edge_id: E002
+  from: FL-P02
+  to: FL-P03
+  edge_class: ORCHESTRATION
+  semantics: TRANSFER_CONTROL
+  conditional: false
+  executable: true
+  note: Unidad validada alimenta semana/sesión.
+  state_guard: target_must_be_invocable
+- edge_id: E003
+  from: TX-A01
+  to: FL-P02
+  edge_class: SUPPORT
+  semantics: SUPPORTS
+  conditional: false
+  executable: false
+  note: Formulación/auditoría de objetivos.
+- edge_id: E004
+  from: TX-A01
+  to: FL-P03
+  edge_class: SUPPORT
+  semantics: SUPPORTS
+  conditional: false
+  executable: false
+  note: Formulación/auditoría de objetivos.
+- edge_id: E005
+  from: TX-A02
+  to: FL-P01
+  edge_class: QUALITY
+  semantics: REVIEWS
+  conditional: false
+  executable: false
+  note: Coherencia/progresión entre niveles.
+- edge_id: E006
+  from: TX-A02
+  to: FL-P02
+  edge_class: QUALITY
+  semantics: REVIEWS
+  conditional: false
+  executable: false
+  note: Objetivo↔evidencia↔actividad.
+- edge_id: E007
+  from: TX-A02
+  to: FL-P03
+  edge_class: QUALITY
+  semantics: REVIEWS
+  conditional: false
+  executable: false
+  note: Objetivo↔assessment↔procedure.
+- edge_id: E008
+  from: FL-P03
+  to: FL-P04
+  edge_class: DATA
+  semantics: SUPPLIES
+  conditional: false
+  executable: false
+  note: Datos semanales pueden alimentar análisis de carga.
+- edge_id: E009
+  from: WF-A01
+  to: TX-A01
+  edge_class: ORCHESTRATION
+  semantics: CALL_COMPONENT
+  conditional: false
+  executable: true
+  note: Objetivos observables y verificables.
+  state_guard: target_must_be_invocable
+- edge_id: E010
+  from: WF-A01
+  to: TX-A02
+  edge_class: ORCHESTRATION
+  semantics: CALL_COMPONENT
+  conditional: false
+  executable: true
+  note: Alineación del proceso remedial.
+  state_guard: target_must_be_invocable
+- edge_id: E011
+  from: WF-A01
+  to: TX-D02
+  edge_class: ORCHESTRATION
+  semantics: CALL_COMPONENT
+  conditional: false
+  executable: true
+  note: Práctica autónoma/guiada.
+  state_guard: target_must_be_invocable
+- edge_id: E012
+  from: WF-A01
+  to: FL-D02
+  edge_class: ORCHESTRATION
+  semantics: CALL_COMPONENT
+  conditional: false
+  executable: true
+  note: Verificación final de dominio.
+  state_guard: target_must_be_invocable
+- edge_id: E013
+  from: WF-A01
+  to: FL-D03
+  edge_class: ORCHESTRATION
+  semantics: CALL_COMPONENT
+  conditional: false
+  executable: true
+  note: Ítems cuando el instrumento lo requiere.
+  state_guard: target_must_be_invocable
+- edge_id: E014
+  from: WF-A01
+  to: PR-S02
+  edge_class: ORCHESTRATION
+  semantics: TRANSFER_CONTROL
+  conditional: true
+  executable: true
+  note: Ajustes cuando existe necesidad autorizada.
+  state_guard: target_must_be_invocable
+- edge_id: E015
+  from: FL-D01
+  to: TX-D01
+  edge_class: ORCHESTRATION
+  semantics: CALL_COMPONENT
+  conditional: false
+  executable: true
+  note: Explicación y lectura sustentadas.
+  state_guard: target_must_be_invocable
+- edge_id: E016
+  from: FL-D01
+  to: TX-D02
+  edge_class: ORCHESTRATION
+  semantics: CALL_COMPONENT
+  conditional: false
+  executable: true
+  note: Ejercicios de refuerzo.
+  state_guard: target_must_be_invocable
+- edge_id: E017
+  from: FL-D01
+  to: TX-A02
+  edge_class: QUALITY
+  semantics: REVIEWS
+  conditional: false
+  executable: false
+  note: Coherencia con la planificación.
+- edge_id: E018
+  from: FL-D01
+  to: TX-P01
+  edge_class: QUALITY
+  semantics: REVIEWS
+  conditional: true
+  executable: false
+  note: Revisión de accesibilidad/barreras si aplica.
+- edge_id: E019
+  from: FL-D02
+  to: FL-D03
+  edge_class: ORCHESTRATION
+  semantics: CALL_COMPONENT
+  conditional: false
+  executable: true
+  note: Construcción/auditoría de ítems.
+  state_guard: target_must_be_invocable
+- edge_id: E020
+  from: FL-D02
+  to: FL-D04
+  edge_class: ORCHESTRATION
+  semantics: CALL_COMPONENT
+  conditional: true
+  executable: false
+  note: Rúbricas cuando el componente esté suficientemente validado.
+  state_guard: target_lifecycle_status=DISABLED
+- edge_id: E021
+  from: FL-D02
+  to: TX-A02
+  edge_class: QUALITY
+  semantics: REVIEWS
+  conditional: false
+  executable: false
+  note: Alineación objetivo↔evidencia.
+- edge_id: E022
+  from: TX-D02
+  to: FL-D02
+  edge_class: ORCHESTRATION
+  semantics: TRANSFER_CONTROL
+  conditional: false
+  executable: true
+  note: Si la práctica se convierte en evaluación formal.
+  state_guard: target_must_be_invocable
+- edge_id: E023
+  from: FL-C01
+  to: FL-C02
+  edge_class: ORCHESTRATION
+  semantics: CALL_COMPONENT
+  conditional: true
+  executable: true
+  note: Feedback de escritura dentro de investigación.
+  state_guard: target_must_be_invocable
+- edge_id: E024
+  from: WF-C01
+  to: FL-C01
+  edge_class: ORCHESTRATION
+  semantics: CALL_COMPONENT
+  conditional: false
+  executable: true
+  note: Motor de coaching investigativo.
+  state_guard: target_must_be_invocable
+- edge_id: E025
+  from: WF-C01
+  to: FL-C02
+  edge_class: ORCHESTRATION
+  semantics: CALL_COMPONENT
+  conditional: false
+  executable: true
+  note: Feedback sobre borradores.
+  state_guard: target_must_be_invocable
+- edge_id: E026
+  from: SP-C01
+  to: FL-C02
+  edge_class: STRUCTURAL
+  semantics: SPECIALIZES
+  conditional: false
+  executable: false
+  note: Especialización periodística del feedback de escritura.
+- edge_id: E027
+  from: GAP-C01
+  to: FL-D02
+  edge_class: FUTURE
+  semantics: NON_EXECUTABLE_FUTURE_RELATION
+  conditional: true
+  executable: false
+  note: Evaluación/diagnóstico lector futura, aún no especificada.
+- edge_id: E028
+  from: GAP-C01
+  to: TX-D02
+  edge_class: FUTURE
+  semantics: NON_EXECUTABLE_FUTURE_RELATION
+  conditional: true
+  executable: false
+  note: Práctica lectora futura, aún no especificada.
+- edge_id: E029
+  from: GAP-C01
+  to: TX-P01
+  edge_class: FUTURE
+  semantics: NON_EXECUTABLE_FUTURE_RELATION
+  conditional: true
+  executable: false
+  note: Accesibilidad futura, aún no especificada.
+- edge_id: E030
+  from: WF-P01
+  to: PR-S01
+  edge_class: ORCHESTRATION
+  semantics: CALL_COMPONENT
+  conditional: false
+  executable: true
+  note: Identificación de barreras/apoyos.
+  state_guard: target_must_be_invocable
+- edge_id: E031
+  from: WF-P01
+  to: PR-S03
+  edge_class: ORCHESTRATION
+  semantics: CALL_COMPONENT
+  conditional: true
+  executable: true
+  note: Traducción de información especializada si existe.
+  state_guard: target_must_be_invocable
+- edge_id: E032
+  from: WF-P01
+  to: PR-S02
+  edge_class: ORCHESTRATION
+  semantics: CALL_COMPONENT
+  conditional: true
+  executable: true
+  note: Ajustes cuando se requieren.
+  state_guard: target_must_be_invocable
+- edge_id: E033
+  from: WF-P01
+  to: WF-P02
+  edge_class: ORCHESTRATION
+  semantics: TRANSFER_CONTROL
+  conditional: false
+  executable: true
+  note: PPI puede alimentar PIAE.
+  state_guard: target_must_be_invocable
+- edge_id: E034
+  from: PR-S01
+  to: PR-S02
+  edge_class: ORCHESTRATION
+  semantics: TRANSFER_CONTROL
+  conditional: false
+  executable: true
+  note: Barrera/apoyo se traduce en ajuste concreto.
+  state_guard: target_must_be_invocable
+- edge_id: E035
+  from: PR-S02
+  to: PR-S04
+  edge_class: ORCHESTRATION
+  semantics: TRANSFER_CONTROL
+  conditional: false
+  executable: true
+  note: Ajustes implementados requieren seguimiento.
+  state_guard: target_must_be_invocable
+- edge_id: E036
+  from: WF-P02
+  to: PR-S04
+  edge_class: ORCHESTRATION
+  semantics: CALL_COMPONENT
+  conditional: false
+  executable: true
+  note: Seguimiento del plan de apoyos.
+  state_guard: target_must_be_invocable
+- edge_id: E037
+  from: WF-P03
+  to: PR-S06
+  edge_class: ORCHESTRATION
+  semantics: CALL_COMPONENT
+  conditional: false
+  executable: true
+  note: Longitudinalidad PPD.
+  state_guard: target_must_be_invocable
+- edge_id: E038
+  from: WF-P03
+  to: PR-S07
+  edge_class: ORCHESTRATION
+  semantics: CALL_COMPONENT
+  conditional: false
+  executable: true
+  note: Transferencia entre mentores.
+  state_guard: target_must_be_invocable
+- edge_id: E039
+  from: PR-S06
+  to: PR-S07
+  edge_class: DATA
+  semantics: SUPPLIES
+  conditional: false
+  executable: false
+  note: Síntesis longitudinal alimenta transferencia.
+- edge_id: E040
+  from: PR-S01
+  to: TX-P01
+  edge_class: DATA
+  semantics: SUPPLIES
+  conditional: false
+  executable: false
+  note: Barreras sustentadas para auditoría de productos académicos.
+- edge_id: E041
+  from: PR-S02
+  to: TX-P01
+  edge_class: DATA
+  semantics: SUPPLIES
+  conditional: false
+  executable: false
+  note: Ajustes propuestos para auditoría de productos.
+- edge_id: E042
+  from: TX-P01
+  to: FL-P03
+  edge_class: ORCHESTRATION
+  semantics: TRANSFER_CONTROL
+  conditional: true
+  executable: true
+  note: Revisión de planner cuando existen barreras autorizadas.
+  state_guard: target_must_be_invocable
+- edge_id: E043
+  from: TX-P01
+  to: FL-D01
+  edge_class: ORCHESTRATION
+  semantics: TRANSFER_CONTROL
+  conditional: true
+  executable: true
+  note: Revisión de guías.
+  state_guard: target_must_be_invocable
+- edge_id: E044
+  from: TX-P01
+  to: FL-D02
+  edge_class: ORCHESTRATION
+  semantics: TRANSFER_CONTROL
+  conditional: true
+  executable: true
+  note: Revisión de evaluaciones.
+  state_guard: target_must_be_invocable
+- edge_id: E045
+  from: WF-I01
+  to: TX-I03
+  edge_class: ORCHESTRATION
+  semantics: CALL_COMPONENT
+  conditional: false
+  executable: true
+  note: Compromisos con responsable/fecha.
+  state_guard: target_must_be_invocable
+- edge_id: E046
+  from: WF-I01
+  to: TX-I02
+  edge_class: ORCHESTRATION
+  semantics: CALL_COMPONENT
+  conditional: false
+  executable: true
+  note: Redacción diferenciada por audiencia.
+  state_guard: target_must_be_invocable
+- edge_id: E047
+  from: IN-S01
+  to: IN-S02
+  edge_class: ORCHESTRATION
+  semantics: TRANSFER_CONTROL
+  conditional: false
+  executable: true
+  note: Caso estructurado pasa a clasificación/gravedad.
+  state_guard: target_must_be_invocable
+- edge_id: E048
+  from: IN-S01
+  to: TX-I01
+  edge_class: ORCHESTRATION
+  semantics: CALL_COMPONENT
+  conditional: true
+  executable: true
+  note: Alertas no clínicas si procede.
+  state_guard: target_must_be_invocable
+- edge_id: E049
+  from: IN-S02
+  to: IN-S03
+  edge_class: ORCHESTRATION
+  semantics: TRANSFER_CONTROL
+  conditional: false
+  executable: true
+  note: Clasificación técnica alimenta reporte.
+  state_guard: target_must_be_invocable
+- edge_id: E050
+  from: IN-S03
+  to: TX-I02
+  edge_class: ORCHESTRATION
+  semantics: CALL_COMPONENT
+  conditional: false
+  executable: true
+  note: Redacción institucional trazable.
+  state_guard: target_must_be_invocable
+- edge_id: E051
+  from: IN-S03
+  to: TX-I01
+  edge_class: ORCHESTRATION
+  semantics: CALL_COMPONENT
+  conditional: true
+  executable: true
+  note: Alertas sustentadas opcionales.
+  state_guard: target_must_be_invocable
+- edge_id: E052
+  from: TX-I01
+  to: WF-P01
+  edge_class: ORCHESTRATION
+  semantics: TRANSFER_CONTROL
+  conditional: true
+  executable: true
+  note: Señal educativa puede requerir comprensión pedagógica.
+  state_guard: target_must_be_invocable
+- edge_id: E053
+  from: TX-I01
+  to: HUM-PSICOLOGIA
+  edge_class: AUTHORITY
+  semantics: TRANSFER_TO_HUMAN
+  conditional: true
+  executable: false
+  note: Señal clínica/psicológica se deriva a profesional competente.
+- edge_id: E054
+  from: WF-I02
+  to: TX-I02
+  edge_class: ORCHESTRATION
+  semantics: CALL_COMPONENT
+  conditional: false
+  executable: true
+  note: Lenguaje profesional y trazable.
+  state_guard: target_must_be_invocable
+- edge_id: E055
+  from: IN-S04
+  to: WF-I04
+  edge_class: ORCHESTRATION
+  semantics: TRANSFER_CONTROL
+  conditional: false
+  executable: true
+  note: Auditar antes de redactar.
+  state_guard: target_must_be_invocable
+- edge_id: E056
+  from: IN-S04
+  to: TX-I02
+  edge_class: ORCHESTRATION
+  semantics: CALL_COMPONENT
+  conditional: false
+  executable: true
+  note: Redacción técnica interna.
+  state_guard: target_must_be_invocable
+- edge_id: E057
+  from: WF-I04
+  to: TX-I02
+  edge_class: ORCHESTRATION
+  semantics: CALL_COMPONENT
+  conditional: false
+  executable: true
+  note: Informe por audiencia.
+  state_guard: target_must_be_invocable
+- edge_id: E058
+  from: FL-P03
+  to: FL-D01
+  edge_class: ORCHESTRATION
+  semantics: TRANSFER_CONTROL
+  conditional: false
+  executable: true
+  note: Planificación cerrada puede producir guía.
+  state_guard: target_must_be_invocable
+- edge_id: E059
+  from: FL-P03
+  to: FL-D02
+  edge_class: ORCHESTRATION
+  semantics: TRANSFER_CONTROL
+  conditional: false
+  executable: true
+  note: Planificación cerrada puede producir evaluación.
+  state_guard: target_must_be_invocable
+- edge_id: E060
+  from: FL-P02
+  to: WF-A01
+  edge_class: ORCHESTRATION
+  semantics: TRANSFER_CONTROL
+  conditional: true
+  executable: true
+  note: Recuperación consume objetivos/contenidos priorizados, no sustituye planificación.
+  state_guard: target_must_be_invocable
+- edge_id: E061
+  from: PR-S03
+  to: PR-S01
+  edge_class: DATA
+  semantics: SUPPLIES
+  conditional: false
+  executable: false
+  note: Implicaciones pedagógicas informan análisis de barreras.
+- edge_id: E062
+  from: PR-S05
+  to: WF-P01
+  edge_class: DATA
+  semantics: SUPPLIES
+  conditional: false
+  executable: false
+  note: Síntesis CTA puede ser evidencia contextual, no diagnóstico.
+- edge_id: E063
+  from: IN-S04
+  to: WF-I01
+  edge_class: DATA
+  semantics: SUPPLIES
+  conditional: true
+  executable: false
+  note: Síntesis académica validada puede alimentar panorama de reunión, si la audiencia lo permite.
+- edge_id: E064
+  from: FL-P01
+  to: KP-001
+  edge_class: KNOWLEDGE
+  semantics: USES_KNOWLEDGE
+  conditional: false
+  executable: false
+  note: ''
+- edge_id: E065
+  from: FL-P01
+  to: KP-002
+  edge_class: KNOWLEDGE
+  semantics: USES_KNOWLEDGE
+  conditional: false
+  executable: false
+  note: ''
+- edge_id: E066
+  from: FL-P01
+  to: KP-003
+  edge_class: KNOWLEDGE
+  semantics: USES_KNOWLEDGE
+  conditional: false
+  executable: false
+  note: ''
+- edge_id: E067
+  from: FL-P02
+  to: KP-001
+  edge_class: KNOWLEDGE
+  semantics: USES_KNOWLEDGE
+  conditional: false
+  executable: false
+  note: ''
+- edge_id: E068
+  from: FL-P02
+  to: KP-003
+  edge_class: KNOWLEDGE
+  semantics: USES_KNOWLEDGE
+  conditional: false
+  executable: false
+  note: ''
+- edge_id: E069
+  from: FL-P03
+  to: KP-003
+  edge_class: KNOWLEDGE
+  semantics: USES_KNOWLEDGE
+  conditional: false
+  executable: false
+  note: ''
+- edge_id: E070
+  from: FL-P03
+  to: KP-004
+  edge_class: KNOWLEDGE
+  semantics: USES_KNOWLEDGE
+  conditional: false
+  executable: false
+  note: ''
+- edge_id: E071
+  from: FL-P04
+  to: KP-003
+  edge_class: KNOWLEDGE
+  semantics: USES_KNOWLEDGE
+  conditional: false
+  executable: false
+  note: ''
+- edge_id: E072
+  from: TX-A01
+  to: KP-003
+  edge_class: KNOWLEDGE
+  semantics: USES_KNOWLEDGE
+  conditional: false
+  executable: false
+  note: ''
+- edge_id: E073
+  from: TX-A01
+  to: KP-004
+  edge_class: KNOWLEDGE
+  semantics: USES_KNOWLEDGE
+  conditional: false
+  executable: false
+  note: ''
+- edge_id: E074
+  from: TX-A02
+  to: KP-003
+  edge_class: KNOWLEDGE
+  semantics: USES_KNOWLEDGE
+  conditional: false
+  executable: false
+  note: ''
+- edge_id: E075
+  from: WF-A01
+  to: KP-003
+  edge_class: KNOWLEDGE
+  semantics: USES_KNOWLEDGE
+  conditional: false
+  executable: false
+  note: ''
+- edge_id: E076
+  from: WF-A01
+  to: KP-008
+  edge_class: KNOWLEDGE
+  semantics: USES_KNOWLEDGE
+  conditional: false
+  executable: false
+  note: ''
+- edge_id: E077
+  from: FL-D01
+  to: KP-001
+  edge_class: KNOWLEDGE
+  semantics: USES_KNOWLEDGE
+  conditional: false
+  executable: false
+  note: ''
+- edge_id: E078
+  from: FL-D01
+  to: KP-002
+  edge_class: KNOWLEDGE
+  semantics: USES_KNOWLEDGE
+  conditional: false
+  executable: false
+  note: ''
+- edge_id: E079
+  from: FL-D01
+  to: KP-005
+  edge_class: KNOWLEDGE
+  semantics: USES_KNOWLEDGE
+  conditional: false
+  executable: false
+  note: ''
+- edge_id: E080
+  from: FL-D02
+  to: KP-003
+  edge_class: KNOWLEDGE
+  semantics: USES_KNOWLEDGE
+  conditional: false
+  executable: false
+  note: ''
+- edge_id: E081
+  from: FL-D02
+  to: KP-005
+  edge_class: KNOWLEDGE
+  semantics: USES_KNOWLEDGE
+  conditional: false
+  executable: false
+  note: ''
+- edge_id: E082
+  from: FL-D03
+  to: KP-006
+  edge_class: KNOWLEDGE
+  semantics: USES_KNOWLEDGE
+  conditional: false
+  executable: false
+  note: ''
+- edge_id: E083
+  from: FL-D04
+  to: KP-003
+  edge_class: KNOWLEDGE
+  semantics: USES_KNOWLEDGE
+  conditional: false
+  executable: false
+  note: ''
+- edge_id: E084
+  from: TX-D01
+  to: KP-005
+  edge_class: KNOWLEDGE
+  semantics: USES_KNOWLEDGE
+  conditional: false
+  executable: false
+  note: ''
+- edge_id: E085
+  from: TX-D02
+  to: KP-005
+  edge_class: KNOWLEDGE
+  semantics: USES_KNOWLEDGE
+  conditional: false
+  executable: false
+  note: ''
+- edge_id: E086
+  from: FL-C01
+  to: KP-007
+  edge_class: KNOWLEDGE
+  semantics: USES_KNOWLEDGE
+  conditional: false
+  executable: false
+  note: ''
+- edge_id: E087
+  from: WF-C01
+  to: KP-007
+  edge_class: KNOWLEDGE
+  semantics: USES_KNOWLEDGE
+  conditional: false
+  executable: false
+  note: ''
+- edge_id: E088
+  from: WF-P01
+  to: KP-001
+  edge_class: KNOWLEDGE
+  semantics: USES_KNOWLEDGE
+  conditional: false
+  executable: false
+  note: ''
+- edge_id: E089
+  from: WF-P01
+  to: KP-008
+  edge_class: KNOWLEDGE
+  semantics: USES_KNOWLEDGE
+  conditional: false
+  executable: false
+  note: ''
+- edge_id: E090
+  from: PR-S01
+  to: KP-008
+  edge_class: KNOWLEDGE
+  semantics: USES_KNOWLEDGE
+  conditional: false
+  executable: false
+  note: ''
+- edge_id: E091
+  from: PR-S02
+  to: KP-008
+  edge_class: KNOWLEDGE
+  semantics: USES_KNOWLEDGE
+  conditional: false
+  executable: false
+  note: ''
+- edge_id: E092
+  from: PR-S03
+  to: KP-008
+  edge_class: KNOWLEDGE
+  semantics: USES_KNOWLEDGE
+  conditional: false
+  executable: false
+  note: ''
+- edge_id: E093
+  from: WF-P02
+  to: KP-001
+  edge_class: KNOWLEDGE
+  semantics: USES_KNOWLEDGE
+  conditional: false
+  executable: false
+  note: ''
+- edge_id: E094
+  from: WF-P02
+  to: KP-008
+  edge_class: KNOWLEDGE
+  semantics: USES_KNOWLEDGE
+  conditional: false
+  executable: false
+  note: ''
+- edge_id: E095
+  from: PR-S04
+  to: KP-008
+  edge_class: KNOWLEDGE
+  semantics: USES_KNOWLEDGE
+  conditional: false
+  executable: false
+  note: ''
+- edge_id: E096
+  from: PR-S05
+  to: KP-013
+  edge_class: KNOWLEDGE
+  semantics: USES_KNOWLEDGE
+  conditional: false
+  executable: false
+  note: ''
+- edge_id: E097
+  from: WF-P03
+  to: KP-001
+  edge_class: KNOWLEDGE
+  semantics: USES_KNOWLEDGE
+  conditional: false
+  executable: false
+  note: ''
+- edge_id: E098
+  from: WF-P03
+  to: KP-009
+  edge_class: KNOWLEDGE
+  semantics: USES_KNOWLEDGE
+  conditional: false
+  executable: false
+  note: ''
+- edge_id: E099
+  from: PR-S06
+  to: KP-009
+  edge_class: KNOWLEDGE
+  semantics: USES_KNOWLEDGE
+  conditional: false
+  executable: false
+  note: ''
+- edge_id: E100
+  from: PR-S07
+  to: KP-009
+  edge_class: KNOWLEDGE
+  semantics: USES_KNOWLEDGE
+  conditional: false
+  executable: false
+  note: ''
+- edge_id: E101
+  from: TX-P01
+  to: KP-008
+  edge_class: KNOWLEDGE
+  semantics: USES_KNOWLEDGE
+  conditional: false
+  executable: false
+  note: ''
+- edge_id: E102
+  from: WF-I01
+  to: KP-015
+  edge_class: KNOWLEDGE
+  semantics: USES_KNOWLEDGE
+  conditional: false
+  executable: false
+  note: ''
+- edge_id: E103
+  from: IN-S01
+  to: KP-001
+  edge_class: KNOWLEDGE
+  semantics: USES_KNOWLEDGE
+  conditional: false
+  executable: false
+  note: ''
+- edge_id: E104
+  from: IN-S01
+  to: KP-010
+  edge_class: KNOWLEDGE
+  semantics: USES_KNOWLEDGE
+  conditional: false
+  executable: false
+  note: ''
+- edge_id: E105
+  from: IN-S02
+  to: KP-010
+  edge_class: KNOWLEDGE
+  semantics: USES_KNOWLEDGE
+  conditional: false
+  executable: false
+  note: ''
+- edge_id: E106
+  from: IN-S03
+  to: KP-010
+  edge_class: KNOWLEDGE
+  semantics: USES_KNOWLEDGE
+  conditional: false
+  executable: false
+  note: ''
+- edge_id: E107
+  from: TX-I01
+  to: KP-010
+  edge_class: KNOWLEDGE
+  semantics: USES_KNOWLEDGE
+  conditional: false
+  executable: false
+  note: ''
+- edge_id: E108
+  from: WF-I02
+  to: KP-001
+  edge_class: KNOWLEDGE
+  semantics: USES_KNOWLEDGE
+  conditional: false
+  executable: false
+  note: ''
+- edge_id: E109
+  from: WF-I02
+  to: KP-002
+  edge_class: KNOWLEDGE
+  semantics: USES_KNOWLEDGE
+  conditional: false
+  executable: false
+  note: ''
+- edge_id: E110
+  from: WF-I02
+  to: KP-011
+  edge_class: KNOWLEDGE
+  semantics: USES_KNOWLEDGE
+  conditional: false
+  executable: false
+  note: ''
+- edge_id: E111
+  from: WF-I03
+  to: KP-001
+  edge_class: KNOWLEDGE
+  semantics: USES_KNOWLEDGE
+  conditional: false
+  executable: false
+  note: ''
+- edge_id: E112
+  from: WF-I03
+  to: KP-012
+  edge_class: KNOWLEDGE
+  semantics: USES_KNOWLEDGE
+  conditional: false
+  executable: false
+  note: ''
+- edge_id: E113
+  from: IN-S04
+  to: KP-014
+  edge_class: KNOWLEDGE
+  semantics: USES_KNOWLEDGE
+  conditional: false
+  executable: false
+  note: ''
+- edge_id: E114
+  from: WF-I04
+  to: KP-014
+  edge_class: KNOWLEDGE
+  semantics: USES_KNOWLEDGE
+  conditional: false
+  executable: false
+  note: ''
+- edge_id: E115
+  from: TX-I02
+  to: KP-001
+  edge_class: KNOWLEDGE
+  semantics: USES_KNOWLEDGE
+  conditional: false
+  executable: false
+  note: ''
+- edge_id: E116
+  from: TX-I03
+  to: KP-015
+  edge_class: KNOWLEDGE
+  semantics: USES_KNOWLEDGE
+  conditional: false
+  executable: false
+  note: ''
+- edge_id: E117
+  from: FL-P01
+  to: HUM-PROFESOR
+  edge_class: AUTHORITY
+  semantics: RESERVES_DECISION_TO
+  conditional: false
+  executable: false
+  note: Decisión/validación reservada según la especificación del componente.
+- edge_id: E118
+  from: FL-P02
+  to: HUM-PROFESOR
+  edge_class: AUTHORITY
+  semantics: RESERVES_DECISION_TO
+  conditional: false
+  executable: false
+  note: Decisión/validación reservada según la especificación del componente.
+- edge_id: E119
+  from: FL-P03
+  to: HUM-PROFESOR
+  edge_class: AUTHORITY
+  semantics: RESERVES_DECISION_TO
+  conditional: false
+  executable: false
+  note: Decisión/validación reservada según la especificación del componente.
+- edge_id: E120
+  from: FL-P04
+  to: HUM-PROFESOR
+  edge_class: AUTHORITY
+  semantics: RESERVES_DECISION_TO
+  conditional: false
+  executable: false
+  note: Decisión/validación reservada según la especificación del componente.
+- edge_id: E121
+  from: TX-A01
+  to: HUM-PROFESOR
+  edge_class: AUTHORITY
+  semantics: RESERVES_DECISION_TO
+  conditional: false
+  executable: false
+  note: Decisión/validación reservada según la especificación del componente.
+- edge_id: E122
+  from: TX-A02
+  to: HUM-PROFESOR
+  edge_class: AUTHORITY
+  semantics: RESERVES_DECISION_TO
+  conditional: false
+  executable: false
+  note: Decisión/validación reservada según la especificación del componente.
+- edge_id: E123
+  from: WF-A01
+  to: HUM-PROFESOR
+  edge_class: AUTHORITY
+  semantics: RESERVES_DECISION_TO
+  conditional: false
+  executable: false
+  note: Decisión/validación reservada según la especificación del componente.
+- edge_id: E124
+  from: FL-D01
+  to: HUM-PROFESOR
+  edge_class: AUTHORITY
+  semantics: RESERVES_DECISION_TO
+  conditional: false
+  executable: false
+  note: Decisión/validación reservada según la especificación del componente.
+- edge_id: E125
+  from: FL-D02
+  to: HUM-PROFESOR
+  edge_class: AUTHORITY
+  semantics: RESERVES_DECISION_TO
+  conditional: false
+  executable: false
+  note: Decisión/validación reservada según la especificación del componente.
+- edge_id: E126
+  from: FL-D03
+  to: HUM-PROFESOR
+  edge_class: AUTHORITY
+  semantics: RESERVES_DECISION_TO
+  conditional: false
+  executable: false
+  note: Decisión/validación reservada según la especificación del componente.
+- edge_id: E127
+  from: FL-D04
+  to: HUM-PROFESOR
+  edge_class: AUTHORITY
+  semantics: RESERVES_DECISION_TO
+  conditional: false
+  executable: false
+  note: Decisión/validación reservada según la especificación del componente.
+- edge_id: E128
+  from: TX-D01
+  to: HUM-PROFESOR
+  edge_class: AUTHORITY
+  semantics: RESERVES_DECISION_TO
+  conditional: false
+  executable: false
+  note: Decisión/validación reservada según la especificación del componente.
+- edge_id: E129
+  from: TX-D02
+  to: HUM-PROFESOR
+  edge_class: AUTHORITY
+  semantics: RESERVES_DECISION_TO
+  conditional: false
+  executable: false
+  note: Decisión/validación reservada según la especificación del componente.
+- edge_id: E130
+  from: FL-C01
+  to: HUM-SUPERVISOR
+  edge_class: AUTHORITY
+  semantics: RESERVES_DECISION_TO
+  conditional: false
+  executable: false
+  note: Decisión/validación reservada según la especificación del componente.
+- edge_id: E131
+  from: FL-C02
+  to: HUM-PROFESOR
+  edge_class: AUTHORITY
+  semantics: RESERVES_DECISION_TO
+  conditional: false
+  executable: false
+  note: Decisión/validación reservada según la especificación del componente.
+- edge_id: E132
+  from: WF-C01
+  to: HUM-SUPERVISOR
+  edge_class: AUTHORITY
+  semantics: RESERVES_DECISION_TO
+  conditional: false
+  executable: false
+  note: Decisión/validación reservada según la especificación del componente.
+- edge_id: E133
+  from: SP-C01
+  to: HUM-EDITOR
+  edge_class: AUTHORITY
+  semantics: RESERVES_DECISION_TO
+  conditional: false
+  executable: false
+  note: Decisión/validación reservada según la especificación del componente.
+- edge_id: E134
+  from: GAP-C01
+  to: HUM-PROFESOR
+  edge_class: AUTHORITY
+  semantics: RESERVES_DECISION_TO
+  conditional: false
+  executable: false
+  note: Decisión/validación reservada según la especificación del componente.
+- edge_id: E135
+  from: WF-P01
+  to: HUM-ED
+  edge_class: AUTHORITY
+  semantics: RESERVES_DECISION_TO
+  conditional: false
+  executable: false
+  note: Decisión/validación reservada según la especificación del componente.
+- edge_id: E136
+  from: PR-S01
+  to: HUM-ED
+  edge_class: AUTHORITY
+  semantics: RESERVES_DECISION_TO
+  conditional: false
+  executable: false
+  note: Decisión/validación reservada según la especificación del componente.
+- edge_id: E137
+  from: PR-S02
+  to: HUM-ED
+  edge_class: AUTHORITY
+  semantics: RESERVES_DECISION_TO
+  conditional: false
+  executable: false
+  note: Decisión/validación reservada según la especificación del componente.
+- edge_id: E138
+  from: PR-S03
+  to: HUM-ED
+  edge_class: AUTHORITY
+  semantics: RESERVES_DECISION_TO
+  conditional: false
+  executable: false
+  note: Decisión/validación reservada según la especificación del componente.
+- edge_id: E139
+  from: WF-P02
+  to: HUM-ED
+  edge_class: AUTHORITY
+  semantics: RESERVES_DECISION_TO
+  conditional: false
+  executable: false
+  note: Decisión/validación reservada según la especificación del componente.
+- edge_id: E140
+  from: PR-S04
+  to: HUM-ED
+  edge_class: AUTHORITY
+  semantics: RESERVES_DECISION_TO
+  conditional: false
+  executable: false
+  note: Decisión/validación reservada según la especificación del componente.
+- edge_id: E141
+  from: PR-S05
+  to: HUM-PROFESOR
+  edge_class: AUTHORITY
+  semantics: RESERVES_DECISION_TO
+  conditional: false
+  executable: false
+  note: Decisión/validación reservada según la especificación del componente.
+- edge_id: E142
+  from: WF-P03
+  to: HUM-MENTOR
+  edge_class: AUTHORITY
+  semantics: RESERVES_DECISION_TO
+  conditional: false
+  executable: false
+  note: Decisión/validación reservada según la especificación del componente.
+- edge_id: E143
+  from: PR-S06
+  to: HUM-MENTOR
+  edge_class: AUTHORITY
+  semantics: RESERVES_DECISION_TO
+  conditional: false
+  executable: false
+  note: Decisión/validación reservada según la especificación del componente.
+- edge_id: E144
+  from: PR-S07
+  to: HUM-MENTOR
+  edge_class: AUTHORITY
+  semantics: RESERVES_DECISION_TO
+  conditional: false
+  executable: false
+  note: Decisión/validación reservada según la especificación del componente.
+- edge_id: E145
+  from: TX-P01
+  to: HUM-PROFESOR
+  edge_class: AUTHORITY
+  semantics: RESERVES_DECISION_TO
+  conditional: false
+  executable: false
+  note: Decisión/validación reservada según la especificación del componente.
+- edge_id: E146
+  from: WF-I01
+  to: HUM-PROFESOR
+  edge_class: AUTHORITY
+  semantics: RESERVES_DECISION_TO
+  conditional: false
+  executable: false
+  note: Decisión/validación reservada según la especificación del componente.
+- edge_id: E147
+  from: IN-S01
+  to: HUM-CONVIVENCIA
+  edge_class: AUTHORITY
+  semantics: RESERVES_DECISION_TO
+  conditional: false
+  executable: false
+  note: Decisión/validación reservada según la especificación del componente.
+- edge_id: E148
+  from: IN-S02
+  to: HUM-CONVIVENCIA
+  edge_class: AUTHORITY
+  semantics: RESERVES_DECISION_TO
+  conditional: false
+  executable: false
+  note: Decisión/validación reservada según la especificación del componente.
+- edge_id: E149
+  from: IN-S03
+  to: HUM-CONVIVENCIA
+  edge_class: AUTHORITY
+  semantics: RESERVES_DECISION_TO
+  conditional: false
+  executable: false
+  note: Decisión/validación reservada según la especificación del componente.
+- edge_id: E150
+  from: TX-I01
+  to: HUM-PSICOLOGIA
+  edge_class: AUTHORITY
+  semantics: RESERVES_DECISION_TO
+  conditional: false
+  executable: false
+  note: Decisión/validación reservada según la especificación del componente.
+- edge_id: E151
+  from: WF-I02
+  to: HUM-EDP
+  edge_class: AUTHORITY
+  semantics: RESERVES_DECISION_TO
+  conditional: false
+  executable: false
+  note: Decisión/validación reservada según la especificación del componente.
+- edge_id: E152
+  from: WF-I03
+  to: HUM-RECONOCIMIENTO
+  edge_class: AUTHORITY
+  semantics: RESERVES_DECISION_TO
+  conditional: false
+  executable: false
+  note: Decisión/validación reservada según la especificación del componente.
+- edge_id: E153
+  from: IN-S04
+  to: HUM-COMITE
+  edge_class: AUTHORITY
+  semantics: RESERVES_DECISION_TO
+  conditional: false
+  executable: false
+  note: Decisión/validación reservada según la especificación del componente.
+- edge_id: E154
+  from: WF-I04
+  to: HUM-COMITE
+  edge_class: AUTHORITY
+  semantics: RESERVES_DECISION_TO
+  conditional: false
+  executable: false
+  note: Decisión/validación reservada según la especificación del componente.
+- edge_id: E155
+  from: TX-I02
+  to: HUM-PROFESOR
+  edge_class: AUTHORITY
+  semantics: RESERVES_DECISION_TO
+  conditional: false
+  executable: false
+  note: Decisión/validación reservada según la especificación del componente.
+- edge_id: E156
+  from: TX-I03
+  to: HUM-PROFESOR
+  edge_class: AUTHORITY
+  semantics: RESERVES_DECISION_TO
+  conditional: false
+  executable: false
+  note: Decisión/validación reservada según la especificación del componente.

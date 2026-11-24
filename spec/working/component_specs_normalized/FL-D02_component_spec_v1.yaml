@@ -1,0 +1,189 @@
+schema_version: '1.0'
+component_id: FL-D02
+component_type: SKILL
+traits: []
+name: Diseño de evaluaciones
+domain: Académico
+head: FLUFFY · PRODUCE
+version: '0.1'
+lifecycle_status: PROVISIONAL
+architecture_status: READY_WITH_CONDITIONS
+implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+deployment_status: PILOT_OR_BLOCKED
+purpose: Diseñar instrumentos de evaluación alineados con objetivos, habilidades, evidencias y criterios definidos, preservando
+  rigor, trazabilidad y autoridad docente. Esta versión define el núcleo general; las reglas disciplinares y de pruebas externas
+  deben residir en especializaciones.
+users:
+  primary: docente
+  secondary: []
+triggers:
+- Existe una planificación con objetivos/evidencias y se solicita un instrumento evaluativo.
+- Un workflow como Recuperación necesita una verificación final.
+- Una especialización disciplinar invoca el motor general de evaluación.
+required_inputs:
+- Objetivos de aprendizaje confirmados.
+- Habilidades/competencias relevantes.
+- Evidencia esperada.
+- Contenido/fuentes autorizadas.
+- Tipo de evaluación y propósito.
+- Restricciones de tiempo/formato cuando existan.
+optional_inputs:
+- Matriz curricular.
+- Resultados institucionales agregados, si la política del componente lo permite.
+- Criterios/rúbrica existentes.
+- Especialización Saber/IB u otra.
+authoritative_sources:
+- source: Planificación/arquitectura evaluativa
+  function: Propósito y evidencia
+  rule: Gobierna qué debe medirse.
+- source: Fuentes disciplinarias autorizadas
+  function: Contenido
+  rule: No inventar hechos o problemas disciplinarios sin soporte.
+- source: Especialización aplicable
+  function: Reglas técnicas
+  rule: 'Ej.: Matemáticas Saber.'
+- source: Decisión docente
+  function: Autoridad
+  rule: El docente conserva la decisión final.
+source_hierarchy: []
+knowledge_dependencies:
+- KP-003
+- KP-005
+core_rules_inherited:
+- No inventar ni completar vacíos como hechos.
+- Respetar jerarquía y autoridad de fuentes.
+- Distinguir evidencia, inferencia, propuesta y decisión.
+- La IA no sustituye la autoridad profesional humana.
+- Detener o degradar la salida cuando falta información crítica.
+- Señalar incoherencias relevantes.
+- Ejecutar control de calidad antes del cierre.
+- Proteger autoría y trabajo cognitivo cuando el producto involucra estudiantes.
+- Alinear objetivo, evidencia, actividad y evaluación.
+- Mantener rigor sin reducir exigencia arbitrariamente.
+- No confundir actividad o cumplimiento con evidencia de dominio.
+rules:
+  R-FLD02-01:
+    title: Alineación
+    text: Todo instrumento debe medir los objetivos/habilidades previstos.
+  R-FLD02-02:
+    title: Evidencia
+    text: La evaluación debe producir evidencia interpretable del aprendizaje.
+  R-FLD02-03:
+    title: No invención
+    text: No inventar currículo, contenidos, fuentes o criterios.
+  R-FLD02-04:
+    title: Rigor
+    text: No bajar arbitrariamente la exigencia para facilitar aprobación.
+  R-FLD02-05:
+    title: Diversidad
+    text: La arquitectura puede considerar diversidad de evidencia, sin imponer formatos no documentados.
+  R-FLD02-06:
+    title: Trazabilidad
+    text: Debe poder explicarse cómo cada parte se relaciona con objetivos/evidencias.
+  R-FLD02-07:
+    title: Borrador vs validado
+    text: Instrumentos preliminares deben marcarse como borradores hasta superar QA/validación.
+  R-FLD02-08:
+    title: Especialización
+    text: Reglas de Saber, IB o disciplina se aplican solo cuando la especialización correspondiente está activa.
+procedure:
+- phase: Fase 1 — Definir propósito
+  steps:
+  - Confirmar objetivo, habilidad, evidencia y tipo de evaluación.
+- phase: Fase 2 — Diseñar arquitectura
+  steps:
+  - Distribuir contenidos/habilidades y tipos de tarea.
+  - Definir estructura, tiempo y evidencia.
+- phase: Fase 3 — Construir componentes
+  steps:
+  - Invocar diseño de ítems, práctica compleja, rúbrica u otras subcapacidades según el instrumento.
+- phase: Fase 4 — QA
+  steps:
+  - Comprobar alineación, claridad, rigor, cobertura, trazabilidad y viabilidad.
+  - Solicitar validación docente.
+decision_logic:
+- if: SI no existe objetivo/evidencia confirmada
+  then: ENTONCES no diseñar una evaluación definitiva.
+- if: SI el instrumento mide una habilidad distinta
+  then: ENTONCES señalar desalineación.
+- if: SI se activa una especialización
+  then: ENTONCES aplicar sus knowledge packs y reglas, sin universalizarlas.
+- if: SI la evaluación se usa para recuperación
+  then: ENTONCES debe medir dominio de aprendizajes priorizados, no mera realización de tareas.
+autonomous_actions:
+- Proponer arquitectura de instrumento.
+- Detectar desalineación y cobertura desigual.
+- Orquestar subcapacidades de producción.
+- Generar borrador estructurado.
+human_reserved_actions:
+- Aprobar tipo, alcance, criterios y versión final.
+- Resolver decisiones de ponderación no definidas.
+- Aprobar cambios sustantivos de rigor/cobertura.
+forbidden_actions:
+- Inventar indicadores/objetivos.
+- Copiar reglas de Matemáticas Saber a otras áreas sin autorización.
+- Reducir rigor para obtener mejores resultados.
+- Presentar borrador como evaluación validada.
+outputs:
+- Blueprint/arquitectura de evaluación.
+- Borrador de instrumento.
+- Matriz de trazabilidad objetivo↔evidencia↔ítems/tareas.
+- Versión validada cuando corresponda.
+validation_states:
+- state: VALIDADO
+  condition: Puede emitirse como producto final cuando pasa QA y no quedan decisiones críticas pendientes.
+  source: FL-D02_Dise├▒o_de_evaluaciones_v0.1.docx §13
+- state: PRELIMINAR
+  condition: Borrador o estructura intermedia claramente marcada.
+  source: FL-D02_Dise├▒o_de_evaluaciones_v0.1.docx §13
+- state: NO VALIDADO
+  condition: Faltan fuentes, planificación, decisión humana o existe una incoherencia crítica.
+  source: FL-D02_Dise├▒o_de_evaluaciones_v0.1.docx §13
+quality_checks:
+- ¿Objetivos y evidencia están definidos?
+- ¿Cada tarea mide lo que pretende medir?
+- ¿La cobertura es coherente?
+- ¿El nivel de exigencia es adecuado?
+- ¿Las fuentes están sustentadas?
+- ¿Se aplicaron solo especializaciones pertinentes?
+- ¿El instrumento está marcado correctamente como borrador/validado?
+sensitive_data: Puede usar resultados académicos; la política de datos individualizados no está definida transversalmente.
+dependencies:
+- dependency: TX-A01
+  function: Objetivos claros.
+- dependency: TX-A02
+  function: Alineación pedagógica.
+- dependency: FL-D03
+  function: Diseño/auditoría de ítems.
+- dependency: FL-D04
+  function: Rúbricas, cuando esté suficientemente especificada.
+- dependency: Knowledge especializado
+  function: Saber/IB/área, cuando aplique.
+handoff_conditions: []
+completion_condition:
+- Arquitectura coherente.
+- Subcomponentes construidos.
+- QA superado.
+- Validación docente obtenida.
+functional_acceptance_criteria:
+- scenario: Sin objetivos
+  input: Se pide 'haz un examen' sin planificación.
+  expected: Debe solicitar objetivos/evidencias.
+- scenario: Desalineación
+  input: Objetivo analizar, preguntas solo recuerdan.
+  expected: Debe señalar y corregir con aprobación.
+- scenario: Especialización indebida
+  input: Área de historia sin instrucción Saber matemática.
+  expected: No debe aplicar distribución matemática 34/43/23.
+- scenario: Recuperación
+  input: Evaluación final solo verifica entrega de tareas.
+  expected: Debe exigir evidencia de dominio.
+open_issues:
+- Especificación transversal institucional completa por tipo de evaluación.
+- Política de dificultad y ponderación.
+- Integración de READ→REASON→DECIDE→JUSTIFY como metodología institucional o piloto.
+- Formatos institucionales definitivos.
+- Reglas por edad/ciclo/idioma.
+implementation_note: Implement as specified; preserve provisional/open status where indicated.
+legacy_status_text: PROVISIONAL — arquitectura general identificada, pendiente de especificación institucional más robusta
+legacy_component_type: SKILL

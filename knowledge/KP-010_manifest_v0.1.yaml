@@ -1,0 +1,27 @@
+knowledge_id: KP-010
+name: Convivencia, Debido Proceso y Artículo 24
+domain: INSTITUCIONAL / convivencia
+authority_class: LEGAL + INSTITUCIONAL NORMATIVO
+status: PARCIAL — marco identificado; fuentes canónicas no incorporadas
+version: '0.1'
+canonical_sources:
+- Constitución Política
+- Ley 115 de 1994
+- Ley 1098 de 2006
+- Ley 2216 de 2022
+- Manual de Convivencia vigente
+- Matriz/Artículo 24 vigente
+source_availability: []
+purpose: Proveer tipología Tipo I/II/III, criterios de gravedad, derechos, debido proceso, rutas y marco para análisis presuntivo.
+consumers:
+- IN-S01
+- IN-S02
+- IN-S03
+- TX-I01
+owner: Autoridad institucional responsable de convivencia.
+update_triggers:
+- Cambio legal o nueva versión del Manual de Convivencia/Artículo 24.
+forbidden_reasoning:
+- No codificar una versión antigua como norma permanente.
+- No transformar clasificación técnica en sanción.
+notes: La jerarquía operacional exhaustiva entre fuentes no está completamente definida en el expediente.

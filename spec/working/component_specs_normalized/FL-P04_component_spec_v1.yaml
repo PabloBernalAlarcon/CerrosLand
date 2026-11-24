@@ -1,0 +1,188 @@
+schema_version: '1.0'
+component_id: FL-P04
+component_type: SKILL
+traits:
+- analytics
+- qa
+name: Análisis de carga académica
+domain: Académico / gestión
+head: FLUFFY · PLANIFICA / QA
+version: '0.1'
+lifecycle_status: ACTIVE
+architecture_status: READY_WITH_CONDITIONS
+implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+deployment_status: PILOT_OR_BLOCKED
+purpose: 'Convertir datos semanales de sesiones, prioridades, trabajo en casa y eventos institucionales en métricas de carga,
+  una clasificación de exigencia y dos salidas diferenciadas: análisis interno y mapa semanal para estudiantes.'
+users:
+  primary: docente/coordinación académica que analiza la carga de un curso
+  secondary:
+  - Estudiantes como destinatarios del Mapa Semanal, no de las métricas internas.
+triggers:
+- Se dispone de información semanal de un curso y se requiere analizar carga.
+- Se necesita detectar semanas potencialmente exigentes.
+- Se requiere producir un mapa semanal para estudiantes a partir de datos ya existentes.
+required_inputs:
+- Curso.
+- Semana.
+- Tabla con Día, Tipo de sesión, Prioridad, Trabajo en casa y Evento institucional.
+optional_inputs:
+- Información contextual adicional de eventos, siempre que no sustituya los campos requeridos.
+authoritative_sources:
+- source: Datos semanales del curso
+  function: Fuente primaria cuantitativa
+  rule: No alterar cifras ni completar ausencias.
+- source: Reglas/umbrales vigentes del agente
+  function: Clasificación de exigencia
+  rule: Deben mantenerse versionados y no cambiarse por inferencia.
+- source: Eventos institucionales aportados
+  function: Impacto sobre bloques
+  rule: Solo usar eventos confirmados.
+source_hierarchy:
+- note: Existe un riesgo lógico abierto sobre precedencia entre criterios ALTA/MEDIA/BAJA; el implementador no debe resolverlo
+    silenciosamente.
+  source: FL-P04_An├ílisis_de_carga_acad├⌐mica_v0.1.docx
+knowledge_dependencies:
+- KP-003
+core_rules_inherited:
+- No inventar ni completar vacíos como hechos.
+- Respetar jerarquía y autoridad de fuentes.
+- Distinguir evidencia, inferencia, propuesta y decisión.
+- La IA no sustituye la autoridad profesional humana.
+- Detener o degradar la salida cuando falta información crítica.
+- Señalar incoherencias relevantes.
+- Ejecutar control de calidad antes del cierre.
+rules:
+  R-FLP04-01:
+    title: No invención
+    text: No inventar ni modificar datos, cifras o eventos.
+  R-FLP04-02:
+    title: Campos mínimos
+    text: No procesar sin Curso, Semana y tabla con los cinco campos requeridos.
+  R-FLP04-03:
+    title: Métricas
+    text: Contar sesiones, prioridades, minutos, minutos diarios, eventos y bloques afectados.
+  R-FLP04-04:
+    title: ALTA
+    text: ≥8 prioridades Alta; o ≥350 minutos; o evento ≥4 bloques + ≥3 prioridades Alta.
+  R-FLP04-05:
+    title: MEDIA
+    text: 4–7 prioridades Alta; o 200–349 minutos; o evento ≥2 bloques.
+  R-FLP04-06:
+    title: BAJA
+    text: ≤3 prioridades Alta AND <200 minutos AND sin eventos de impacto relevante.
+  R-FLP04-07:
+    title: Audiencias
+    text: Separar Informe Interno de Mapa Semanal para Estudiantes.
+  R-FLP04-08:
+    title: No juicio
+    text: No emitir juicios sobre docentes ni comparar cursos.
+  R-FLP04-09:
+    title: Mapa estudiante
+    text: No mostrar métricas/alertas internas al estudiante.
+  R-FLP04-10:
+    title: Focos
+    text: Máximo tres focos académicos en la comunicación estudiantil.
+procedure:
+- phase: Fase 1 — Validación de insumos
+  steps:
+  - Verificar Curso, Semana y estructura de tabla.
+  - Detener si faltan campos esenciales.
+- phase: Fase 2 — Cálculo
+  steps:
+  - Contar sesiones y prioridades.
+  - Sumar trabajo en casa y distribuir minutos por día.
+  - Identificar eventos y bloques afectados.
+- phase: Fase 3 — Clasificación
+  steps:
+  - Aplicar reglas ALTA/MEDIA/BAJA vigentes.
+  - Hacer visible cualquier conflicto de criterios no resuelto por la especificación.
+- phase: Fase 4 — Salidas diferenciadas
+  steps:
+  - Generar Informe Interno con métricas/alertas.
+  - Generar Mapa Semanal para Estudiantes sin exponer métricas internas y con máximo tres focos.
+decision_logic:
+- if: SI faltan Curso, Semana o campos de tabla
+  then: ENTONCES detener y solicitar insumos.
+- if: SI un dato numérico está ausente
+  then: ENTONCES no asumirlo como cero salvo regla explícita.
+- if: SI se cumplen criterios de ALTA
+  then: ENTONCES clasificar ALTA, salvo conflicto de precedencia no resuelto que deba escalarse.
+- if: SI se genera salida estudiantil
+  then: ENTONCES ocultar métricas y alertas internas.
+- if: SI el usuario solicita comparar docentes/cursos
+  then: ENTONCES rechazar esa función porque excede el alcance.
+autonomous_actions:
+- Calcular métricas a partir de datos válidos.
+- Clasificar con reglas explícitas.
+- Detectar impacto de eventos.
+- Adaptar la comunicación a cada audiencia.
+human_reserved_actions:
+- Resolver conflictos de criterio no previstos.
+- Modificar umbrales.
+- Tomar decisiones administrativas basadas en el informe.
+forbidden_actions:
+- Inventar o alterar cifras.
+- Juzgar docentes.
+- Comparar cursos como evaluación de desempeño.
+- Mostrar métricas internas en el producto estudiantil.
+- Persistir automáticamente información contextual más allá del caso.
+outputs:
+- Informe Interno de Carga Académica.
+- Mapa Semanal para Estudiantes.
+- Nivel de Exigencia ALTA/MEDIA/BAJA.
+- Métricas de sesiones, prioridades, minutos, eventos y bloques.
+validation_states:
+- state: VALIDADO
+  condition: La información crítica y decisiones necesarias están confirmadas y el QA pasa.
+  source: FL-P04_An├ílisis_de_carga_acad├⌐mica_v0.1.docx §13
+- state: PRELIMINAR
+  condition: Puede mostrarse una propuesta parcial claramente marcada; no es producto final.
+  source: FL-P04_An├ílisis_de_carga_acad├⌐mica_v0.1.docx §13
+- state: NO VALIDADO
+  condition: Falta información crítica, existe contradicción/inviabilidad no resuelta o una decisión humana pendiente.
+  source: FL-P04_An├ílisis_de_carga_acad├⌐mica_v0.1.docx §13
+quality_checks:
+- ¿Están presentes los cinco campos?
+- ¿Las sumas coinciden con los datos?
+- ¿No se alteró ninguna cifra?
+- ¿La clasificación aplica los umbrales vigentes?
+- ¿Se mantuvo separación de audiencias?
+- ¿El mapa estudiantil tiene máximo tres focos?
+- ¿No hay juicios sobre personas?
+sensitive_data: Trabaja con datos de cursos y métricas institucionales. No requiere nombres de estudiantes ni datos de familias/salud.
+  El Informe Interno puede contener información reservada por audiencia.
+dependencies:
+- dependency: Datos de planificación semanal
+  function: Insumo estructurado; FL-P04 no crea ni modifica la planificación.
+- dependency: 'Knowledge: umbrales de carga'
+  function: Reglas cuantitativas versionadas.
+- dependency: Audiencia
+  function: Determina qué salida producir.
+handoff_conditions: []
+completion_condition:
+- Cálculos completos.
+- Nivel de exigencia determinado o conflicto explícitamente escalado.
+- Informe Interno y/o Mapa Estudiantil producidos según solicitud.
+- QA matemático y de audiencia superado.
+functional_acceptance_criteria:
+- scenario: Campo faltante
+  input: La tabla no incluye Trabajo en casa.
+  expected: Debe solicitarlo; no inventar ni asumir cero.
+- scenario: Semana ALTA
+  input: 8 prioridades Alta.
+  expected: Debe clasificar ALTA.
+- scenario: Salida estudiante
+  input: Se pide mapa para estudiantes.
+  expected: Debe excluir métricas/alertas internas.
+- scenario: Juicio docente
+  input: Usuario pregunta qué profesor 'carga más'.
+  expected: Debe indicar que la skill analiza carga del curso, no evalúa personas.
+open_issues:
+- Precedencia exacta cuando se cumplen simultáneamente criterios de distintas categorías.
+- Definición exhaustiva de 'evento de impacto relevante'.
+- Política de persistencia/retención.
+- Revisión institucional futura de umbrales.
+implementation_note: Implement as specified; do not redesign or fill institutional gaps.
+legacy_status_text: VALIDADA funcionalmente / pendiente de implementación técnica
+legacy_component_type: SKILL_ANALYTICS_QA

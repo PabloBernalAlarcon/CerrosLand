@@ -1,0 +1,250 @@
+schema_version: '1.0'
+component_id: WF-A01
+component_type: WORKFLOW
+traits: []
+name: Recuperación intensiva
+domain: Académico
+head: FLUFFY · PLANIFICA (principal), PRODUCE/ACOMPAÑA (secundarios)
+version: '0.1'
+lifecycle_status: ACTIVE
+architecture_status: READY_WITH_CONDITIONS
+implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+deployment_status: PILOT_OR_BLOCKED
+purpose: Orquestar una recuperación focalizada y rigurosa que reconstruya aprendizajes esenciales no alcanzados mediante un
+  ciclo 3 días de preparación autónoma guiada + 3 días de intervención intensiva con profesor + 1 día de verificación final
+  de dominio.
+users:
+  primary: docente o coordinador académico
+  secondary:
+  - Estudiante como destinatario de materiales y del proceso; no está determinado si opera directamente el workflow.
+triggers:
+- Un estudiante/grupo requiere recuperación de aprendizajes no alcanzados.
+- Se necesita diseñar un remedial intensivo sin repetir todo el curso.
+- Existe una recuperación demasiado amplia, fácil o desconectada de evidencia.
+required_inputs:
+- 'Modalidad: grupal, individual o mixta.'
+- Aprendizajes/competencias no alcanzados.
+- Evidencia de errores o dificultades.
+- Materiales oficiales de la asignatura.
+- Calendario institucional.
+- Información relevante sobre adaptaciones/PIAR cuando aplique.
+optional_inputs:
+- Evaluación original.
+- Trabajos previos.
+- Guías/lecturas oficiales.
+- Observaciones del docente.
+- Restricciones logísticas.
+authoritative_sources:
+- source: Materiales oficiales del profesor/institución
+  function: Contenido curricular
+  rule: Tienen prioridad.
+- source: Programa, guías, lecturas y documentos autorizados
+  function: Base académica
+  rule: No reemplazar por contenido externo autónomo.
+- source: Calendario institucional
+  function: Restricción temporal
+  rule: Gobierna la viabilidad.
+- source: PIAR/adaptaciones institucionales
+  function: Condición del caso cuando aplique
+  rule: No inventar ni modificar unilateralmente.
+- source: Fuentes externas
+  function: Complemento excepcional
+  rule: Solo si existe solicitud explícita.
+source_hierarchy:
+- note: La jerarquía exhaustiva entre programa, guía, docente, PIAR y otras fuentes no está completamente determinada; las
+    contradicciones deben escalarse.
+  source: WF-A01_Recuperaci├│n_intensiva_v0.1.docx
+knowledge_dependencies:
+- KP-003
+- KP-008
+core_rules_inherited:
+- No inventar ni completar vacíos como hechos.
+- Respetar jerarquía y autoridad de fuentes.
+- Distinguir evidencia, inferencia, propuesta y decisión.
+- La IA no sustituye la autoridad profesional humana.
+- Detener o degradar la salida cuando falta información crítica.
+- Señalar incoherencias relevantes.
+- Ejecutar control de calidad antes del cierre.
+- Mantener rigor sin convertir recuperación en aprobación automática.
+- Distinguir realización de tareas de dominio auténtico.
+rules:
+  R-WFA01-01:
+    title: Modelo temporal
+    text: 3 días preparación autónoma + 3 días intervención docente + 1 día verificación final.
+  R-WFA01-02:
+    title: Propósito
+    text: Recuperar aprendizajes esenciales, no repetir el curso completo.
+  R-WFA01-03:
+    title: Rigor
+    text: No reducir artificialmente el nivel para facilitar aprobación.
+  R-WFA01-04:
+    title: Diagnóstico
+    text: Distinguir dificultad conceptual, procedimental, hábitos, lectura, escritura, razonamiento, participación y falta
+      de trabajo.
+  R-WFA01-05:
+    title: Priorización
+    text: Clasificar contenidos en P1 esenciales, P2 importantes y P3 complementarios.
+  R-WFA01-06:
+    title: Cobertura
+    text: Si el proceso intenta abarcar demasiado, advertir inviabilidad y priorizar.
+  R-WFA01-07:
+    title: Alineación
+    text: Objetivos, contenidos priorizados, práctica y evaluación final deben estar alineados.
+  R-WFA01-08:
+    title: Objetivos
+    text: Objetivos vagos deben reformularse como observables/verificables.
+  R-WFA01-09:
+    title: Fuentes
+    text: No inventar contenido, bibliografía ni fuentes.
+  R-WFA01-10:
+    title: Supervisión
+    text: Las decisiones finales y aprobación pertenecen al profesor/institución.
+  R-WFA01-11:
+    title: Evaluación final
+    text: Debe comprobar dominio, no solo cumplimiento de tareas.
+  R-WFA01-12:
+    title: IA en ítems
+    text: Distractores generados por IA son borradores preliminares y requieren revisión docente.
+procedure:
+- phase: Fase 0 — Definir modalidad y alcance
+  steps:
+  - Confirmar grupal/individual/mixta.
+  - Reunir materiales oficiales, calendario y adaptaciones aplicables.
+- phase: Fase 1 — Diagnóstico
+  steps:
+  - Identificar aprendizajes no alcanzados.
+  - Clasificar la naturaleza de las dificultades.
+  - Evitar tratar todos los problemas como conceptuales.
+- phase: Fase 2 — Priorización P1/P2/P3
+  steps:
+  - Separar esenciales, importantes y complementarios.
+  - Reducir/reorganizar si la cobertura es inviable.
+- phase: Fase 3 — Diseñar 3 días autónomos
+  steps:
+  - Definir metas, tiempos, orden de estudio, activación, práctica y reflexión guiada.
+- phase: Fase 4 — Diseñar 3 días con profesor
+  steps:
+  - Organizar aclaración, corrección, modelamiento, profundización y práctica guiada.
+- phase: Fase 5 — Diseñar verificación final
+  steps:
+  - Construir evaluación/evidencia alineada con P1/P2 y objetivos.
+  - Definir criterios de dominio sin convertir aprobación en automática.
+- phase: Fase 6 — QA global
+  steps:
+  - Verificar coherencia, carga, rigor, cobertura y adaptaciones.
+  - Distinguir borrador de producto validado.
+decision_logic:
+- if: SI la recuperación intenta cubrir todo el curso
+  then: ENTONCES advertir y exigir priorización.
+- if: SI una dificultad parece de hábito/lectura/escritura/razonamiento
+  then: ENTONCES no tratarla automáticamente como vacío conceptual.
+- if: SI un contenido es accesorio
+  then: ENTONCES ubicarlo P3 y proteger P1/P2.
+- if: SI la evaluación final no mide los aprendizajes priorizados
+  then: ENTONCES marcar desalineación.
+- if: SI faltan fuentes oficiales
+  then: ENTONCES detener la parte factual; no inventar contenido.
+- if: SI existe PIAR/adaptación relevante
+  then: ENTONCES incorporarla según fuente institucional y sin redefinirla unilateralmente.
+- if: SI el plan baja artificialmente el nivel
+  then: ENTONCES señalarlo y proponer alternativa que preserve rigor.
+autonomous_actions:
+- Organizar diagnóstico y priorización.
+- Proponer distribución 3+3+1.
+- Diseñar borradores de actividades, cronograma y materiales.
+- Detectar sobrecarga/inviabilidad.
+- Proponer instrumentos de verificación.
+human_reserved_actions:
+- Aprobar priorización definitiva.
+- Aprobar objetivos y evaluación final.
+- Decidir aprobación del estudiante.
+- Resolver contradicciones entre fuentes/adaptaciones.
+- Validar instrumentos y distractores.
+forbidden_actions:
+- Repetir automáticamente todo el curso.
+- Reducir nivel para facilitar aprobación.
+- Inventar fuentes/contenidos.
+- Usar fuentes externas sin solicitud explícita.
+- Aprobar estudiantes implícitamente.
+- Confundir cantidad de trabajo con dominio.
+- Ignorar adaptaciones institucionales conocidas.
+outputs:
+- Diagnóstico de recuperación.
+- Matriz P1/P2/P3.
+- Plan 3+3+1.
+- Guía de preparación autónoma.
+- Secuencia de intervención docente.
+- Criterios/evaluación final de dominio.
+- Cronograma y materiales derivados cuando se soliciten.
+validation_states:
+- state: VALIDADO
+  condition: La información crítica y decisiones necesarias están confirmadas y el QA pasa.
+  source: WF-A01_Recuperaci├│n_intensiva_v0.1.docx §13
+- state: PRELIMINAR
+  condition: Puede mostrarse una propuesta parcial claramente marcada; no es producto final.
+  source: WF-A01_Recuperaci├│n_intensiva_v0.1.docx §13
+- state: NO VALIDADO
+  condition: Falta información crítica, existe contradicción/inviabilidad no resuelta o una decisión humana pendiente.
+  source: WF-A01_Recuperaci├│n_intensiva_v0.1.docx §13
+quality_checks:
+- ¿Se definió modalidad?
+- ¿El diagnóstico distingue tipos de dificultad?
+- ¿La priorización protege P1?
+- ¿La cobertura es viable?
+- ¿No se repite el curso completo?
+- ¿Se mantiene rigor?
+- ¿Objetivos, práctica y evaluación están alineados?
+- ¿La evaluación mide dominio y no cumplimiento?
+- ¿Se respetan materiales oficiales y adaptaciones?
+- ¿Las decisiones finales quedan en el profesor?
+sensitive_data: Puede involucrar datos académicos individuales, necesidades educativas y adaptaciones/PIAR. El gobierno técnico
+  de esos datos está pendiente y debe tratarse como dependencia institucional.
+dependencies:
+- dependency: TX-A01
+  function: Formulación/auditoría de objetivos.
+- dependency: TX-A02
+  function: Alineación entre objetivos, práctica y evaluación.
+- dependency: FL-D01/TX-D02
+  function: Producción de guías/práctica cuando se necesite.
+- dependency: FL-D02/FL-D03
+  function: Diseño de evaluación e ítems cuando se necesite.
+- dependency: Persona / PR-S02
+  function: Ajustes pedagógicos cuando aplique.
+- dependency: Materiales oficiales + calendario
+  function: Knowledge y restricciones del caso.
+handoff_conditions: []
+completion_condition:
+- Diagnóstico y priorización cerrados.
+- Plan 3+3+1 viable y coherente.
+- Verificación final alineada.
+- Decisiones humanas requeridas confirmadas.
+- QA global superado.
+functional_acceptance_criteria:
+- scenario: Cobertura excesiva
+  input: Profesor intenta recuperar todo el año en 7 días.
+  expected: Debe advertir inviabilidad y priorizar P1/P2.
+- scenario: Dificultad no conceptual
+  input: Errores por lectura, no por concepto.
+  expected: Debe distinguir la barrera y no repetir solo contenidos.
+- scenario: Recuperación fácil
+  input: Se propone bajar la complejidad hasta asegurar aprobación.
+  expected: Debe rechazar esa lógica y preservar rigor.
+- scenario: Evaluación desconectada
+  input: Plan trabaja habilidades, evaluación final solo memoria.
+  expected: Debe marcar desalineación.
+- scenario: Sin fuentes
+  input: Faltan materiales oficiales.
+  expected: Debe pedirlos y no inventar contenido disciplinar.
+open_issues:
+- Criterios operativos definitivos de P1/P2/P3.
+- Definición institucional de 'dominio mínimo competente'.
+- Tratamiento concreto de PIAR/adaptaciones.
+- Diferencias grupal/individual/mixta.
+- Protocolos por edad/asignatura.
+- Qué ocurre tras evaluación final fallida.
+- Jerarquía exacta ante fuentes contradictorias.
+- Estado institucional definitivo del modelo 3+3+1.
+implementation_note: Implement as specified; do not redesign or fill institutional gaps.
+legacy_status_text: VALIDADO funcionalmente como workflow / pendiente de implementación técnica y de decisiones institucionales
+  abiertas
+legacy_component_type: WORKFLOW

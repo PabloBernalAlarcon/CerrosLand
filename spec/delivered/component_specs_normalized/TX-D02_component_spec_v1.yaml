@@ -1,0 +1,142 @@
+schema_version: '1.0'
+component_id: TX-D02
+component_type: MICRO_SKILL
+traits:
+- transversal
+name: Diseño de práctica
+domain: Académico
+head: FLUFFY · PRODUCE
+version: '0.1'
+lifecycle_status: PROVISIONAL
+architecture_status: READY_WITH_CONDITIONS
+implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+deployment_status: PILOT_OR_BLOCKED
+purpose: Diseñar ejercicios y práctica de refuerzo alineados con el aprendizaje previsto, distinguiendo práctica, refuerzo
+  y preparación de una evaluación formal.
+users:
+  primary: otros componentes de Cerros AI y docentes
+  secondary:
+  - Estudiantes como destinatarios.
+triggers:
+- Una guía requiere ejercicios de refuerzo.
+- Un remedial necesita práctica autónoma o guiada.
+- Una planificación necesita actividades de práctica no evaluativa.
+required_inputs:
+- Objetivo/aprendizaje esperado.
+- Contenido/fuentes autorizadas.
+- 'Propósito de la práctica: activar, reforzar, aplicar o recuperar.'
+- Nivel/grado.
+optional_inputs:
+- Tiempo disponible.
+- Barreras/apoyos relevantes.
+- Tipo de respuesta deseado.
+authoritative_sources:
+- source: Planificación/objetivo
+  function: Propósito de práctica
+  rule: La práctica debe contribuir al aprendizaje.
+- source: Fuentes disciplinarias
+  function: Contenido
+  rule: No inventar hechos disciplinarios.
+- source: Workflow llamante
+  function: Contexto
+  rule: Guía, recuperación u otra secuencia define restricciones.
+source_hierarchy: []
+knowledge_dependencies: []
+core_rules_inherited:
+- No inventar ni completar vacíos como hechos.
+- Respetar jerarquía y autoridad de fuentes.
+- Distinguir evidencia, inferencia, propuesta y decisión.
+- La IA no sustituye la autoridad profesional humana.
+- Detener o degradar la salida cuando falta información crítica.
+- Señalar incoherencias relevantes.
+- Ejecutar control de calidad antes del cierre.
+- Proteger autoría y trabajo cognitivo cuando el producto involucra estudiantes.
+- Alinear objetivo, evidencia, actividad y evaluación.
+- Mantener rigor sin reducir exigencia arbitrariamente.
+- No confundir actividad o cumplimiento con evidencia de dominio.
+rules:
+  R-TXD02-01: Cada ejercicio debe contribuir a un objetivo/aprendizaje.
+  R-TXD02-02: No presentar refuerzo como evaluación formal salvo que FL-D02 lo defina.
+  R-TXD02-03: Puede organizar práctica de menor a mayor demanda cuando el contexto lo justifica.
+  R-TXD02-04: No trivializar la tarea para facilitar cumplimiento.
+  R-TXD02-05: El contenido disciplinar debe estar respaldado.
+  R-TXD02-06: Completar ejercicios no equivale automáticamente a demostrar dominio.
+procedure:
+- phase: Paso 1 — Definir propósito
+  steps:
+  - Confirmar qué aprendizaje se practica y para qué.
+- phase: Paso 2 — Diseñar secuencia
+  steps:
+  - Crear ejercicios coherentes con el objetivo y nivel.
+  - Variar demanda cuando sea pedagógicamente útil.
+- phase: Paso 3 — Revisar carga
+  steps:
+  - Comprobar cantidad, tiempo y pertinencia.
+- phase: Paso 4 — Handoff
+  steps:
+  - Si la intención es evaluar formalmente, derivar a FL-D02.
+decision_logic:
+- if: SI un ejercicio no contribuye al objetivo
+  then: ENTONCES eliminar/reformular.
+- if: SI la práctica se usa para calificar dominio
+  then: ENTONCES derivar a diseño de evaluación.
+- if: SI la cantidad es excesiva
+  then: ENTONCES señalar carga y priorizar.
+- if: SI existe recuperación
+  then: ENTONCES alinear práctica con P1/P2 y la verificación final.
+autonomous_actions:
+- Crear ejercicios/refuerzo desde fuentes.
+- Organizar secuencias de práctica.
+- Detectar sobrecarga o irrelevancia.
+human_reserved_actions:
+- Aprobar cambios de nivel/dificultad sustantivos.
+- Decidir cuándo una práctica se convierte en evaluación formal.
+forbidden_actions:
+- Confundir cantidad con aprendizaje.
+- Inventar contenido factual.
+- Reducir rigor arbitrariamente.
+- Etiquetar una práctica como sumativa sin decisión docente.
+outputs:
+- Ejercicios de refuerzo.
+- Práctica guiada.
+- Secuencia de práctica autónoma.
+- Actividades de aplicación.
+validation_states: []
+quality_checks:
+- ¿Cada ejercicio está alineado?
+- ¿La carga es viable?
+- ¿El contenido está sustentado?
+- ¿Se distingue práctica de evaluación?
+- ¿El nivel de exigencia es adecuado?
+sensitive_data: No requiere datos personales por defecto; puede consumir apoyos pedagógicos si otro componente los provee.
+dependencies:
+- dependency: TX-A01/TX-A02
+  function: Objetivo y alineación.
+- dependency: FL-D01
+  function: Guías.
+- dependency: WF-A01
+  function: Recuperación.
+- dependency: FL-D02
+  function: Handoff si pasa a evaluación.
+handoff_conditions: []
+completion_condition:
+- Práctica alineada y viable.
+- Rol formativo explícito.
+- Handoff a evaluación si corresponde.
+functional_acceptance_criteria:
+- scenario: Ejercicio irrelevante
+  input: Actividad entretenida pero sin relación con objetivo.
+  expected: Debe señalar y reemplazar/reformular.
+- scenario: Práctica como nota
+  input: Usuario quiere convertir worksheet en sumativa sin criterios.
+  expected: Debe derivar a FL-D02.
+- scenario: Sobrecarga
+  input: 50 ejercicios para una sesión breve.
+  expected: Debe advertir y priorizar.
+open_issues:
+- Taxonomía institucional de práctica/refuerzo.
+- Reglas específicas por edad y área.
+- Integración formal de DUA/accesibilidad.
+implementation_note: Implement as specified; preserve provisional/open status where indicated.
+legacy_status_text: VALIDADA PROVISIONAL / pendiente de implementación técnica
+legacy_component_type: MICRO_SKILL_TRANSVERSAL

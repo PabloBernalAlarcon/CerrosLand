@@ -1,0 +1,25 @@
+knowledge_id: KP-003
+name: Arquitectura de Planificación Académica
+domain: ACADÉMICO / PLANIFICA
+authority_class: INSTITUCIONAL OPERATIVO
+status: PARCIAL — documentos canónicos identificados, corpus incompleto
+version: '0.1'
+canonical_sources:
+- Documento Maestro Integral de Planeación Académica
+- Documento Marco de Planificación Académica Cerros
+source_availability: []
+purpose: Gobernar estructura anual, niveles de planificación, tablas, secuencia, unidades, evaluación, adaptaciones y articulación
+  IB.
+consumers:
+- FL-P01
+- FL-P02
+- FL-P03
+- FL-D02
+owner: Área académica responsable — NO DETERMINADO aquí.
+update_triggers:
+- Cambio aprobado en estructura de planeación, número de unidades, arquitectura evaluativa o requisitos IB.
+forbidden_reasoning:
+- No reconstruir el Documento Maestro desde memoria del agente.
+- No resolver por inferencia la jerarquía Documento Maestro vs Documento Marco.
+notes: El expediente asigna prioridad estructural explícita al Documento Maestro; la jerarquía exhaustiva con el Documento
+  Marco sigue abierta.

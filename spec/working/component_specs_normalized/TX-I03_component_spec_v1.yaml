@@ -1,0 +1,130 @@
+schema_version: '1.0'
+component_id: TX-I03
+component_type: MICRO_SKILL
+traits:
+- transversal
+name: Gestión de compromisos
+domain: INSTITUTIONAL
+head: null
+version: '0.1'
+lifecycle_status: PROVISIONAL
+architecture_status: READY_WITH_CONDITIONS
+implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+deployment_status: PILOT_OR_BLOCKED
+purpose: Convertir acuerdos humanos confirmados en compromisos trazables con responsable, fecha/plazo y condición de seguimiento,
+  sin crear obligaciones inexistentes.
+users:
+  primary: workflows institucionales
+triggers:
+- Una reunión/plan produce acuerdos.
+- Se requiere registrar seguimiento.
+required_inputs:
+- Acuerdo confirmado.
+- Responsable confirmado.
+- Fecha/plazo cuando aplique.
+optional_inputs:
+- Evidencia de cumplimiento esperada.
+- Fecha de revisión.
+authoritative_sources:
+- source: Acuerdo humano
+  function: Autoridad
+  limit: La IA no crea el compromiso.
+- source: Workflow llamante
+  function: Contexto
+  limit: Define formato/seguimiento.
+source_hierarchy: []
+knowledge_dependencies:
+- KP-015
+core_rules_inherited:
+- No inventar ni completar vacíos como hechos.
+- Separar hechos, versiones, inferencias, propuestas y decisiones.
+- Respetar jerarquía de fuentes y conservar contradicciones relevantes.
+- La IA no sustituye la autoridad institucional o profesional humana.
+- Bloquear o degradar la salida ante vacíos críticos.
+- Ejecutar control de calidad antes del cierre.
+- Usar lenguaje profesional, neutral y trazable.
+- No convertir análisis técnico en sanción, calificación, diagnóstico o decisión administrativa.
+- Separar productos internos de documentos destinados a familias/estudiantes.
+- Conservar responsables, fechas y fuentes cuando son parte de la trazabilidad.
+- Tratar la información personal/sensible como datos de caso, no conocimiento institucional permanente.
+rules:
+  R-TXI03-01:
+    title: No inventar
+    text: Solo registrar compromisos acordados.
+  R-TXI03-02:
+    title: Responsable
+    text: Debe ser explícito.
+  R-TXI03-03:
+    title: Fecha
+    text: Debe ser explícita cuando el acuerdo requiere plazo.
+  R-TXI03-04:
+    title: Seguimiento
+    text: Registrar condición/evidencia de revisión cuando corresponda.
+procedure:
+- phase: Paso 1
+  steps:
+  - Confirmar acuerdo.
+- phase: Paso 2
+  steps:
+  - Identificar responsable/plazo.
+- phase: Paso 3
+  steps:
+  - Definir seguimiento.
+- phase: Paso 4
+  steps:
+  - Entregar registro al workflow.
+decision_logic:
+- if: SI no hay responsable
+  then: ENTONCES no cerrar compromiso.
+- if: SI no hay fecha pero es necesaria
+  then: ENTONCES solicitarla.
+- if: SI el usuario no acordó una acción
+  then: ENTONCES no convertir sugerencia en compromiso.
+autonomous_actions:
+- Estructurar acuerdos.
+- Detectar campos faltantes.
+human_reserved_actions:
+- Acordar acción.
+- Aceptar responsabilidad/plazo.
+forbidden_actions:
+- Inventar compromisos.
+- Asignar responsable unilateralmente.
+outputs:
+- Acción.
+- Responsable.
+- Fecha/plazo.
+- Seguimiento.
+validation_states:
+- state: VALIDADO
+  condition: Puede emitirse como producto final dentro de la lógica funcional, sujeto a autoridad humana correspondiente.
+  source: Documento Maestro de Continuidad v0.11 §9.4 (default general, aprobado 2026-11-24)
+- state: PRELIMINAR
+  condition: Borrador o estado intermedio; faltan elementos no críticos o validación.
+  source: Documento Maestro de Continuidad v0.11 §9.4 (default general, aprobado 2026-11-24)
+- state: NO VALIDADO
+  condition: Falta información crítica, existe contradicción importante o la autoridad requerida no ha decidido.
+  source: Documento Maestro de Continuidad v0.11 §9.4 (default general, aprobado 2026-11-24)
+quality_checks:
+- ¿Acuerdo confirmado?
+- ¿Responsable claro?
+- ¿Fecha cuando aplica?
+sensitive_data: Hereda sensibilidad del proceso.
+dependencies:
+- dependency: Workflow llamante
+  function: Contexto/documento.
+handoff_conditions: []
+completion_condition:
+- Compromiso completo o marcado pendiente.
+functional_acceptance_criteria:
+- scenario: Sugerencia
+  input: IA recomienda llamar a familia.
+  expected: No debe registrarlo como compromiso hasta que humano lo acepte.
+- scenario: Sin responsable
+  input: '''Revisar hábitos''.'
+  expected: Debe pedir responsable.
+open_issues:
+- Formatos de seguimiento institucional.
+- Reglas de vencimiento/escalamiento.
+implementation_note: Implement as specified; do not infer institutional authority or data governance.
+legacy_status_text: PROVISIONAL / reutilización identificada
+legacy_component_type: MICRO_SKILL_TRANSVERSAL

@@ -1,0 +1,141 @@
+schema_version: '1.0'
+component_id: IN-S04
+component_type: SKILL
+traits:
+- qa
+name: Auditoría de evidencia académica
+domain: INSTITUTIONAL
+head: null
+version: '0.1'
+lifecycle_status: PROVISIONAL
+architecture_status: READY_WITH_CONDITIONS
+implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+deployment_status: PILOT_OR_BLOCKED
+purpose: Auditar la suficiencia y trazabilidad de un caso académico antes de redactar informe, verificando la cadena afirmación→indicador→evidencia→factor→intervención→resultado→conclusión→recomendación
+  y haciendo visibles los vacíos.
+users:
+  primary: docente/directivo autorizado
+triggers:
+- Se prepara Informe Académico Individual.
+- Se requiere validar evidencia antes de comité/reunión.
+required_inputs:
+- Un estudiante + una asignatura + un periodo.
+- Indicadores/notas.
+- Evidencia.
+- Factores explicativos si se alegan.
+- Intervenciones/resultados documentados.
+optional_inputs:
+- Código institucional CERROS-VAL.
+- Anexos.
+authoritative_sources:
+- source: Datos académicos del caso
+  function: Base
+  limit: No completar vacíos.
+- source: Protocolo/configuración Auditor
+  function: Reglas de validación
+  limit: Puede existir tensión documental pendiente.
+- source: Criterios institucionales de indicadores
+  function: Interpretación
+  limit: No sustituir con conocimiento general.
+source_hierarchy: []
+knowledge_dependencies: []
+core_rules_inherited:
+- No inventar ni completar vacíos como hechos.
+- Separar hechos, versiones, inferencias, propuestas y decisiones.
+- Respetar jerarquía de fuentes y conservar contradicciones relevantes.
+- La IA no sustituye la autoridad institucional o profesional humana.
+- Bloquear o degradar la salida ante vacíos críticos.
+- Ejecutar control de calidad antes del cierre.
+- Usar lenguaje profesional, neutral y trazable.
+- No convertir análisis técnico en sanción, calificación, diagnóstico o decisión administrativa.
+- Separar productos internos de documentos destinados a familias/estudiantes.
+- Conservar responsables, fechas y fuentes cuando son parte de la trazabilidad.
+- Tratar la información personal/sensible como datos de caso, no conocimiento institucional permanente.
+rules:
+  R-INS04-01: Un estudiante + una asignatura + un periodo.
+  R-INS04-02: Toda afirmación material debe conectarse con evidencia.
+  R-INS04-03: Usar sección 'Información no documentada por el docente' cuando corresponda.
+  R-INS04-04: Máximo tres factores explicativos según configuración recuperada; deben tener sustento.
+  R-INS04-05: No presentar intervención inexistente como realizada.
+  R-INS04-06: Debe ser observable/documentado.
+  R-INS04-07: No usar causas subjetivas/diagnósticas sin fuente.
+  R-INS04-08: Incoherencias críticas impiden validación definitiva.
+procedure:
+- phase: Paso 1
+  steps:
+  - Validar identificación y código cuando aplique.
+- phase: Paso 2
+  steps:
+  - Auditar indicadores/evidencia y coherencia con notas.
+- phase: Paso 3
+  steps:
+  - Auditar factores, intervenciones y resultados.
+- phase: Paso 4
+  steps:
+  - Determinar suficiencia/criticidad y vacíos.
+- phase: Paso 5
+  steps:
+  - Emitir resultado de auditoría para WF-I04.
+decision_logic:
+- if: SI se afirma bajo desempeño sin evidencia
+  then: ENTONCES bloquear afirmación.
+- if: SI hay resultado negativo sin intervención documentada
+  then: ENTONCES hacer visible ausencia.
+- if: SI explicación es psicológica sin fuente
+  then: ENTONCES retirarla/reformular.
+- if: SI persiste incoherencia crítica
+  then: ENTONCES NO VALIDADO.
+autonomous_actions:
+- Comprobar consistencia.
+- Detectar vacíos.
+- Validar trazabilidad.
+- Generar resumen técnico interno.
+human_reserved_actions:
+- Aportar/corregir datos.
+- Aprobar informe final.
+- Decidir promoción/comité.
+forbidden_actions:
+- Fabricar expediente.
+- Evaluar al docente desde ausencia documental.
+- Ocultar contradicciones.
+- Convertir correlación en causalidad.
+outputs:
+- Estado VALIDADO/PRELIMINAR/NO VALIDADO.
+- Vacíos/incoherencias.
+- Información no documentada.
+- Resumen Técnico interno cuando proceda.
+validation_states: []
+quality_checks:
+- ¿Unidad del caso correcta?
+- ¿Cada afirmación tiene evidencia?
+- ¿Factores sustentados?
+- ¿Intervenciones/resultados documentados?
+- ¿Contradicciones visibles?
+sensitive_data: Información académica individual; puede reflejar indirectamente prácticas docentes.
+dependencies:
+- dependency: WF-I04
+  function: Consume auditoría.
+- dependency: TX-I02
+  function: Redacción institucional.
+- dependency: Datos académicos
+  function: Fuente.
+handoff_conditions: []
+completion_condition:
+- Suficiencia determinada.
+- Vacíos explicitados.
+- Caso listo/no listo para WF-I04.
+functional_acceptance_criteria:
+- scenario: Intervención ausente
+  input: Se afirma 'se hizo seguimiento' sin registro.
+  expected: Debe marcar no documentado.
+- scenario: Causa subjetiva
+  input: '''No aprende porque es perezoso''.'
+  expected: Debe rechazar/solicitar evidencia observable.
+open_issues:
+- Fundamento del umbral 4.5.
+- Semántica de criticidad.
+- Obligatoriedad del Resumen Técnico.
+- Gobierno del registro sobre prácticas docentes.
+implementation_note: Implement as specified; do not infer institutional authority or data governance.
+legacy_status_text: VALIDADA funcionalmente / pendiente de decisiones institucionales abiertas
+legacy_component_type: SKILL_QA

@@ -1,0 +1,24 @@
+knowledge_id: KP-011
+name: EDP — Evaluación de Desempeño Profesional
+domain: INSTITUCIONAL / desarrollo profesional
+authority_class: INSTITUCIONAL OPERATIVO
+status: PARCIAL — lógica funcional recuperada; formulario/fuentes canónicas faltantes
+version: '0.1'
+canonical_sources:
+- Formulario/proceso EDP vigente
+- Handbook de Cultura Institucional
+- Plan Estratégico Institucional
+source_availability:
+- Handbook de Cultura Institucional del Gimnasio de Los Cerros.pdf
+- _Presentación Plan estratégico.pdf
+purpose: Proveer etapas, campos, evidencias, lenguaje, Cultura Cerros y alineación estratégica para acompañamiento reflexivo
+  EDP.
+consumers:
+- WF-I02
+owner: Autoridad institucional responsable de EDP — NO DETERMINADO.
+update_triggers:
+- Cambio de formulario, ciclo EDP, criterios o Plan Estratégico.
+forbidden_reasoning:
+- No usar el pack para puntuar automáticamente.
+- No derivar decisiones administrativas desde la IA.
+notes: El workflow debe preservar la restricción de no completar el formulario ni redactar respuestas oficiales sustitutivas.

@@ -1,0 +1,217 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "cerros-ai://schemas/component-contract/1.0",
+  "title": "Cerros AI Component Contract v1.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "component_id",
+    "component_type",
+    "traits",
+    "name",
+    "domain",
+    "version",
+    "lifecycle_status",
+    "architecture_status",
+    "implementation_status",
+    "deployment_status",
+    "purpose",
+    "users",
+    "triggers",
+    "required_inputs",
+    "optional_inputs",
+    "authoritative_sources",
+    "knowledge_dependencies",
+    "core_rules_inherited",
+    "rules",
+    "procedure",
+    "decision_logic",
+    "autonomous_actions",
+    "human_reserved_actions",
+    "forbidden_actions",
+    "outputs",
+    "quality_checks",
+    "dependencies",
+    "completion_condition",
+    "functional_acceptance_criteria",
+    "open_issues"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "component_id": {
+      "type": "string",
+      "pattern": "^[A-Z]{2}-[A-Z][0-9]{2}$"
+    },
+    "component_type": {
+      "enum": [
+        "SKILL",
+        "MICRO_SKILL",
+        "WORKFLOW",
+        "SPECIALIZATION"
+      ]
+    },
+    "traits": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "qa",
+          "transversal",
+          "specialized",
+          "bridge",
+          "analytics",
+          "conversational",
+          "workflow_embedded"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "domain": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "head": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "version": {
+      "type": "string"
+    },
+    "lifecycle_status": {
+      "enum": [
+        "ACTIVE",
+        "PROVISIONAL",
+        "DISABLED"
+      ]
+    },
+    "architecture_status": {
+      "enum": [
+        "READY",
+        "READY_WITH_CONDITIONS",
+        "NOT_READY"
+      ]
+    },
+    "implementation_status": {
+      "enum": [
+        "IMPLEMENTABLE",
+        "IMPLEMENTABLE_WITH_CONDITIONS",
+        "NOT_IMPLEMENTABLE"
+      ]
+    },
+    "deployment_status": {
+      "enum": [
+        "ELIGIBLE_FOR_TECHNICAL_QA",
+        "BLOCKED_BY_GOVERNANCE",
+        "BLOCKED_BY_KNOWLEDGE",
+        "PILOT_OR_BLOCKED",
+        "NOT_DEPLOYABLE"
+      ]
+    },
+    "purpose": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "users": {
+      "type": [
+        "object",
+        "array",
+        "string",
+        "null"
+      ]
+    },
+    "triggers": {
+      "type": "array"
+    },
+    "required_inputs": {
+      "type": "array"
+    },
+    "optional_inputs": {
+      "type": "array"
+    },
+    "authoritative_sources": {
+      "type": "array"
+    },
+    "source_hierarchy": {
+      "type": "array"
+    },
+    "knowledge_dependencies": {
+      "type": "array"
+    },
+    "core_rules_inherited": {
+      "type": "array"
+    },
+    "rules": {
+      "type": "object"
+    },
+    "procedure": {
+      "type": "array"
+    },
+    "decision_logic": {
+      "type": "array"
+    },
+    "autonomous_actions": {
+      "type": "array"
+    },
+    "human_reserved_actions": {
+      "type": "array"
+    },
+    "forbidden_actions": {
+      "type": "array"
+    },
+    "outputs": {
+      "type": "array"
+    },
+    "validation_states": {
+      "type": "array"
+    },
+    "quality_checks": {
+      "type": "array"
+    },
+    "sensitive_data": {},
+    "dependencies": {
+      "type": "array"
+    },
+    "handoff_conditions": {
+      "type": "array"
+    },
+    "completion_condition": {
+      "type": "array"
+    },
+    "functional_acceptance_criteria": {
+      "type": "array"
+    },
+    "open_issues": {
+      "type": "array"
+    },
+    "implementation_note": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "legacy_status_text": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "legacy_component_type": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  }
+}

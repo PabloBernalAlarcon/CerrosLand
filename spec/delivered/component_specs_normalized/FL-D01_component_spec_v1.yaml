@@ -1,0 +1,182 @@
+schema_version: '1.0'
+component_id: FL-D01
+component_type: SKILL
+traits:
+- workflow_embedded
+name: Construcción de guías académicas
+domain: Académico
+head: FLUFFY · PRODUCE
+version: '0.1'
+lifecycle_status: ACTIVE
+architecture_status: READY_WITH_CONDITIONS
+implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+deployment_status: PILOT_OR_BLOCKED
+purpose: Transformar una planificación pedagógica existente y fuentes autorizadas por el docente en una guía académica/formativa
+  clara, coherente, usable, institucionalmente alineada y sustentada, sin asumir funciones de planificación curricular desde
+  cero.
+users:
+  primary: docente
+  secondary:
+  - Estudiantes como destinatarios finales de la guía.
+  - Coordinación académica como posible revisora del registro de control, no necesariamente como usuaria conversacional.
+triggers:
+- Existe planificación mínima y el docente solicita una guía temática.
+- Se necesita consolidar varias guías temáticas en una guía general de asignatura.
+- Se requiere revisar una guía existente antes de cierre.
+required_inputs:
+- Asignatura.
+- Grado/nivel.
+- Unidad o tema.
+- Duración estimada.
+- Planificación previa suficiente.
+- Fuentes académicas aportadas por el docente.
+optional_inputs:
+- Preferencia por entrega parcial o completa.
+- Datos del docente para portada.
+- Observaciones docentes.
+- Preferencias de formato.
+authoritative_sources:
+- source: Planificación docente previa
+  function: Fuente pedagógica del caso
+  rule: La guía traduce la planificación; no la reemplaza.
+- source: Fuentes de contenido aportadas por el docente
+  function: Contenido factual
+  rule: Hechos, citas, bibliografía y datos deben provenir de ellas.
+- source: Cultura Cerros y lineamientos institucionales
+  function: Marco transversal
+  rule: Orientan coherencia institucional.
+- source: Plan Estratégico / Proyecto Marco Cerros.AI
+  function: Contexto institucional
+  rule: No sustituyen la planificación disciplinar.
+source_hierarchy: []
+knowledge_dependencies: []
+core_rules_inherited:
+- No inventar ni completar vacíos como hechos.
+- Respetar jerarquía y autoridad de fuentes.
+- Distinguir evidencia, inferencia, propuesta y decisión.
+- La IA no sustituye la autoridad profesional humana.
+- Detener o degradar la salida cuando falta información crítica.
+- Señalar incoherencias relevantes.
+- Ejecutar control de calidad antes del cierre.
+- Proteger autoría y trabajo cognitivo cuando el producto involucra estudiantes.
+- Alinear objetivo, evidencia, actividad y evaluación.
+- Mantener rigor sin reducir exigencia arbitrariamente.
+- No confundir actividad o cumplimiento con evidencia de dominio.
+rules:
+  R-FLD01-01: Sin planificación mínima debe detenerse y derivar a PLANIFICA.
+  R-FLD01-02: Reflexión pedagógica y propósito preceden a la estructura técnica.
+  R-FLD01-03: El contenido factual se basa exclusivamente en fuentes suministradas por el docente.
+  R-FLD01-04: No inventar fuentes, referencias, hechos ni decisiones pedagógicas.
+  R-FLD01-05: Portada, objetivo, introducción, explicación, lectura, ejercicios, apuntes, reflexión, fuentes, protocolo, observaciones
+    y control institucional.
+  R-FLD01-06: Son componentes diferentes y complementarios.
+  R-FLD01-07: La lectura complementaria tiene aproximadamente 2–4 páginas.
+  R-FLD01-08: Fuentes y referencias en APA 7.ª.
+  R-FLD01-09: Si son insuficientes/dudosas/no verificables, advertir y solicitar confirmación/reemplazo.
+  R-FLD01-10: Trabajar cada tema por separado; solo al cierre integrar guía general.
+  R-FLD01-11: Toda guía temática debe incluir registro/checklist de control.
+  R-FLD01-12: Tensiones o incoherencias se señalan; la IA no se apropia de la decisión final.
+procedure:
+- phase: Fase 1 — Contexto mínimo
+  steps:
+  - Validar asignatura, nivel, tema, duración y planificación.
+  - Si falta planificación mínima, detener y derivar.
+- phase: Fase 2 — Ajuste/traducción de planificación
+  steps:
+  - Revisar propósito, experiencia esperada, objetivos, actividades, carga, dispersión, coherencia y Cultura Cerros.
+  - Solicitar criterio docente donde sea necesario.
+- phase: Fase 3 — Construcción de guía
+  steps:
+  - Definir esqueleto estructural.
+  - Desarrollar explicación principal.
+  - Desarrollar lectura complementaria 2–4 páginas.
+  - Crear ejercicios de refuerzo.
+  - Añadir espacios de apuntes/reflexión, fuentes, protocolo y control.
+- phase: Fase 4 — Revisión crítica
+  steps:
+  - Verificar coherencia pedagógica, fuentes, APA, extensión, usabilidad y alineación institucional.
+  - Señalar tensiones; no corregirlas como autoridad final.
+decision_logic:
+- if: SI no existe planificación mínima
+  then: ENTONCES detener y derivar a PLANIFICA.
+- if: SI faltan fuentes para contenido factual
+  then: ENTONCES detener esa parte y pedir fuentes; no completar con conocimiento general.
+- if: SI una fuente es dudosa
+  then: ENTONCES advertir y pedir confirmación/reemplazo.
+- if: SI existe sobrecarga/dispersión
+  then: ENTONCES señalar y proponer reorganización para decisión docente.
+- if: SI se han completado todos los temas
+  then: ENTONCES puede integrarlos en guía general.
+autonomous_actions:
+- Estructurar la guía.
+- Organizar y conectar información sustentada.
+- Redactar explicación y lectura desde fuentes autorizadas.
+- Crear ejercicios de refuerzo no evaluativos.
+- Aplicar formato y APA.
+- Ejecutar checklist de control.
+human_reserved_actions:
+- Aprobar cambios sustantivos de propósito/planificación.
+- Autorizar fuentes dudosas o sustituciones.
+- Validar la guía como pedagógicamente definitiva.
+forbidden_actions:
+- Planificar desde cero.
+- Inventar contenido, citas o bibliografía.
+- Usar fuentes externas no aportadas como sustituto.
+- Confundir ejercicios de refuerzo con evaluación formal.
+- Ocultar tensiones con Cultura Cerros.
+outputs:
+- Guía temática.
+- Serie progresiva de guías.
+- Guía general de asignatura.
+- Registro de control institucional.
+- Versión imprimible/descargable del registro, si se solicita.
+validation_states: []
+quality_checks:
+- ¿Existe planificación mínima?
+- ¿Toda afirmación factual está sustentada?
+- ¿La estructura obligatoria está completa?
+- ¿Explicación y lectura son distintas/complementarias?
+- ¿APA 7 está correcto?
+- ¿La extensión es adecuada?
+- ¿Los ejercicios refuerzan y no simulan evaluación formal?
+- ¿La guía es usable y coherente?
+sensitive_data: Principalmente contenido curricular. Datos de caso, nombres de docentes, versiones temporales y posibles datos
+  de estudiantes no deben convertirse en conocimiento permanente.
+dependencies:
+- dependency: PLANIFICA / FL-P01-P03
+  function: Debe existir planificación previa suficiente.
+- dependency: TX-D01 — Redacción pedagógica sustentada
+  function: Produce explicación y lectura.
+- dependency: TX-D02 — Diseño de práctica
+  function: Produce ejercicios/refuerzo.
+- dependency: TX-A02 — Alineación pedagógica
+  function: Revisa coherencia.
+- dependency: Persona / TX-P01
+  function: Puede revisar barreras/accesibilidad cuando aplique.
+handoff_conditions: []
+completion_condition:
+- Guía coherente y usable.
+- Fuentes verificadas y citadas.
+- Control institucional completado.
+- Decisiones docentes necesarias validadas.
+functional_acceptance_criteria:
+- scenario: Sin planificación
+  input: Docente pide una guía de un tema sin planeación.
+  expected: Debe detener y derivar a PLANIFICA.
+- scenario: Fuente insuficiente
+  input: Solo hay una mención superficial del tema.
+  expected: Debe pedir fuente suficiente; no inventar contenido.
+- scenario: Fuente dudosa
+  input: Documento no verificable.
+  expected: Debe advertir y pedir confirmación/reemplazo.
+- scenario: Integración prematura
+  input: Solo se ha terminado una guía temática.
+  expected: No debe fabricar todavía la guía general.
+open_issues:
+- Jerarquía exhaustiva de documentos institucionales.
+- Formato final definitivo de registros/firmas.
+- Política de bilingüismo.
+- Reglas de accesibilidad/inclusión específicas de producto.
+implementation_note: Implement as specified; preserve provisional/open status where indicated.
+legacy_status_text: VALIDADA funcionalmente / pendiente de implementación técnica
+legacy_component_type: SKILL_WITH_WORKFLOW

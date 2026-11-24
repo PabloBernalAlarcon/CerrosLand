@@ -1,0 +1,96 @@
+migration_version: '1.0'
+content_policy: No substantive pedagogical or institutional rule changed; normalization affects technical representation only.
+type_migrations:
+- component_id: FL-D01
+  from: SKILL_WITH_WORKFLOW
+  to: SKILL
+  traits:
+  - workflow_embedded
+- component_id: FL-D03
+  from: SKILL_WITH_SPECIALIZATION
+  to: SKILL
+  traits:
+  - specialized
+- component_id: FL-D04
+  from: SKILL_CANDIDATE
+  to: SKILL
+  traits: []
+- component_id: FL-P03
+  from: SKILL_WITH_CONVERSATIONAL_WORKFLOW
+  to: SKILL
+  traits:
+  - conversational
+  - workflow_embedded
+- component_id: FL-P04
+  from: SKILL_ANALYTICS_QA
+  to: SKILL
+  traits:
+  - analytics
+  - qa
+- component_id: IN-S02
+  from: SKILL_SPECIALIZED
+  to: SKILL
+  traits:
+  - specialized
+- component_id: IN-S04
+  from: SKILL_QA
+  to: SKILL
+  traits:
+  - qa
+- component_id: PR-S02
+  from: SKILL_BRIDGE
+  to: SKILL
+  traits:
+  - bridge
+- component_id: PR-S05
+  from: SKILL_PROVISIONAL
+  to: SKILL
+  traits: []
+- component_id: TX-A01
+  from: MICRO_SKILL_TRANSVERSAL
+  to: MICRO_SKILL
+  traits:
+  - transversal
+- component_id: TX-A02
+  from: MICRO_SKILL_QA_TRANSVERSAL
+  to: MICRO_SKILL
+  traits:
+  - qa
+  - transversal
+- component_id: TX-D01
+  from: MICRO_SKILL_TRANSVERSAL
+  to: MICRO_SKILL
+  traits:
+  - transversal
+- component_id: TX-D02
+  from: MICRO_SKILL_TRANSVERSAL
+  to: MICRO_SKILL
+  traits:
+  - transversal
+- component_id: TX-I02
+  from: MICRO_SKILL_TRANSVERSAL
+  to: MICRO_SKILL
+  traits:
+  - transversal
+- component_id: TX-I03
+  from: MICRO_SKILL_TRANSVERSAL
+  to: MICRO_SKILL
+  traits:
+  - transversal
+- component_id: TX-P01
+  from: MICRO_SKILL_TRANSVERSAL
+  to: MICRO_SKILL
+  traits:
+  - transversal
+- component_id: WF-C01
+  from: WORKFLOW_SPECIALIZED
+  to: WORKFLOW
+  traits:
+  - specialized
+status_policy:
+  ACTIVE: Included in v1 architecture.
+  PROVISIONAL: Included with explicit conditions.
+  DISABLED: Not invocable.
+  GAP: No executable component.
+edge_policy: Only executable ORCHESTRATION edges transfer component control; dormant relations to DISABLED/GAP nodes remain
+  visible but non-executable.

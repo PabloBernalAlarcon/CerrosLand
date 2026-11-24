@@ -1,0 +1,23 @@
+knowledge_id: KP-004
+name: Lesson Planner Institucional
+domain: ACADÉMICO / PLANIFICA
+authority_class: INSTITUCIONAL OPERATIVO
+status: PARCIAL — lógica recuperada; fuentes literales no incorporadas al corpus actual
+version: '0.1'
+canonical_sources:
+- LESSON PLANNER (GUIDELINES)
+- Expediente Maestro Cerros Lesson Planner
+- Ajuste operativo vigente de consolidación semanal
+source_availability: []
+purpose: Definir campos, formato, reglas de objetivos, assessment, procedure, metodología, 3W/3T y unidad documental semanal.
+consumers:
+- FL-P03
+- TX-A01
+- TX-A02
+owner: Área académica responsable del planner — NO DETERMINADO aquí.
+update_triggers:
+- Cambio de formato institucional, duración de sesiones, idioma del producto o regla de consolidación semanal.
+forbidden_reasoning:
+- No revertir la consolidación semanal por conveniencia técnica.
+- No asumir que la regla antigua 1 planner = 1 encuentro sigue vigente documentalmente.
+notes: La lógica por encuentro permanece, pero un documento vigente corresponde a una semana.

@@ -1,0 +1,20 @@
+knowledge_id: KP-013
+name: CTA — Observación Académica Institucional
+domain: PERSONA / INSTITUCIONAL
+authority_class: INSTITUCIONAL OPERATIVO
+status: INCOMPLETO
+version: '0.1'
+canonical_sources:
+- Componentes institucionales CTA
+- Formato/catálogo CTA vigente
+source_availability: []
+purpose: Proveer categorías, campos y lenguaje oficial para síntesis CTA basada en evidencia.
+consumers:
+- PR-S05
+owner: Autoridad institucional CTA — NO DETERMINADO.
+update_triggers:
+- Cambio de formulario, escala, categorías o responsables CTA.
+forbidden_reasoning:
+- No asignar valoración oficial si el pack no lo autoriza.
+- No convertir etiquetas personales en observaciones.
+notes: Actualmente solo está sustentada la lógica evidencia→impacto→orientación; el catálogo oficial sigue pendiente.

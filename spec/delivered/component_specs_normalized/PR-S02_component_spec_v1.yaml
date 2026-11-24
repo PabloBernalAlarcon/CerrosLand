@@ -1,0 +1,137 @@
+schema_version: '1.0'
+component_id: PR-S02
+component_type: SKILL
+traits:
+- bridge
+name: Diseño de ajustes pedagógicos
+domain: PERSONA
+head: null
+version: '0.1'
+lifecycle_status: ACTIVE
+architecture_status: READY_WITH_CONDITIONS
+implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+deployment_status: PILOT_OR_BLOCKED
+purpose: Traducir barreras y objetivos en ajustes de acceso, metodología, proceso o demostración que favorezcan aprendizaje
+  sin modificar arbitrariamente el objetivo esencial.
+users:
+  primary: docente con apoyo profesional cuando corresponda
+triggers:
+- PR-S01 identifica barrera relevante.
+- Se solicita Informe de Ajustes por Asignatura.
+- Actividad/evaluación necesita adaptación.
+required_inputs:
+- Objetivo de aprendizaje.
+- Barrera sustentada.
+- Apoyo propuesto.
+- Actividad/evaluación concreta.
+optional_inputs:
+- PIAR/PIAE.
+- Informe especializado.
+- Respuesta a apoyos anteriores.
+authoritative_sources:
+- source: Objetivo curricular
+  function: Límite
+  limit: Preservar lo esencial.
+- source: Evidencia de barrera
+  function: Necesidad
+  limit: Justifica ajuste.
+- source: Documento institucional/PIAR/PIAE
+  function: Autoridad de caso
+  limit: No modificarlo unilateralmente.
+source_hierarchy: []
+knowledge_dependencies: []
+core_rules_inherited:
+- No inventar ni completar vacíos como hechos.
+- Respetar jerarquía y autoridad de fuentes.
+- Distinguir evidencia, inferencia, propuesta y decisión.
+- La IA no sustituye autoridad profesional o institucional humana.
+- Detener o degradar la salida cuando falta información crítica.
+- Señalar incoherencias relevantes y ejecutar QA antes del cierre.
+- La persona precede a la etiqueta, dificultad, diagnóstico, calificación o procedimiento.
+- Comprender contexto y fortalezas antes de recomendar.
+- Usar evidencia observable antes que inferencia y formular hipótesis con prudencia.
+- No diagnosticar, patologizar, psicologizar ni convertir circunstancias en identidad.
+- Proteger dignidad, posibilidad de crecimiento y autonomía progresiva.
+- Los apoyos deben ser proporcionales, viables y no reducir automáticamente el objetivo académico.
+rules:
+  R-PRS02-01: Distinguir objetivo, acceso y forma de demostración.
+  R-PRS02-02: Ajuste mínimo suficiente.
+  R-PRS02-03: No bajar exigencia automáticamente.
+  R-PRS02-04: Cada ajuste debe indicar qué barrera aborda.
+  R-PRS02-05: Ajustes pueden revisarse según seguimiento.
+procedure:
+- phase: Paso 1
+  steps:
+  - Precisar objetivo esencial.
+- phase: Paso 2
+  steps:
+  - Identificar dónde ocurre la barrera.
+- phase: Paso 3
+  steps:
+  - Proponer ajuste de acceso/proceso/demostración.
+- phase: Paso 4
+  steps:
+  - Verificar que no altere indebidamente el objetivo.
+- phase: Paso 5
+  steps:
+  - Documentar para aprobación/seguimiento.
+decision_logic:
+- if: SI el ajuste cambia el objetivo esencial
+  then: ENTONCES escalar como decisión especializada/institucional.
+- if: SI existe apoyo menos intrusivo suficiente
+  then: ENTONCES preferirlo.
+- if: SI el ajuste proviene de fuente oficial
+  then: ENTONCES respetarlo y no reinterpretarlo unilateralmente.
+autonomous_actions:
+- Proponer alternativas.
+- Comparar ventajas/limitaciones.
+- Revisar coherencia con objetivo.
+human_reserved_actions:
+- Aprobar ajuste.
+- Definir adaptación significativa.
+- Resolver conflictos con PIAR/PIAE.
+forbidden_actions:
+- Bajar nivel por conveniencia.
+- Inventar adaptaciones oficiales.
+- Contradecir especialistas en rol clínico.
+outputs:
+- Ajuste propuesto.
+- Justificación barrera→ajuste.
+- Límite respecto del objetivo.
+- Evidencia para seguimiento.
+validation_states: []
+quality_checks:
+- ¿Ajuste responde a barrera?
+- ¿Conserva objetivo?
+- ¿Es proporcional?
+- ¿Es viable?
+- ¿Tiene seguimiento?
+sensitive_data: Puede incorporar PIAR/PIAE e información sensible.
+dependencies:
+- dependency: PR-S01
+  function: Barrera/apoyo.
+- dependency: TX-A02
+  function: Alineación pedagógica.
+- dependency: FL-D02
+  function: Evaluación cuando aplica.
+- dependency: TX-P01
+  function: Revisión de barreras en producto.
+handoff_conditions: []
+completion_condition:
+- Ajuste definido.
+- Impacto sobre objetivo verificado.
+- Aprobación humana identificada.
+functional_acceptance_criteria:
+- scenario: Dificultad lectora
+  input: Lectura no es objetivo.
+  expected: Puede proponer acceso alternativo conservando contenido.
+- scenario: Reducción excesiva
+  input: Eliminar parte esencial del desempeño.
+  expected: Debe escalar y no aprobar automáticamente.
+open_issues:
+- Criterio institucional de adaptación significativa.
+- Formatos de Informe de Ajustes.
+- Responsable formal de aprobación.
+implementation_note: Do not implement data persistence/access policy unless separately approved.
+legacy_status_text: VALIDADA funcionalmente / pendiente de implementación técnica
+legacy_component_type: SKILL_BRIDGE

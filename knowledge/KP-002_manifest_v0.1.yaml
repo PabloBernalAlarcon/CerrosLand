@@ -1,0 +1,23 @@
+knowledge_id: KP-002
+name: Plan Estratégico Institucional
+domain: CORE / estrategia
+authority_class: INSTITUCIONAL NORMATIVO-ESTRATÉGICO
+status: FUENTE DISPONIBLE
+version: '0.1'
+canonical_sources:
+- Plan Estratégico Institucional 2025–2030 / presentación institucional disponible
+source_availability:
+- _Presentación Plan estratégico.pdf
+purpose: Proveer prioridades estratégicas, lenguaje de alineación y contexto institucional para componentes que conectan acciones
+  u objetivos con dirección estratégica.
+consumers:
+- WF-I02 EDP
+- FL-D01 Guías
+- Arquitectura curricular cuando aplique
+owner: Órgano institucional responsable del Plan Estratégico — NO DETERMINADO aquí.
+update_triggers:
+- Aprobación de nuevo plan estratégico, ajuste oficial de prioridades o cambio de periodo.
+forbidden_reasoning:
+- No usar una prioridad estratégica para inventar evaluación o decisión administrativa.
+- No sustituir el propósito pedagógico de una asignatura.
+notes: EDP utiliza explícitamente la lógica prioridad → objetivo → indicador.

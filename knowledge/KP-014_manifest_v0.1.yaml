@@ -1,0 +1,23 @@
+knowledge_id: KP-014
+name: Protocolo de Validación e Informe Académico Individual
+domain: INSTITUCIONAL / calidad académica
+authority_class: INSTITUCIONAL OPERATIVO
+status: PARCIAL — reglas recuperadas; protocolo literal y fundamento de algunos umbrales pendientes
+version: '0.1'
+canonical_sources:
+- Protocolo Maestro / configuración Auditor de Informe Académico
+- Formato Informe Académico Individual
+- Reglas CERROS-VAL
+- Reglas de Resumen Técnico de Validación
+source_availability: []
+purpose: Proveer estructura de auditoría, umbrales, factores, intervenciones, recomendaciones, código y productos internos/externos.
+consumers:
+- IN-S04
+- WF-I04
+owner: Área académica/calidad institucional — NO DETERMINADO.
+update_triggers:
+- Cambio de protocolo, umbral, formato, criticidad o reglas de comité.
+forbidden_reasoning:
+- No presentar el umbral 4.5 como universal sin fuente vigente.
+- No exponer Resumen Técnico interno a familias.
+notes: La cadena de trazabilidad es lógica de skill; umbrales, códigos y formatos concretos deben vivir aquí.

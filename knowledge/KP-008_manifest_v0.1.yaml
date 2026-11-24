@@ -1,0 +1,33 @@
+knowledge_id: KP-008
+name: Educación Centrada en la Persona, Educación Diferencial y Apoyos
+domain: PERSONA
+authority_class: 'MIXTO: institucional normativo-operativo + referente técnico'
+status: PARCIAL — múltiples fuentes identificadas, no todas presentes
+version: '0.1'
+canonical_sources:
+- Expediente de Diseño Cerros Persona
+- Manual de Identidad Operativa Cerros Persona
+- Manual Institucional de Educación Diferencial
+- Expediente Temporal de Educación Diferencial
+- Expediente Pedagógico de Educación Centrada en la Persona
+- Expediente Normativo de Apoyos Educativos
+- Referentes DUA
+- Normativa colombiana de inclusión
+source_availability:
+- Handbook de Cultura Institucional del Gimnasio de Los Cerros.pdf
+purpose: Sustentar perfiles, barreras, apoyos, ajustes, PIAE, seguimiento y traducción pedagógica de información especializada.
+consumers:
+- WF-P01
+- PR-S01
+- PR-S02
+- PR-S03
+- WF-P02
+- PR-S04
+- TX-P01
+owner: Educación Diferencial / área institucional competente — NO DETERMINADO.
+update_triggers:
+- Cambio en normativa, protocolos ED, DUA institucionalmente adoptado o documentos Persona.
+forbidden_reasoning:
+- No transformar DUA en modelo pedagógico total del colegio.
+- No transformar diagnóstico en receta de apoyos.
+notes: Persona antes que diagnóstico; apoyos antes que adaptación significativa; evidencia antes que etiquetas.

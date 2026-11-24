@@ -1,0 +1,24 @@
+knowledge_id: KP-016
+name: Evidencia externa sobre IA en educación
+domain: SUSTENTO / investigación
+authority_class: EXTERNO — NO NORMATIVO
+status: FUENTES DISPONIBLES
+version: '0.1'
+canonical_sources:
+- Literatura externa seleccionada sobre IA en educación
+source_availability:
+- ilide.info-artificial-intelligence-in-education-pr_a0dc787c7333a30ddba68ec6fcfd59b2.pdf
+- ilide.info-pr_482a06dbce33e19a3d459deec59bdf46.pdf
+- ilide.info-artificial-intelligence-in-education-supporting-learning-through-intelligent-and-pr_b55f982ebd579175acb227531ab07de5.pdf
+purpose: Sustentar decisiones de diseño, límites, oportunidades y riesgos de IA educativa sin convertir literatura externa
+  en política institucional.
+consumers:
+- Documentación teórica Cerros AI
+- futuras decisiones de arquitectura y gobernanza
+owner: Equipo de diseño/investigación Cerros AI.
+update_triggers:
+- Incorporación de nueva evidencia relevante o revisión del estado del arte.
+forbidden_reasoning:
+- No elevar recomendaciones externas a norma del colegio.
+- No reemplazar decisiones institucionales con literatura académica.
+notes: Este pack sirve para sustento teórico, no para gobernar directamente una skill salvo decisión explícita.

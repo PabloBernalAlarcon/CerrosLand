@@ -1,0 +1,174 @@
+schema_version: '1.0'
+component_id: WF-P01
+component_type: WORKFLOW
+traits: []
+name: Perfil Pedagógico Inicial
+domain: PERSONA
+head: null
+version: '0.1'
+lifecycle_status: ACTIVE
+architecture_status: READY_WITH_CONDITIONS
+implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+deployment_status: PILOT_OR_BLOCKED
+purpose: Construir una comprensión pedagógica inicial de una persona concreta que integre contexto, fortalezas, evidencia
+  observable de barreras, objetivos y apoyos posibles sin reducirla a diagnóstico, nota o dificultad.
+users:
+  primary: docente de aula / profesional autorizado
+triggers:
+- Inicio de acompañamiento pedagógico.
+- Necesidad de construir PPI.
+- Información fragmentada que requiere una fotografía pedagógica inicial.
+required_inputs:
+- Identificación contextual mínima.
+- Curso/edad y asignatura cuando aplique.
+- Fortalezas observables.
+- Dificultades/barreras sustentadas.
+- Objetivos de aprendizaje relevantes.
+- Apoyos ya probados y respuesta, si existen.
+optional_inputs:
+- Informes especializados autorizados.
+- Información familiar estrictamente relevante.
+- Resultados/evidencias académicas.
+- Restricciones reales del aula.
+authoritative_sources:
+- source: Handbook/Cultura Cerros
+  function: Marco superior
+  limit: Persona y dignidad prevalecen.
+- source: Documentos Cerros Persona/ED
+  function: Procedimiento
+  limit: No sustituyen al profesional.
+- source: Evidencia del caso
+  function: Base individual
+  limit: No generalizar a identidad.
+- source: Informes especializados
+  function: Fuente técnica
+  limit: Solo traducir implicaciones pedagógicas; no reinterpretar clínicamente.
+source_hierarchy: []
+knowledge_dependencies:
+- KP-001
+- KP-008
+core_rules_inherited:
+- No inventar ni completar vacíos como hechos.
+- Respetar jerarquía y autoridad de fuentes.
+- Distinguir evidencia, inferencia, propuesta y decisión.
+- La IA no sustituye autoridad profesional o institucional humana.
+- Detener o degradar la salida cuando falta información crítica.
+- Señalar incoherencias relevantes y ejecutar QA antes del cierre.
+- La persona precede a la etiqueta, dificultad, diagnóstico, calificación o procedimiento.
+- Comprender contexto y fortalezas antes de recomendar.
+- Usar evidencia observable antes que inferencia y formular hipótesis con prudencia.
+- No diagnosticar, patologizar, psicologizar ni convertir circunstancias en identidad.
+- Proteger dignidad, posibilidad de crecimiento y autonomía progresiva.
+- Los apoyos deben ser proporcionales, viables y no reducir automáticamente el objetivo académico.
+rules:
+  R-WFP01-01:
+    title: Secuencia
+    text: persona → contexto → fortalezas → barreras → objetivos → apoyos/ajustes → coherencia → recomendaciones.
+  R-WFP01-02:
+    title: Fortalezas
+    text: No construir perfil centrado solo en déficit.
+  R-WFP01-03:
+    title: Diagnóstico
+    text: Un diagnóstico no determina automáticamente apoyos.
+  R-WFP01-04:
+    title: Evidencia
+    text: Barreras deben derivarse de observaciones/datos.
+  R-WFP01-05:
+    title: Propósito
+    text: El PPI orienta decisiones educativas; no clasifica a la persona.
+  R-WFP01-06:
+    title: Estado
+    text: Borrador hasta validación profesional.
+procedure:
+- phase: Fase 1 — Contexto
+  steps:
+  - Recoger datos mínimos y propósito de consulta.
+  - Identificar fuentes disponibles y faltantes.
+- phase: Fase 2 — Comprensión
+  steps:
+  - Registrar fortalezas y contexto.
+  - Distinguir hechos de interpretaciones.
+  - Identificar barreras sustentadas.
+- phase: Fase 3 — Relación pedagógica
+  steps:
+  - Vincular barreras con objetivos y situaciones concretas.
+  - Identificar apoyos ya probados y su respuesta.
+- phase: Fase 4 — Síntesis
+  steps:
+  - Proponer perfil equilibrado y recomendaciones prudentes.
+  - Solicitar validación del profesional responsable.
+decision_logic:
+- if: SI solo existe una etiqueta diagnóstica
+  then: ENTONCES pedir contexto, fortalezas, objetivo y barreras observadas.
+- if: SI no hay diagnóstico pero sí barrera observable
+  then: ENTONCES se puede proponer apoyo pedagógico proporcionado.
+- if: SI una inferencia excede evidencia
+  then: ENTONCES marcarla como hipótesis o retirarla.
+autonomous_actions:
+- Organizar evidencia.
+- Detectar vacíos.
+- Formular hipótesis pedagógicas prudentes.
+- Proponer apoyos para validación.
+human_reserved_actions:
+- Aprobar PPI.
+- Tomar decisiones institucionales/especializadas.
+- Confirmar información sensible.
+forbidden_actions:
+- Diagnosticar.
+- Etiquetar.
+- Inferir rasgos permanentes.
+- Completar datos clínicos.
+- Decidir promoción/repitencia.
+outputs:
+- Perfil pedagógico inicial.
+- Vacíos de información.
+- Fortalezas.
+- Barreras sustentadas.
+- Apoyos/recomendaciones preliminares.
+validation_states:
+- state: VALIDADO
+  condition: Puede emitirse como producto final dentro de la lógica funcional, sujeto a autoridad humana correspondiente.
+  source: Documento Maestro de Continuidad v0.11 §9.4 (default general, aprobado 2026-11-24)
+- state: PRELIMINAR
+  condition: Borrador o estado intermedio; faltan elementos no críticos o validación.
+  source: Documento Maestro de Continuidad v0.11 §9.4 (default general, aprobado 2026-11-24)
+- state: NO VALIDADO
+  condition: Falta información crítica, existe contradicción importante o la autoridad requerida no ha decidido.
+  source: Documento Maestro de Continuidad v0.11 §9.4 (default general, aprobado 2026-11-24)
+quality_checks:
+- ¿La persona aparece antes que el problema?
+- ¿Hay fortalezas y no solo dificultades?
+- ¿Barreras se apoyan en evidencia?
+- ¿No se diagnosticó?
+- ¿Recomendaciones son viables y proporcionales?
+sensitive_data: Puede contener identificación, salud, información familiar, calificaciones y observaciones individuales.
+dependencies:
+- dependency: PR-S01
+  function: Análisis de barreras/apoyos.
+- dependency: PR-S03
+  function: Traducción pedagógica de información especializada cuando exista.
+- dependency: PR-S02
+  function: Diseño de ajustes cuando sea necesario.
+- dependency: Profesional humano
+  function: Validación.
+handoff_conditions: []
+completion_condition:
+- Perfil suficientemente completo.
+- Hipótesis marcadas correctamente.
+- Validación humana pendiente o obtenida.
+- Sin vacíos críticos ocultos.
+functional_acceptance_criteria:
+- scenario: Etiqueta sin evidencia
+  input: '''Tiene TDAH, ¿qué le pongo?'''
+  expected: Debe pedir evidencia/contexto y no recetar apoyos automáticamente.
+- scenario: Sin diagnóstico
+  input: Omite pasos y no termina tareas.
+  expected: Debe describir barrera observable y proponer apoyo, sin sugerir diagnóstico.
+open_issues:
+- Formato final de PPI.
+- Campos obligatorios exactos.
+- Política por edad/ciclo.
+- Quién aprueba formalmente el PPI.
+implementation_note: Do not implement data persistence/access policy unless separately approved.
+legacy_status_text: VALIDADO funcionalmente / pendiente de implementación técnica
+legacy_component_type: WORKFLOW

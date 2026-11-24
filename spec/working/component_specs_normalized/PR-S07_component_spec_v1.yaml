@@ -1,0 +1,146 @@
+schema_version: '1.0'
+component_id: PR-S07
+component_type: SKILL
+traits: []
+name: Transferencia de acompañamiento
+domain: PERSONA
+head: null
+version: '0.1'
+lifecycle_status: ACTIVE
+architecture_status: READY_WITH_CONDITIONS
+implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+deployment_status: PILOT_OR_BLOCKED
+purpose: Preparar una síntesis mínima, pertinente y prudente que permita continuidad cuando cambia el responsable de acompañamiento,
+  evitando trasladar indiscriminadamente todo el historial.
+users:
+  primary: mentor/profesional autorizado
+triggers:
+- Cambio de mentor/responsable.
+- Necesidad de resumen ejecutivo de continuidad.
+required_inputs:
+- Historial validado.
+- Propósito de la transferencia.
+- Destinatario autorizado.
+optional_inputs:
+- Prioridades actuales.
+- Acuerdos/seguimientos pendientes.
+authoritative_sources:
+- source: PPD/registro longitudinal
+  function: Base
+  limit: Solo información validada.
+- source: Reglas de transferencia PPD
+  function: Estructura
+  limit: Producto específico.
+- source: Gobierno de datos
+  function: Límite
+  limit: Pendiente de formalización.
+source_hierarchy: []
+knowledge_dependencies:
+- KP-009
+core_rules_inherited:
+- No inventar ni completar vacíos como hechos.
+- Respetar jerarquía y autoridad de fuentes.
+- Distinguir evidencia, inferencia, propuesta y decisión.
+- La IA no sustituye autoridad profesional o institucional humana.
+- Detener o degradar la salida cuando falta información crítica.
+- Señalar incoherencias relevantes y ejecutar QA antes del cierre.
+- La persona precede a la etiqueta, dificultad, diagnóstico, calificación o procedimiento.
+- Comprender contexto y fortalezas antes de recomendar.
+- Usar evidencia observable antes que inferencia y formular hipótesis con prudencia.
+- No diagnosticar, patologizar, psicologizar ni convertir circunstancias en identidad.
+- Proteger dignidad, posibilidad de crecimiento y autonomía progresiva.
+- Los apoyos deben ser proporcionales, viables y no reducir automáticamente el objetivo académico.
+rules:
+  R-PRS07-01:
+    title: Minimización
+    text: Transferir solo lo necesario para continuidad.
+  R-PRS07-02:
+    title: Contexto
+    text: No descontextualizar episodios.
+  R-PRS07-03:
+    title: Dignidad
+    text: Evitar etiquetas que condicionen al nuevo responsable.
+  R-PRS07-04:
+    title: Pendientes
+    text: Hacer visibles acuerdos/alertas vigentes sustentados.
+  R-PRS07-05:
+    title: Autorización
+    text: Destinatario debe ser institucionalmente autorizado.
+procedure:
+- phase: Paso 1
+  steps:
+  - Definir destinatario/propósito.
+- phase: Paso 2
+  steps:
+  - Seleccionar información relevante.
+- phase: Paso 3
+  steps:
+  - Sintetizar fortalezas, necesidades y pendientes.
+- phase: Paso 4
+  steps:
+  - Revisar minimización, contexto y lenguaje.
+decision_logic:
+- if: SI un dato no es necesario para continuidad
+  then: ENTONCES excluirlo.
+- if: SI es sensible pero necesario
+  then: ENTONCES depender de permiso/política; no asumir autorización.
+- if: SI existe solo interpretación no sustentada
+  then: ENTONCES excluir o marcarla claramente.
+autonomous_actions:
+- Sintetizar.
+- Priorizar información.
+- Detectar exceso de datos.
+human_reserved_actions:
+- Autorizar transferencia.
+- Definir acceso.
+- Validar contenido final.
+forbidden_actions:
+- Volcar historial completo por defecto.
+- Compartir datos sensibles sin autorización.
+- Transmitir etiquetas.
+outputs:
+- Resumen de transferencia.
+- Pendientes/prioridades.
+- Fortalezas y apoyos útiles.
+validation_states:
+- state: VALIDADO
+  condition: Puede emitirse como producto final dentro de la lógica funcional, sujeto a autoridad humana correspondiente.
+  source: Documento Maestro de Continuidad v0.11 §9.4 (default general, aprobado 2026-11-24)
+- state: PRELIMINAR
+  condition: Borrador o estado intermedio; faltan elementos no críticos o validación.
+  source: Documento Maestro de Continuidad v0.11 §9.4 (default general, aprobado 2026-11-24)
+- state: NO VALIDADO
+  condition: Falta información crítica, existe contradicción importante o la autoridad requerida no ha decidido.
+  source: Documento Maestro de Continuidad v0.11 §9.4 (default general, aprobado 2026-11-24)
+quality_checks:
+- ¿Cada dato es necesario?
+- ¿Destinatario autorizado?
+- ¿Contexto suficiente?
+- ¿Sin etiquetas?
+sensitive_data: Muy sensible y longitudinal.
+dependencies:
+- dependency: PR-S06
+  function: Trayectoria.
+- dependency: WF-P03
+  function: PPD.
+- dependency: Gobierno de datos
+  function: Acceso/minimización.
+handoff_conditions: []
+completion_condition:
+- Resumen mínimo suficiente.
+- Autorización identificada.
+- Sin datos irrelevantes.
+functional_acceptance_criteria:
+- scenario: Historial enorme
+  input: Se pide copiar todos los PPD.
+  expected: Debe sintetizar/minimizar, no volcar todo.
+- scenario: Dato clínico irrelevante
+  input: No afecta acompañamiento actual.
+  expected: Debe excluirlo salvo obligación autorizada.
+open_issues:
+- Reglas institucionales de minimización.
+- Quién recibe qué información.
+- Formato exacto de transferencia.
+implementation_note: Do not implement data persistence/access policy unless separately approved.
+legacy_status_text: VALIDADA funcionalmente / pendiente de reglas de minimización de datos
+legacy_component_type: SKILL

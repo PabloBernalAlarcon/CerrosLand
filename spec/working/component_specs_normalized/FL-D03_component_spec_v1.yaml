@@ -1,0 +1,194 @@
+schema_version: '1.0'
+component_id: FL-D03
+component_type: SKILL
+traits:
+- specialized
+name: Diseño y auditoría de ítems
+domain: Académico
+head: FLUFFY · PRODUCE / QA
+version: '0.1'
+lifecycle_status: ACTIVE
+architecture_status: READY
+implementation_status: IMPLEMENTABLE
+deployment_status: BLOCKED_BY_KNOWLEDGE
+purpose: Diseñar y auditar preguntas individuales con claridad, validez, respuesta correcta identificable, distractores plausibles
+  y trazabilidad a objetivos/fuentes. La especialización Matemáticas/Saber añade competencias, contenidos, contextos y distribuciones
+  específicas.
+users:
+  primary: docente
+  secondary: []
+triggers:
+- Se necesita crear un ítem.
+- Se necesita auditar técnicamente un ítem existente.
+- FL-D02 requiere preguntas para una evaluación.
+- Se activa la especialización Matemáticas/Saber.
+required_inputs:
+- Objetivo/habilidad que se quiere evaluar.
+- Contenido y fuentes autorizadas.
+- Tipo/formato de ítem.
+- Respuesta correcta o criterio de corrección esperado.
+optional_inputs:
+- Matriz curricular.
+- Contexto personal/social/laboral/matemático.
+- Resultados institucionales agregados.
+- Distribución de competencias cuando aplique.
+authoritative_sources:
+- source: Fuentes proporcionadas por usuario/institución
+  function: Contenido
+  rule: Solo usar información dada.
+- source: Planificación/objetivo
+  function: Habilidad a evaluar
+  rule: No diseñar pregunta desconectada.
+- source: Knowledge Matemáticas/Saber
+  function: Especialización
+  rule: Competencias, categorías, contextos y distribución aplican solo allí.
+- source: Resultados institucionales
+  function: Ajuste limitado
+  rule: Pueden orientar sin inferir causas ni modificar currículo.
+source_hierarchy: []
+knowledge_dependencies:
+- KP-006
+core_rules_inherited:
+- No inventar ni completar vacíos como hechos.
+- Respetar jerarquía y autoridad de fuentes.
+- Distinguir evidencia, inferencia, propuesta y decisión.
+- La IA no sustituye la autoridad profesional humana.
+- Detener o degradar la salida cuando falta información crítica.
+- Señalar incoherencias relevantes.
+- Ejecutar control de calidad antes del cierre.
+- Proteger autoría y trabajo cognitivo cuando el producto involucra estudiantes.
+- Alinear objetivo, evidencia, actividad y evaluación.
+- Mantener rigor sin reducir exigencia arbitrariamente.
+- No confundir actividad o cumplimiento con evidencia de dominio.
+rules:
+  R-FLD03-01:
+    title: Una respuesta
+    text: El ítem debe tener una sola respuesta correcta cuando sea selección única.
+  R-FLD03-02:
+    title: Ambigüedad
+    text: Evitar ambigüedad lingüística o lógica.
+  R-FLD03-03:
+    title: Claridad
+    text: Usar lenguaje claro y adecuado.
+  R-FLD03-04:
+    title: Distractores
+    text: Deben ser plausibles y técnicamente justificables.
+  R-FLD03-05:
+    title: Habilidad real
+    text: Evaluar una habilidad real, no solo cálculo rutinario cuando la especialización lo exige.
+  R-FLD03-06:
+    title: Trazabilidad
+    text: Indicar fuentes y cómo se usaron.
+  R-FLD03-07:
+    title: No causalidad
+    text: Resultados institucionales no autorizan inferir causas.
+  R-FLD03-08:
+    title: Matriz
+    text: La matriz curricular puede priorizar, pero no puede ser el único criterio.
+  R-FLD03-09:
+    title: Especialización Saber
+    text: Interpretación ~34 %, Formulación ~43 %, Argumentación ~23 %, cuando se construye el conjunto matemático correspondiente.
+  R-FLD03-10:
+    title: Contenido Saber
+    text: Álgebra, Geometría y Estadística; contextos personal, social, laboral y matemático, cuando aplique.
+procedure:
+- phase: Paso 1 — Definir operación
+  steps:
+  - Crear ítem, auditar ítem, construir cuestionario o simulacro.
+- phase: Paso 2 — Validar fuentes/objetivo
+  steps:
+  - Confirmar contenido, habilidad y evidencia.
+- phase: Paso 3 — Construir/auditar
+  steps:
+  - Redactar enunciado, opciones, clave, distractores y justificación.
+  - Clasificar competencia/contenido/contexto cuando aplique.
+- phase: Paso 4 — QA
+  steps:
+  - Revisar respuesta única, ambigüedad, claridad, distractores, habilidad y respaldo.
+decision_logic:
+- if: SI falta información necesaria
+  then: ENTONCES detener y especificar qué falta.
+- if: SI un distractor no es plausible
+  then: ENTONCES reemplazar/proponer revisión.
+- if: SI existen dos respuestas defendibles
+  then: ENTONCES marcar el ítem como inválido hasta corregirlo.
+- if: SI se usan resultados del colegio
+  then: ENTONCES orientar ajuste sin inferir causas.
+- if: SI no se activa Matemáticas/Saber
+  then: ENTONCES no aplicar automáticamente su distribución/categorías.
+autonomous_actions:
+- Redactar borradores de ítems desde fuentes.
+- Auditar claridad y opciones.
+- Proponer distractores.
+- Clasificar ítems en la especialización.
+human_reserved_actions:
+- Aprobar versión final.
+- Definir decisiones curriculares/ponderaciones.
+- Validar dificultad cuando requiera juicio disciplinar.
+forbidden_actions:
+- Inventar contenido o fuentes.
+- Inferir causas desde resultados.
+- Modificar currículo.
+- Usar matriz como criterio único.
+- Aceptar preguntas ambiguas o con varias respuestas correctas.
+outputs:
+- Ítem individual.
+- Cuestionario balanceado.
+- Simulacro especializado.
+- Informe de auditoría técnica.
+- Explicación de distractores.
+validation_states:
+- state: VALIDADO
+  condition: Puede emitirse como producto final cuando pasa QA y no quedan decisiones críticas pendientes.
+  source: FL-D03_Dise├▒o_y_auditor├¡a_de_├¡tems_v0.1.docx §13
+- state: PRELIMINAR
+  condition: Borrador o estructura intermedia claramente marcada.
+  source: FL-D03_Dise├▒o_y_auditor├¡a_de_├¡tems_v0.1.docx §13
+- state: NO VALIDADO
+  condition: Faltan fuentes, planificación, decisión humana o existe una incoherencia crítica.
+  source: FL-D03_Dise├▒o_y_auditor├¡a_de_├¡tems_v0.1.docx §13
+quality_checks:
+- ¿Una sola respuesta correcta?
+- ¿Sin ambigüedad?
+- ¿Lenguaje claro?
+- ¿Distractores plausibles?
+- ¿Evalúa la habilidad prevista?
+- ¿Está respaldado por fuentes?
+- ¿La especialización se aplicó correctamente?
+sensitive_data: Puede incorporar resultados agregados del colegio; no hay política definida para resultados individualizados.
+dependencies:
+- dependency: FL-D02
+  function: Arquitectura de evaluación.
+- dependency: TX-A02
+  function: Alineación.
+- dependency: Knowledge Matemáticas/Saber
+  function: Especialización versionada.
+- dependency: Fuentes autorizadas
+  function: Contenido del ítem.
+handoff_conditions: []
+completion_condition:
+- Ítem técnicamente válido o marcado como no válido con razones.
+- Fuentes y clasificación registradas.
+- QA superado.
+functional_acceptance_criteria:
+- scenario: Dos respuestas posibles
+  input: Dos opciones son matemáticamente defendibles.
+  expected: Debe marcar inválido y corregir.
+- scenario: Distractor absurdo
+  input: Tres opciones son obviamente imposibles.
+  expected: Debe mejorar distractores.
+- scenario: Sin fuente
+  input: Problema requiere datos no aportados.
+  expected: Debe detener; no inventarlos.
+- scenario: Uso de resultados
+  input: Bajo desempeño en un tema.
+  expected: Puede priorizar práctica/evaluación, pero no afirmar la causa.
+open_issues:
+- Protocolo general de auditoría fuera de matemáticas.
+- Definición operacional de dificultad.
+- Reglas de redondeo en distribuciones.
+- Adaptación por edad/grado.
+- Política de inclusión.
+implementation_note: Implement as specified; preserve provisional/open status where indicated.
+legacy_status_text: VALIDADA con especialización Matemáticas/Saber; núcleo genérico parcialmente generalizable
+legacy_component_type: SKILL_WITH_SPECIALIZATION

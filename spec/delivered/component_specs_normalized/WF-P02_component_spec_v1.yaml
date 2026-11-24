@@ -1,0 +1,138 @@
+schema_version: '1.0'
+component_id: WF-P02
+component_type: WORKFLOW
+traits: []
+name: PIAE
+domain: PERSONA
+head: null
+version: '0.1'
+lifecycle_status: PROVISIONAL
+architecture_status: READY_WITH_CONDITIONS
+implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+deployment_status: PILOT_OR_BLOCKED
+purpose: Integrar perfil, barreras, apoyos, ajustes, responsables y seguimiento en un Plan Institucional de Apoyos Educativos
+  coherente y trazable.
+users:
+  primary: docente y profesionales institucionales autorizados
+triggers:
+- Se requiere formalizar apoyos educativos de un estudiante.
+- PPI identifica necesidades que requieren coordinación institucional.
+required_inputs:
+- PPI o información equivalente.
+- Objetivos educativos.
+- Barreras/apoyos/ajustes sustentados.
+- Responsables.
+- Evidencias y contexto.
+optional_inputs:
+- PIAR u otros instrumentos.
+- Informes especializados.
+- Seguimientos previos.
+authoritative_sources:
+- source: Cultura Cerros
+  function: Marco
+  limit: Dignidad/persona.
+- source: Protocolos ED
+  function: Procedimiento
+  limit: Responsabilidades especializadas.
+- source: PPI/ajustes
+  function: Caso
+  limit: Base del plan.
+- source: Normativa inclusión
+  function: Marco jurídico
+  limit: No sustituir con conocimiento general no validado.
+source_hierarchy: []
+knowledge_dependencies: []
+core_rules_inherited:
+- No inventar ni completar vacíos como hechos.
+- Respetar jerarquía y autoridad de fuentes.
+- Distinguir evidencia, inferencia, propuesta y decisión.
+- La IA no sustituye autoridad profesional o institucional humana.
+- Detener o degradar la salida cuando falta información crítica.
+- Señalar incoherencias relevantes y ejecutar QA antes del cierre.
+- La persona precede a la etiqueta, dificultad, diagnóstico, calificación o procedimiento.
+- Comprender contexto y fortalezas antes de recomendar.
+- Usar evidencia observable antes que inferencia y formular hipótesis con prudencia.
+- No diagnosticar, patologizar, psicologizar ni convertir circunstancias en identidad.
+- Proteger dignidad, posibilidad de crecimiento y autonomía progresiva.
+- Los apoyos deben ser proporcionales, viables y no reducir automáticamente el objetivo académico.
+rules:
+  R-WFP02-01: PIAE articula, no duplica indiscriminadamente documentos.
+  R-WFP02-02: Debe identificar responsables sin asignarlos unilateralmente.
+  R-WFP02-03: Todo apoyo relevante debe tener evidencia/fecha de revisión.
+  R-WFP02-04: Decisiones especializadas/directivas permanecen humanas.
+  R-WFP02-05: Apoyos se revisan; no convierten la necesidad en identidad permanente.
+procedure:
+- phase: Fase 1
+  steps:
+  - Consolidar perfil/objetivos/barreras.
+- phase: Fase 2
+  steps:
+  - Seleccionar apoyos y ajustes propuestos.
+- phase: Fase 3
+  steps:
+  - Identificar responsables, condiciones y seguimiento.
+- phase: Fase 4
+  steps:
+  - Revisar coherencia/proporcionalidad.
+- phase: Fase 5
+  steps:
+  - Preparar documento para aprobación institucional.
+decision_logic:
+- if: SI falta responsable autorizado
+  then: ENTONCES dejar pendiente; no asignar automáticamente.
+- if: SI apoyo no tiene relación con barrera
+  then: ENTONCES revisar.
+- if: SI se requiere adaptación significativa
+  then: ENTONCES escalar a autoridad/profesional competente.
+autonomous_actions:
+- Organizar plan.
+- Detectar vacíos/incoherencias.
+- Proponer estructura y seguimiento.
+human_reserved_actions:
+- Aprobar PIAE.
+- Asignar recursos/responsables.
+- Autorizar adaptaciones significativas.
+forbidden_actions:
+- Aprobar plan por sí mismo.
+- Asignar profesionales.
+- Inventar obligaciones institucionales.
+outputs:
+- PIAE.
+- Matriz de apoyos/responsables.
+- Plan de seguimiento.
+validation_states: []
+quality_checks:
+- ¿Todo apoyo responde a barrera?
+- ¿Responsables/fechas están claros?
+- ¿Se preserva objetivo?
+- ¿No se asignó autoridad inexistente?
+sensitive_data: Altamente sensible e individual.
+dependencies:
+- dependency: WF-P01
+  function: Perfil.
+- dependency: PR-S01/02/03
+  function: Barreras, ajustes, traducción.
+- dependency: PR-S04
+  function: Seguimiento.
+- dependency: ED/Psicología/Directivos
+  function: Autoridades según caso.
+handoff_conditions: []
+completion_condition:
+- Plan completo.
+- Responsabilidades confirmadas o marcadas pendientes.
+- Aprobación humana identificada.
+functional_acceptance_criteria:
+- scenario: Responsable inexistente
+  input: No se sabe quién ejecuta apoyo.
+  expected: Debe dejar pendiente y escalar.
+- scenario: Apoyo genérico
+  input: Se propone tiempo extra por diagnóstico sin evidencia.
+  expected: Debe volver a barrera/objetivo.
+open_issues:
+- Nivel de autoridad exacto del PIAE.
+- Relación con PIAR.
+- Firmas/aprobaciones.
+- Persistencia y acceso.
+implementation_note: Do not implement data persistence/access policy unless separately approved.
+legacy_status_text: VALIDADO PROVISIONAL / pendiente de definición institucional de autoridad exacta
+legacy_component_type: WORKFLOW

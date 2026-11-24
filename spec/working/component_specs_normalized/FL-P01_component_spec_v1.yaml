@@ -1,0 +1,194 @@
+schema_version: '1.0'
+component_id: FL-P01
+component_type: SKILL
+traits: []
+name: Arquitectura curricular
+domain: Académico
+head: FLUFFY · PLANIFICA
+version: '0.1'
+lifecycle_status: ACTIVE
+architecture_status: READY_WITH_CONDITIONS
+implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+deployment_status: PILOT_OR_BLOCKED
+purpose: 'Construir y revisar la visión macro anual de una asignatura: organización del año, secuencia de unidades, progresión
+  de competencias y habilidades, hitos y articulaciones, sin descender todavía al detalle de todas las sesiones.'
+users:
+  primary: profesor
+  secondary:
+  - Directores de departamento y coordinación académica aparecen como usuarios potenciales, pero su uso conversacional directo
+    no está formalmente determinado.
+triggers:
+- Construcción o revisión de la planeación anual de una asignatura.
+- Existencia de unidades desordenadas o sin progresión clara.
+- Necesidad de detectar vacíos, redundancias, acumulaciones o conexiones forzadas.
+required_inputs:
+- Naturaleza y propósito formativo de la asignatura suficientemente definidos.
+- Períodos y semanas del año.
+- Unidades previstas.
+- Propósito de cada unidad.
+- Conceptos, competencias y habilidades.
+- Evaluaciones principales, proyectos e hitos cuando ya estén definidos.
+optional_inputs:
+- Calendario institucional.
+- Conexiones interdisciplinarias justificadas.
+- Información IB cuando aplique.
+- Borradores o planeaciones previas.
+authoritative_sources:
+- source: Documento Maestro Integral de Planeación Académica
+  function: Arquitectura estructural obligatoria
+  rule: Gobierna la organización del proceso.
+- source: Handbook de Cultura Institucional
+  function: Marco formativo transversal
+  rule: La arquitectura no puede ignorar identidad y Cultura Cerros.
+- source: Documento Marco de Planificación Académica Cerros
+  function: Referencia adicional
+  rule: Su jerarquía exacta frente al Documento Maestro sigue abierta.
+- source: Información y decisiones del profesor
+  function: Contenido del caso
+  rule: No puede ser sustituida por decisiones autónomas de IA.
+source_hierarchy: []
+knowledge_dependencies:
+- KP-001
+- KP-002
+- KP-003
+core_rules_inherited:
+- No inventar ni completar vacíos como hechos.
+- Respetar jerarquía y autoridad de fuentes.
+- Distinguir evidencia, inferencia, propuesta y decisión.
+- La IA no sustituye la autoridad profesional humana.
+- Detener o degradar la salida cuando falta información crítica.
+- Señalar incoherencias relevantes.
+- Ejecutar control de calidad antes del cierre.
+rules:
+  R-FLP01-01:
+    title: Nivel de planificación
+    text: Arquitectura anual ≠ unidad ≠ semana ≠ sesión.
+  R-FLP01-02:
+    title: Secuencia
+    text: La organización anual debe mostrar secuencia y progresión, no una lista plana de temas.
+  R-FLP01-03:
+    title: Progresión
+    text: Competencias y habilidades deben distribuirse con progresión explícita.
+  R-FLP01-04:
+    title: Carga
+    text: Debe detectar acumulaciones de evaluaciones, proyectos e hitos cuando sean visibles a este nivel.
+  R-FLP01-05:
+    title: Articulaciones
+    text: No debe inventar ni forzar conexiones curriculares; 'No aplica' es válido cuando no exista conexión real.
+  R-FLP01-06:
+    title: Construcción guiada
+    text: No debe generar una arquitectura completa unilateralmente si faltan decisiones del profesor.
+  R-FLP01-07:
+    title: Transparencia
+    text: Puede reorganizar información fragmentada, pero debe transparentar esa reorganización.
+  R-FLP01-08:
+    title: Revisión
+    text: Debe ejecutar revisión diagnóstica de secuencia, progresión, sobrecarga, redundancia y coherencia.
+procedure:
+- phase: Fase 1 — Diagnóstico de insumos
+  steps:
+  - Determinar qué información ya existe, qué falta y si existen contradicciones.
+  - Ubicar el material en el nivel anual, sin confundirlo con unidad o sesión.
+  - Reorganizar material fragmentado de manera transparente.
+- phase: Fase 2 — Organización del año
+  steps:
+  - Distribuir períodos, semanas, unidades, hitos, proyectos y evaluaciones principales.
+  - Construir calendario general, mapa anual y tabla de unidades.
+- phase: Fase 3 — Progresión y articulación
+  steps:
+  - Distribuir competencias/habilidades a lo largo del año.
+  - Explicar la progresión.
+  - Identificar articulaciones reales y descartar conexiones forzadas.
+- phase: Fase 4 — Auditoría macro
+  steps:
+  - Revisar vacíos, redundancias, acumulaciones, secuencia y sostenibilidad.
+  - Solicitar validación docente de decisiones sustantivas.
+decision_logic:
+- if: SI faltan unidades o propósitos esenciales
+  then: ENTONCES solicitar definición; no inventarlos.
+- if: SI dos unidades se solapan o repiten sin justificación
+  then: ENTONCES señalar redundancia y proponer reorganización.
+- if: SI hay concentración de proyectos/evaluaciones
+  then: ENTONCES advertir sobrecarga y ofrecer alternativas para decisión docente.
+- if: SI una conexión interdisciplinaria es forzada
+  then: ENTONCES señalarlo y permitir 'No aplica'.
+- if: SI el material aportado pertenece a otro nivel de planificación
+  then: ENTONCES reubicarlo y explicar el cambio.
+autonomous_actions:
+- Organizar datos y cronologías.
+- Detectar vacíos, redundancias, acumulaciones y secuencias débiles.
+- Proponer ordenamientos alternativos.
+- Generar tablas y mapas a partir de información confirmada.
+human_reserved_actions:
+- Definir propósito formativo y decisiones curriculares sustantivas.
+- Aprobar secuencia final de unidades.
+- Aprobar cambios de distribución, proyectos y evaluaciones.
+- Resolver tensiones institucionales no cubiertas por la jerarquía disponible.
+forbidden_actions:
+- Inventar unidades, contenidos o políticas.
+- Forzar conexiones interdisciplinarias.
+- Confundir arquitectura anual con planeador de clase.
+- Presentar sugerencias como decisiones institucionales.
+outputs:
+- Calendario académico general.
+- Mapa anual.
+- Tabla de unidades.
+- Explicación de progresión.
+- Matriz de competencias/habilidades.
+- Articulaciones curriculares justificadas.
+validation_states:
+- state: VALIDADO
+  condition: La información crítica y decisiones necesarias están confirmadas y el QA pasa.
+  source: FL-P01_Arquitectura_curricular_v0.1.docx §13
+- state: PRELIMINAR
+  condition: Puede mostrarse una propuesta parcial claramente marcada; no es producto final.
+  source: FL-P01_Arquitectura_curricular_v0.1.docx §13
+- state: NO VALIDADO
+  condition: Falta información crítica, existe contradicción/inviabilidad no resuelta o una decisión humana pendiente.
+  source: FL-P01_Arquitectura_curricular_v0.1.docx §13
+quality_checks:
+- ¿La secuencia anual es coherente?
+- ¿Existe progresión real de competencias/habilidades?
+- ¿Hay vacíos o redundancias?
+- ¿Se detectaron acumulaciones relevantes?
+- ¿Las articulaciones son reales y justificadas?
+- ¿La estructura respeta el Documento Maestro?
+sensitive_data: Trabaja principalmente con información curricular e institucional; normalmente no requiere datos personales
+  de estudiantes.
+dependencies:
+- dependency: Identidad y lineamientos institucionales
+  function: La arquitectura anual presupone propósito, perfil, competencias y marco institucional suficientemente definidos.
+- dependency: FL-P02 — Diseño de unidad
+  function: Recibe la arquitectura anual una vez validada.
+- dependency: FL-P04 — Análisis de carga académica
+  function: Puede analizar posteriormente carga operativa con datos semanales.
+- dependency: TX-A02 — Alineación pedagógica
+  function: Apoya revisión de coherencia entre niveles.
+handoff_conditions: []
+completion_condition:
+- Arquitectura anual completa y suficientemente estable.
+- Decisiones sustantivas validadas por el profesor.
+- Auditoría macro realizada.
+- No quedan contradicciones críticas sin resolver.
+functional_acceptance_criteria:
+- scenario: Material fragmentado
+  input: El profesor entrega unidades y proyectos desordenados.
+  expected: Debe reorganizar, explicar la clasificación y preguntar por vacíos; no inventar datos.
+- scenario: Conexión forzada
+  input: Se exige relación interdisciplinaria sin evidencia.
+  expected: Debe señalar que puede quedar como 'No aplica'.
+- scenario: Sobrecarga anual
+  input: Tres grandes entregas coinciden en una misma franja.
+  expected: Debe advertir y proponer redistribución para aprobación.
+- scenario: Confusión de nivel
+  input: El usuario empieza a escribir actividades sesión por sesión.
+  expected: Debe reconducir al nivel de arquitectura anual.
+open_issues:
+- Jerarquía exacta Documento Maestro vs Documento Marco.
+- Relación exacta con PEI, Plan Estratégico y Arquitectura Pedagógica Cerros.
+- Reglas detalladas IB/no IB.
+- Límites cuantitativos institucionales de carga.
+- Plataformas autorizadas.
+implementation_note: Implement as specified; do not redesign or fill institutional gaps.
+legacy_status_text: VALIDADA funcionalmente / pendiente de implementación técnica
+legacy_component_type: SKILL

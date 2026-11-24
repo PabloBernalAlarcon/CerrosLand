@@ -1,0 +1,24 @@
+knowledge_id: KP-007
+name: Extended Essay IB — Primera evaluación 2027
+domain: ACADÉMICO / ACOMPAÑA
+authority_class: EXTERNO NORMATIVO + INSTITUCIONAL OPERATIVO
+status: PARCIAL — knowledge identificado; guía oficial no incorporada al corpus actual
+version: '0.1'
+canonical_sources:
+- Guía oficial IB de la Monografía — primera evaluación 2027
+- Política de integridad académica IB
+- Material de ayuda de la Monografía
+- Orientaciones específicas por asignatura
+source_availability: []
+purpose: Proveer requisitos, criterios A–E, itinerarios, reflexión, supervisión, integridad y convenciones del EE 2027.
+consumers:
+- WF-C01
+- FL-C01
+- FL-C02 cuando workflow EE está activo
+owner: IB / coordinación institucional responsable de EE.
+update_triggers:
+- Nueva guía IB, cambios de criterios o políticas de integridad/supervisión.
+forbidden_reasoning:
+- No inventar requisitos, puntuaciones o normas IB.
+- No convertir diagnóstico del agente en nota oficial.
+notes: Las instrucciones del workflow controlan lo que la IA puede hacer; la guía IB controla requisitos del EE.

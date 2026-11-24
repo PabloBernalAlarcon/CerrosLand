@@ -1,0 +1,117 @@
+schema_version: '1.0'
+component_id: TX-I01
+component_type: MICRO_SKILL
+traits: []
+name: Detección de alertas no clínicas
+domain: INSTITUTIONAL
+head: null
+version: '0.1'
+lifecycle_status: PROVISIONAL
+architecture_status: READY_WITH_CONDITIONS
+implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+deployment_status: PILOT_OR_BLOCKED
+purpose: Identificar señales que justifican acompañamiento adicional sin convertir observaciones en diagnóstico clínico o
+  psicológico.
+users:
+  primary: componentes institucionales autorizados
+triggers:
+- Un caso contiene señales relevantes de acompañamiento.
+- IN-S01/IN-S03 requiere alertas auxiliares.
+required_inputs:
+- Evidencia observable del caso.
+optional_inputs: []
+authoritative_sources:
+- source: Evidencia del caso
+  function: Base
+  limit: No extrapolar.
+- source: Taxonomía institucional
+  function: Criterios
+  limit: Aún pendiente de formalización.
+source_hierarchy: []
+knowledge_dependencies:
+- KP-010
+core_rules_inherited:
+- No inventar ni completar vacíos como hechos.
+- Separar hechos, versiones, inferencias, propuestas y decisiones.
+- Respetar jerarquía de fuentes y conservar contradicciones relevantes.
+- La IA no sustituye la autoridad institucional o profesional humana.
+- Bloquear o degradar la salida ante vacíos críticos.
+- Ejecutar control de calidad antes del cierre.
+- Usar lenguaje profesional, neutral y trazable.
+- No convertir análisis técnico en sanción, calificación, diagnóstico o decisión administrativa.
+- Separar productos internos de documentos destinados a familias/estudiantes.
+- Conservar responsables, fechas y fuentes cuando son parte de la trazabilidad.
+- Tratar la información personal/sensible como datos de caso, no conocimiento institucional permanente.
+rules:
+  R-TXI01-01:
+    title: No diagnóstico
+    text: Alertas nunca equivalen a diagnóstico.
+  R-TXI01-02:
+    title: Evidencia
+    text: Toda alerta debe citar conducta/dato observable.
+  R-TXI01-03:
+    title: Prudencia
+    text: Usar lenguaje de señal/posible necesidad de acompañamiento.
+procedure:
+- phase: Paso 1
+  steps:
+  - Identificar señales observables.
+- phase: Paso 2
+  steps:
+  - Clasificar solo si existe taxonomía aprobada.
+- phase: Paso 3
+  steps:
+  - Redactar alerta no diagnóstica y handoff.
+decision_logic:
+- if: SI no existe taxonomía aprobada
+  then: ENTONCES describir señal sin etiquetar categoría.
+- if: SI la solicitud pide diagnóstico
+  then: ENTONCES derivar a profesional competente.
+autonomous_actions:
+- Detectar señales.
+- Redactar alerta prudente.
+human_reserved_actions:
+- Decidir derivación/acompañamiento.
+- Evaluación clínica.
+forbidden_actions:
+- Diagnosticar.
+- Etiquetar.
+- Inferir trastornos.
+outputs:
+- Señal observada.
+- Razón de alerta.
+- Handoff sugerido.
+validation_states:
+- state: VALIDADO
+  condition: Puede emitirse como producto final dentro de la lógica funcional, sujeto a autoridad humana correspondiente.
+  source: Documento Maestro de Continuidad v0.11 §9.4 (default general, aprobado 2026-11-24)
+- state: PRELIMINAR
+  condition: Borrador o estado intermedio; faltan elementos no críticos o validación.
+  source: Documento Maestro de Continuidad v0.11 §9.4 (default general, aprobado 2026-11-24)
+- state: NO VALIDADO
+  condition: Falta información crítica, existe contradicción importante o la autoridad requerida no ha decidido.
+  source: Documento Maestro de Continuidad v0.11 §9.4 (default general, aprobado 2026-11-24)
+quality_checks:
+- ¿Hay evidencia?
+- ¿Lenguaje no diagnóstico?
+- ¿Autoridad humana preservada?
+sensitive_data: Puede involucrar datos sensibles.
+dependencies:
+- dependency: Taxonomía de alertas
+  function: Pendiente.
+- dependency: Persona/Psicología
+  function: Handoff cuando corresponda.
+handoff_conditions: []
+completion_condition:
+- Alerta prudente o declaración de insuficiencia.
+functional_acceptance_criteria:
+- scenario: Conducta aislada
+  input: Un episodio de llanto.
+  expected: No debe inferir diagnóstico; puede señalar necesidad de observación/acompañamiento.
+open_issues:
+- Taxonomía institucional.
+- Umbrales de alerta.
+- Roles de destinatarios.
+implementation_note: Implement as specified; do not infer institutional authority or data governance.
+legacy_status_text: PROVISIONAL — requiere taxonomía institucional
+legacy_component_type: MICRO_SKILL

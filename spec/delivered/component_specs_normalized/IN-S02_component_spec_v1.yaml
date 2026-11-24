@@ -1,0 +1,129 @@
+schema_version: '1.0'
+component_id: IN-S02
+component_type: SKILL
+traits:
+- specialized
+name: Clasificación y gravedad de convivencia
+domain: INSTITUTIONAL
+head: null
+version: '0.1'
+lifecycle_status: PROVISIONAL
+architecture_status: READY_WITH_CONDITIONS
+implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+deployment_status: PILOT_OR_BLOCKED
+purpose: Aplicar de forma preliminar y trazable las clasificaciones Tipo I/II/III y la matriz institucional de gravedad del
+  Artículo 24, sin transformar el resultado técnico en sanción o decisión disciplinaria.
+users:
+  primary: profesional institucional autorizado
+triggers:
+- IN-S01 produce caso suficientemente estructurado.
+- Se requiere clasificación preliminar/gravedad.
+required_inputs:
+- Caso estructurado.
+- Conductas individualizadas.
+- Knowledge normativo vigente.
+optional_inputs:
+- Antecedentes normativamente relevantes.
+authoritative_sources:
+- source: Manual/normativa de convivencia vigente
+  function: Autoridad normativa
+  limit: Debe versionarse.
+- source: Matriz Artículo 24
+  function: Cálculo de gravedad
+  limit: Aplicar seis criterios y justificar.
+- source: IN-S01
+  function: Hechos/versiones estructurados
+  limit: No inventar evidencia adicional.
+source_hierarchy: []
+knowledge_dependencies: []
+core_rules_inherited:
+- No inventar ni completar vacíos como hechos.
+- Separar hechos, versiones, inferencias, propuestas y decisiones.
+- Respetar jerarquía de fuentes y conservar contradicciones relevantes.
+- La IA no sustituye la autoridad institucional o profesional humana.
+- Bloquear o degradar la salida ante vacíos críticos.
+- Ejecutar control de calidad antes del cierre.
+- Usar lenguaje profesional, neutral y trazable.
+- No convertir análisis técnico en sanción, calificación, diagnóstico o decisión administrativa.
+- Separar productos internos de documentos destinados a familias/estudiantes.
+- Conservar responsables, fechas y fuentes cuando son parte de la trazabilidad.
+- Tratar la información personal/sensible como datos de caso, no conocimiento institucional permanente.
+rules:
+  R-INS02-01: Clasificación de IA es técnica/presuntiva, no decisión final.
+  R-INS02-02: Aplicar los seis criterios del Artículo 24 según fuente vigente.
+  R-INS02-03: Cada puntuación debe justificarse con evidencia.
+  R-INS02-04: Suma y categoría deben ser matemáticamente verificables.
+  R-INS02-05: Clasificar conducta de cada participante, no solo el episodio global.
+  R-INS02-06: No codificar rangos/criterios como conocimiento eterno del modelo.
+procedure:
+- phase: Paso 1
+  steps:
+  - Confirmar que IN-S01 está suficientemente validado.
+- phase: Paso 2
+  steps:
+  - Aplicar Tipo I/II/III con base normativa.
+- phase: Paso 3
+  steps:
+  - Aplicar seis criterios de gravedad y justificar puntuaciones.
+- phase: Paso 4
+  steps:
+  - Verificar suma/categoría y redactar resultado presuntivo.
+decision_logic:
+- if: SI falta evidencia para un criterio
+  then: ENTONCES no puntuarlo por intuición; marcar insuficiencia.
+- if: SI clasificación y gravedad parecen discordantes
+  then: ENTONCES señalar y remitir a revisión humana.
+- if: SI normativa cambia
+  then: ENTONCES actualizar knowledge, no improvisar.
+autonomous_actions:
+- Aplicar reglas explícitas.
+- Calcular.
+- Justificar puntuaciones.
+- Detectar incoherencias.
+human_reserved_actions:
+- Confirmar clasificación institucional.
+- Decidir sanción/medida.
+- Interpretar casos excepcionales.
+forbidden_actions:
+- Sancionar.
+- Modificar norma.
+- Inventar puntuaciones.
+- Confundir gravedad con culpabilidad.
+outputs:
+- Tipo preliminar.
+- Puntuaciones justificadas.
+- Suma/categoría de gravedad.
+- Alertas de incoherencia.
+validation_states: []
+quality_checks:
+- ¿Norma vigente?
+- ¿Cada puntuación tiene evidencia?
+- ¿Suma correcta?
+- ¿Resultado marcado como preliminar?
+sensitive_data: Muy sensible y disciplinario.
+dependencies:
+- dependency: IN-S01
+  function: Caso estructurado.
+- dependency: Knowledge convivencia/Art.24
+  function: Normativa versionada.
+- dependency: IN-S03
+  function: Redacción de reporte después de validación.
+handoff_conditions: []
+completion_condition:
+- Cálculo verificado.
+- Incertidumbres visibles.
+- Resultado listo para revisión humana.
+functional_acceptance_criteria:
+- scenario: Criterio sin evidencia
+  input: No se conoce recurrencia.
+  expected: No debe asignar puntaje por suposición.
+- scenario: Suma errónea
+  input: Puntos no coinciden con categoría.
+  expected: Debe detectar inconsistencia.
+open_issues:
+- Versión normativa definitiva.
+- Rangos/criterios exactos en knowledge pack.
+- Manejo de casos excepcionales.
+implementation_note: Implement as specified; do not infer institutional authority or data governance.
+legacy_status_text: VALIDADA funcionalmente / knowledge normativo debe mantenerse versionado
+legacy_component_type: SKILL_SPECIALIZED

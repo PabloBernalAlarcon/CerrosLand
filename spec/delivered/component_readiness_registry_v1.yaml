@@ -1,0 +1,340 @@
+registry_version: '1.0'
+freeze_policy:
+  ACTIVE: Included in v1 architecture; deployment still governed by deployment_status.
+  PROVISIONAL: Included in v1 architecture with explicit conditions; must not be represented as production-ready by default.
+  DISABLED: Known component retained for architecture/history but cannot be invoked.
+  GAP: Known missing capability; no executable component exists.
+components:
+  FL-C01:
+    name: Coaching de investigación
+    component_type: SKILL
+    traits: []
+    lifecycle_status: ACTIVE
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+  FL-C02:
+    name: Feedback de escritura
+    component_type: SKILL
+    traits: []
+    lifecycle_status: ACTIVE
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+  FL-D01:
+    name: Construcción de guías académicas
+    component_type: SKILL
+    traits:
+    - workflow_embedded
+    lifecycle_status: ACTIVE
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+  FL-D02:
+    name: Diseño de evaluaciones
+    component_type: SKILL
+    traits: []
+    lifecycle_status: PROVISIONAL
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+  FL-D03:
+    name: Diseño y auditoría de ítems
+    component_type: SKILL
+    traits:
+    - specialized
+    lifecycle_status: ACTIVE
+    architecture_status: READY
+    implementation_status: IMPLEMENTABLE
+    deployment_status: BLOCKED_BY_KNOWLEDGE
+  FL-D04:
+    name: Diseño de rúbricas y criterios
+    component_type: SKILL
+    traits: []
+    lifecycle_status: DISABLED
+    architecture_status: NOT_READY
+    implementation_status: NOT_IMPLEMENTABLE
+    deployment_status: NOT_DEPLOYABLE
+  FL-P01:
+    name: Arquitectura curricular
+    component_type: SKILL
+    traits: []
+    lifecycle_status: ACTIVE
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+  FL-P02:
+    name: Diseño de unidad
+    component_type: SKILL
+    traits: []
+    lifecycle_status: ACTIVE
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+  FL-P03:
+    name: Planificación semanal y de sesión
+    component_type: SKILL
+    traits:
+    - conversational
+    - workflow_embedded
+    lifecycle_status: ACTIVE
+    architecture_status: READY
+    implementation_status: IMPLEMENTABLE
+    deployment_status: BLOCKED_BY_KNOWLEDGE
+  FL-P04:
+    name: Análisis de carga académica
+    component_type: SKILL
+    traits:
+    - analytics
+    - qa
+    lifecycle_status: ACTIVE
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+  IN-S01:
+    name: Análisis técnico de convivencia
+    component_type: SKILL
+    traits: []
+    lifecycle_status: ACTIVE
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+  IN-S02:
+    name: Clasificación y gravedad de convivencia
+    component_type: SKILL
+    traits:
+    - specialized
+    lifecycle_status: PROVISIONAL
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+  IN-S03:
+    name: Redacción de reporte de convivencia
+    component_type: SKILL
+    traits: []
+    lifecycle_status: ACTIVE
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+  IN-S04:
+    name: Auditoría de evidencia académica
+    component_type: SKILL
+    traits:
+    - qa
+    lifecycle_status: PROVISIONAL
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+  PR-S01:
+    name: Análisis de barreras y apoyos
+    component_type: SKILL
+    traits: []
+    lifecycle_status: ACTIVE
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+  PR-S02:
+    name: Diseño de ajustes pedagógicos
+    component_type: SKILL
+    traits:
+    - bridge
+    lifecycle_status: ACTIVE
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+  PR-S03:
+    name: Traducción pedagógica de información especializada
+    component_type: SKILL
+    traits: []
+    lifecycle_status: ACTIVE
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+  PR-S04:
+    name: Seguimiento de apoyos
+    component_type: SKILL
+    traits: []
+    lifecycle_status: ACTIVE
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+  PR-S05:
+    name: Síntesis CTA basada en evidencia
+    component_type: SKILL
+    traits: []
+    lifecycle_status: PROVISIONAL
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+  PR-S06:
+    name: Análisis longitudinal de trayectoria
+    component_type: SKILL
+    traits: []
+    lifecycle_status: ACTIVE
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+  PR-S07:
+    name: Transferencia de acompañamiento
+    component_type: SKILL
+    traits: []
+    lifecycle_status: ACTIVE
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+  SP-C01:
+    name: Periodismo escolar
+    component_type: SPECIALIZATION
+    traits: []
+    lifecycle_status: ACTIVE
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+  TX-A01:
+    name: Formulación de objetivos de aprendizaje
+    component_type: MICRO_SKILL
+    traits: &id001
+    - transversal
+    lifecycle_status: ACTIVE
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+  TX-A02:
+    name: Alineación pedagógica
+    component_type: MICRO_SKILL
+    traits:
+    - qa
+    - transversal
+    lifecycle_status: ACTIVE
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+  TX-D01:
+    name: Redacción pedagógica sustentada
+    component_type: MICRO_SKILL
+    traits: *id001
+    lifecycle_status: ACTIVE
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+  TX-D02:
+    name: Diseño de práctica
+    component_type: MICRO_SKILL
+    traits: *id001
+    lifecycle_status: PROVISIONAL
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+  TX-I01:
+    name: Detección de alertas no clínicas
+    component_type: MICRO_SKILL
+    traits: []
+    lifecycle_status: PROVISIONAL
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+  TX-I02:
+    name: Redacción institucional trazable
+    component_type: MICRO_SKILL
+    traits: *id001
+    lifecycle_status: PROVISIONAL
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+  TX-I03:
+    name: Gestión de compromisos
+    component_type: MICRO_SKILL
+    traits: *id001
+    lifecycle_status: PROVISIONAL
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+  TX-P01:
+    name: Revisión de accesibilidad y barreras
+    component_type: MICRO_SKILL
+    traits: *id001
+    lifecycle_status: PROVISIONAL
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+  WF-A01:
+    name: Recuperación intensiva
+    component_type: WORKFLOW
+    traits: []
+    lifecycle_status: ACTIVE
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+  WF-C01:
+    name: Extended Essay IB 2027
+    component_type: WORKFLOW
+    traits:
+    - specialized
+    lifecycle_status: ACTIVE
+    architecture_status: READY
+    implementation_status: IMPLEMENTABLE
+    deployment_status: BLOCKED_BY_GOVERNANCE
+  WF-I01:
+    name: Reunión colegio–familia
+    component_type: WORKFLOW
+    traits: []
+    lifecycle_status: ACTIVE
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+  WF-I02:
+    name: Acompañamiento EDP
+    component_type: WORKFLOW
+    traits: []
+    lifecycle_status: ACTIVE
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+  WF-I03:
+    name: Reconocimiento institucional
+    component_type: WORKFLOW
+    traits: []
+    lifecycle_status: PROVISIONAL
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+  WF-I04:
+    name: Informe académico individual
+    component_type: WORKFLOW
+    traits: []
+    lifecycle_status: ACTIVE
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+  WF-P01:
+    name: Perfil Pedagógico Inicial
+    component_type: WORKFLOW
+    traits: []
+    lifecycle_status: ACTIVE
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+  WF-P02:
+    name: PIAE
+    component_type: WORKFLOW
+    traits: []
+    lifecycle_status: PROVISIONAL
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+  WF-P03:
+    name: PPD
+    component_type: WORKFLOW
+    traits: []
+    lifecycle_status: ACTIVE
+    architecture_status: READY_WITH_CONDITIONS
+    implementation_status: IMPLEMENTABLE_WITH_CONDITIONS
+    deployment_status: PILOT_OR_BLOCKED
+gaps:
+  GAP-C01:
+    name: Comprensión lectora
+    lifecycle_status: GAP
+    architecture_status: NOT_READY
+    implementation_status: NOT_IMPLEMENTABLE
+    deployment_status: NOT_DEPLOYABLE
+    instruction: Do not create FL-C03 by inference. Requires theoretical and functional specification.

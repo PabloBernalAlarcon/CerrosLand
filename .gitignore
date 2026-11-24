@@ -1,0 +1,28 @@
+# secrets and local settings
+.env
+*.key
+
+# institutional source documents stay local (see knowledge/sources/README.md)
+knowledge/sources/*
+!knowledge/sources/README.md
+
+# never commit real case data
+data/
+cases/
+*.real.*
+
+# python
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
+.venv/
+venv/
+build/
+dist/
+
+# os / editors
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

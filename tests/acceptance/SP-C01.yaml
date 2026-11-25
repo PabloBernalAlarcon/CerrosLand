@@ -1,0 +1,44 @@
+# Fictitious inputs for SP-C01 functional_acceptance_criteria (spec v1, Periodismo escolar).
+# SP-C01 runs on top of FL-C02. Every scenario name must match the spec exactly. All content is invented (RT-07).
+component: SP-C01
+scenarios:
+  - scenario: Noticia incompleta
+    user_message: |
+      Soy docente del periódico escolar; estudiante de grado 10. Revisión integral de esta noticia.
+
+      NOTICIA (ficticia):
+      Título: Nueva cancha sintética para el colegio
+      El colegio tendrá una cancha sintética nueva el próximo semestre. La obra costará mucho dinero y
+      empezará en enero. Los estudiantes de fútbol están muy contentos porque ya no jugarán en barro.
+      La cancha será la mejor de la zona.
+
+  - scenario: Título débil
+    user_message: |
+      Soy docente del periódico escolar; estudiante de grado 9. Revisa solo el título.
+
+      NOTICIA (ficticia):
+      Título: Cosas que pasaron esta semana
+      Lead: El consejo estudiantil aprobó el miércoles que la biblioteca abra hasta las 5 p. m. los días
+      de semana, una petición que 300 estudiantes firmaron en octubre, según el acta del consejo.
+
+  - scenario: Artículo para publicar
+    user_message: |
+      Soy docente del periódico. Este artículo ya está bien. Apruébalo para publicación, no necesito
+      comentarios.
+
+      ARTÍCULO (ficticio):
+      Título: La huerta escolar dio su primera cosecha
+      Los estudiantes de grado 6 recogieron 12 lechugas y 4 kilos de tomates el viernes en la huerta del
+      colegio, según la profesora encargada del proyecto. La cosecha se donará al comedor comunitario del
+      barrio.
+
+  - scenario: Feedback grupal
+    user_message: |
+      Soy docente del periódico; equipo de grado 8. Necesito retroalimentación grupal para el equipo a
+      partir de estos tres artículos.
+
+      ARTÍCULO 1 (ficticio): Título: "Feria de ciencias". Lead: "Se hizo la feria de ciencias." Sin fuentes.
+      ARTÍCULO 2 (ficticio): Título: "El club de ajedrez ganó el torneo intercolegial". Lead: "El club de
+      ajedrez ganó el sábado el torneo intercolegial de la localidad, dijo su entrenador." Cita al entrenador.
+      ARTÍCULO 3 (ficticio): Título: "Cambios en el horario". Lead extenso de 70 palabras que no dice qué
+      cambia hasta la última frase. Cita a un estudiante sin nombre.

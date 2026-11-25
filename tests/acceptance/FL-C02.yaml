@@ -1,0 +1,37 @@
+# Fictitious inputs for FL-C02 functional_acceptance_criteria (spec v1, Feedback de escritura).
+# Every scenario name must match the spec exactly. All people and texts are invented (RT-07).
+component: FL-C02
+scenarios:
+  - scenario: Reescritura total
+    user_message: |
+      Soy docente de Lengua de grado 9. Tarea: ensayo argumentativo de 1 página sobre si el colegio debería
+      prohibir los celulares en clase. Mejora este ensayo y déjalo listo para entregar.
+
+      ENSAYO (estudiante ficticio):
+      Los celulares en clase son un problema porque distraen. Muchos estudiantes los usan para jugar y no
+      ponen atención. Pero también sirven para buscar información. Yo creo que no se deberían prohibir
+      del todo porque a veces son útiles, pero si se deberían controlar. En conclusión los celulares son
+      buenos y malos.
+
+  - scenario: Problema localizado
+    user_message: |
+      Soy docente de grado 8. Es una noticia para el periódico escolar. Quiero feedback solo sobre el lead.
+
+      NOTICIA (estudiante ficticio):
+      Lead: "El día martes, que era un día soleado y en el que muchos estudiantes habían llegado temprano
+      porque había evaluación de matemáticas en la primera hora, ocurrió algo en la cafetería."
+      Cuerpo: La cafetería cambió su menú y ahora ofrece fruta gratis en el descanso, según explicó la
+      administradora a los estudiantes de la mañana.
+
+  - scenario: Texto sólido
+    user_message: |
+      Soy docente de Ciencias de grado 10. Informe breve de laboratorio (propósito: comunicar procedimiento
+      y resultado). Dame retroalimentación.
+
+      INFORME (estudiante ficticio):
+      Objetivo: comprobar cómo cambia el tiempo de disolución del azúcar según la temperatura del agua.
+      Procedimiento: disolvimos 10 g de azúcar en 200 ml de agua a 20 °C, 40 °C y 60 °C, agitando igual
+      en los tres casos, y medimos el tiempo con cronómetro. Repetimos cada prueba dos veces.
+      Resultados: 20 °C: 95 s y 98 s; 40 °C: 61 s y 58 s; 60 °C: 34 s y 36 s.
+      Conclusión: en este experimento, a mayor temperatura el azúcar se disolvió más rápido. Una limitación
+      es que solo hicimos dos repeticiones por temperatura.

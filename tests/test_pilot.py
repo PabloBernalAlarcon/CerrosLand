@@ -86,18 +86,43 @@ def test_fixtures_match_spec_scenarios(cat, component, count):
     assert len(fx) == count and all(f["user_message"].strip() for f in fx)
 
 
-def test_acceptance_run_and_report(cat, tmp_path):
-    replies = []
-    for _ in range(3):
-        replies += ["respuesta de prueba", '{"veredicto": "CUMPLE", "razon": "reconduce a feedback"}']
+def test_acceptance_repeats_and_takes_worst_verdict(cat, tmp_path):
+    ok = '{"veredicto": "CUMPLE", "razon": "reconduce a feedback", "alertas": []}'
+    alert = ('{"veredicto": "CUMPLE", "razon": "ok", "alertas": '
+             '[{"tipo": "NUMERO", "detalle": "dice 5 palabras; son 6"}]}')
+    bad = '{"veredicto": "NO CUMPLE", "razon": "lista mejoras no pedidas"}'
+    judged = [ok, ok, ok, ok, alert, ok, ok, bad, ok]  # 3 scenarios x 3 runs
+    replies = [x for j in judged for x in ("respuesta de prueba", j)]
     p = Scripted(replies)
-    results = run(cat, "FL-C02", p, log=lambda *_: None)
-    assert [r.verdict for r in results] == ["CUMPLE"] * 3
+    results = run(cat, "FL-C02", p, runs=3, log=lambda *_: None)
+    assert len(p.calls) == 18
+    assert [r.verdict for r in results] == ["CUMPLE", "CUMPLE", "NO CUMPLE"]
+    assert results[2].run_verdicts == "CUMPLE · NO CUMPLE · CUMPLE"
     path = write_report("FL-C02", "scripted", results, folder=tmp_path)
     text = path.read_text(encoding="utf-8")
-    assert "Reescritura total" in text and "☐ sí ☐ no" in text and "CORE-04" in text
+    assert "Ejecuciones por escenario: 3" in text and "☐ sí ☐ no" in text and "CORE-04" in text
+    assert "NUMERO: dice 5 palabras; son 6" in text and "### Ejecución 3" in text
+
+
+def test_judge_prompt_covers_base_and_specialization(cat):
+    p = Scripted(["r", '{"veredicto": "CUMPLE", "razon": "x"}'] * 4)
+    run(cat, "SP-C01", p, runs=1, log=lambda *_: None)
+    judge_system, judge_msgs = p.calls[1]
+    assert "CORE-01" in judge_system and "NORMA_SIN_FUENTE" in judge_system
+    assert "Componente FL-C02" in judge_system and "Componente SP-C01" in judge_system
+    assert "Inventar datos, fuentes o citas." in judge_system  # SP-C01 forbidden action
+    assert "Señales de NO CUMPLE" in judge_msgs[0]["content"]
+    answer_system, _ = p.calls[0]
+    assert "NORMA_SIN_FUENTE" not in answer_system  # the answering prompt is unchanged
+
+
+def test_runs_must_be_positive(cat):
+    with pytest.raises(ValueError):
+        run(cat, "FL-C02", Scripted([]), runs=0, log=lambda *_: None)
 
 
 def test_unreadable_verdict_becomes_dudoso():
     assert _parse_verdict("no sé")[0] == "DUDOSO"
-    assert _parse_verdict('{"veredicto": "NO CUMPLE", "razon": "x"}') == ("NO CUMPLE", "x")
+    assert _parse_verdict('{"veredicto": "NO CUMPLE", "razon": "x"}') == ("NO CUMPLE", "x", [])
+    v = _parse_verdict('{"veredicto": "CUMPLE", "razon": "x", "alertas": [{"tipo": "raro", "detalle": "d"}, {"tipo": "NUMERO"}]}')
+    assert v[2] == [{"tipo": "OTRA", "detalle": "d"}]  # unknown type kept as OTRA, empty detail dropped

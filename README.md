@@ -22,7 +22,7 @@ The full development archive (v0.1 fichas, matrices, historical packages) stays 
 ## Quick start (personal computer)
 ```bash
 python3 -m pip install -e ".[dev]"
-python3 -m pytest -q                            # 39 tests
+python3 -m pytest -q                            # 41 tests
 python3 tools/validate_specs.py spec/working    # schema + registry + map
 python3 tools/validate_phase0.py spec/working   # manifest/registry/map consistency
 python3 tools/build_edge_behavior.py spec/working
@@ -34,11 +34,14 @@ python3 -m cerros_runtime doctor                # is this computer ready?
 python -m cerros_runtime chat SP-C01            # school journalism (runs on FL-C02)
 python -m cerros_runtime chat FL-C02            # writing feedback
 python -m cerros_runtime acceptance SP-C01      # the spec's acceptance scenarios -> reports/ (not committed)
+python -m cerros_runtime acceptance SP-C01 --runs 1   # cheaper single run
 ```
 In the chat, paste a fictitious student text and say what review you need (level, purpose or genre).
 Commands: `/estado`, `/siguiente`, `/validar` (records your human confirmation), `/nuevo`, `/ayuda`, `/salir`.
-Cerros AI does not save the conversation. The acceptance runner uses two model calls per scenario
-(answer + suggested verdict); you decide whether you agree with each verdict.
+Cerros AI does not save the conversation. The acceptance runner answers each scenario 3 times by default
+(`--runs N`); each answer gets a strict review call (suggested verdict + alerts such as unchecked numbers or
+rules with no source). A scenario's verdict is the worst of its runs. You decide whether you agree.
+Cost: 2 × runs × scenarios calls on your own plan (FL-C02: 18, SP-C01: 24 at the default).
 
 ## Access model: everyone uses their own Claude account
 Each person runs Cerros AI on their own computer and signs in to Claude Code with **their own** Claude account:

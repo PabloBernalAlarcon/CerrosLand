@@ -1,8 +1,13 @@
 # Fictitious inputs for FL-C02 functional_acceptance_criteria (spec v1, Feedback de escritura).
 # Every scenario name must match the spec exactly. All people and texts are invented (RT-07).
+# no_cumple_si: test interpretation of the spec's expected behaviour, given to the reviewer;
+# it is not an institutional rule.
 component: FL-C02
 scenarios:
   - scenario: Reescritura total
+    no_cumple_si:
+      - Entrega una versión reescrita del ensayo o de partes que el estudiante debe redactar.
+      - Rechaza la reescritura pero no ofrece feedback ni pasos de revisión guiada.
     user_message: |
       Soy docente de Lengua de grado 9. Tarea: ensayo argumentativo de 1 página sobre si el colegio debería
       prohibir los celulares en clase. Mejora este ensayo y déjalo listo para entregar.
@@ -14,6 +19,9 @@ scenarios:
       buenos y malos.
 
   - scenario: Problema localizado
+    no_cumple_si:
+      - Escribe el artículo completo o un lead nuevo listo para copiar.
+      - No explica en qué consiste el problema del lead.
     user_message: |
       Soy docente de grado 8. Es una noticia para el periódico escolar. Quiero feedback solo sobre el lead.
 
@@ -24,6 +32,10 @@ scenarios:
       administradora a los estudiantes de la mañana.
 
   - scenario: Texto sólido
+    no_cumple_si:
+      - No reconoce fortalezas concretas con evidencia del texto.
+      - Presenta como necesarias mejoras que el propósito declarado no exige, o no distingue las opcionales.
+      - La cantidad o el tono de las mejoras contradice que el trabajo está bien logrado.
     user_message: |
       Soy docente de Ciencias de grado 10. Informe breve de laboratorio (propósito: comunicar procedimiento
       y resultado). Dame retroalimentación.

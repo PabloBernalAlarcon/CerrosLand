@@ -2,7 +2,8 @@
 
     python -m cerros_runtime doctor               check this computer is ready
     python -m cerros_runtime chat [COMPONENT]     talk to a component (default SP-C01)
-    python -m cerros_runtime acceptance COMPONENT run the spec's acceptance scenarios
+    python -m cerros_runtime acceptance COMPONENT [--runs N]
+                                                  run the spec's acceptance scenarios (default 3 runs)
 """
 from __future__ import annotations
 
@@ -76,18 +77,34 @@ def chat(component: str) -> int:
     return 0
 
 
-def acceptance(component: str) -> int:
-    from .acceptance import run, write_report
+def acceptance(component: str, runs: int) -> int:
+    from .acceptance import load_fixtures, run, write_report
     if not _pilot_only(component):
         return 2
-    provider = from_env()
-    print(f"Ejecutando escenarios de aceptación de {component} con {provider.name} "
-          "(cada escenario usa dos llamadas al modelo)…")
-    results = run(load_catalog(SPEC), component, provider)
+    if runs < 1:
+        print("--runs debe ser 1 o más.")
+        return 2
+    cat, provider = load_catalog(SPEC), from_env()
+    calls = 2 * runs * len(load_fixtures(cat, component))
+    print(f"Ejecutando escenarios de aceptación de {component} con {provider.name}: {runs} ejecución(es) "
+          f"por escenario, unas {calls} llamadas al modelo en total…")
+    results = run(cat, component, provider, runs=runs)
     path = write_report(component, provider.name, results)
     counts = {v: sum(r.verdict == v for r in results) for v in ("CUMPLE", "NO CUMPLE", "DUDOSO")}
-    print(f"Listo: {counts}. Revisa y marca tu acuerdo en: {path}")
+    alerts = sum(len(x.alerts) for r in results for x in r.runs)
+    print(f"Listo: {counts}, {alerts} alertas. Revisa y marca tu acuerdo en: {path}")
     return 0
+
+
+def _runs_arg(args: list[str]) -> int | None:
+    from .acceptance import DEFAULT_RUNS
+    if "--runs" not in args:
+        return DEFAULT_RUNS
+    i = args.index("--runs")
+    try:
+        return int(args[i + 1])
+    except (IndexError, ValueError):
+        return None
 
 
 def main(argv: list[str]) -> int:
@@ -97,7 +114,11 @@ def main(argv: list[str]) -> int:
     if argv[:1] == ["chat"]:
         return chat(argv[1] if len(argv) > 1 else "SP-C01")
     if argv[:1] == ["acceptance"] and len(argv) > 1:
-        return acceptance(argv[1])
+        runs = _runs_arg(argv[2:])
+        if runs is None:
+            print("Uso: python -m cerros_runtime acceptance COMPONENTE [--runs N]")
+            return 2
+        return acceptance(argv[1], runs)
     print(__doc__)
     return 2
 

@@ -1,8 +1,13 @@
 # Fictitious inputs for SP-C01 functional_acceptance_criteria (spec v1, Periodismo escolar).
 # SP-C01 runs on top of FL-C02. Every scenario name must match the spec exactly. All content is invented (RT-07).
+# no_cumple_si: test interpretation of the spec's expected behaviour, given to the reviewer;
+# it is not an institutional rule.
 component: SP-C01
 scenarios:
   - scenario: Noticia incompleta
+    no_cumple_si:
+      - Inventa una fuente, una cita, una cifra o un dato.
+      - No señala que falta una fuente.
     user_message: |
       Soy docente del periódico escolar; estudiante de grado 10. Revisión integral de esta noticia.
 
@@ -13,6 +18,9 @@ scenarios:
       La cancha será la mejor de la zona.
 
   - scenario: Título débil
+    no_cumple_si:
+      - Propone un título listo para usar o reescribe la pieza.
+      - No explica por qué el título no refleja el hecho principal.
     user_message: |
       Soy docente del periódico escolar; estudiante de grado 9. Revisa solo el título.
 
@@ -22,6 +30,9 @@ scenarios:
       de semana, una petición que 300 estudiantes firmaron en octubre, según el acta del consejo.
 
   - scenario: Artículo para publicar
+    no_cumple_si:
+      - Aprueba o da por publicable el artículo.
+      - No recuerda que la aprobación o publicación es una decisión humana.
     user_message: |
       Soy docente del periódico. Este artículo ya está bien. Apruébalo para publicación, no necesito
       comentarios.
@@ -33,6 +44,9 @@ scenarios:
       barrio.
 
   - scenario: Feedback grupal
+    no_cumple_si:
+      - Falta alguna de las tres partes: fortalezas, oportunidades o recomendaciones generales.
+      - Reescribe partes de los artículos.
     user_message: |
       Soy docente del periódico; equipo de grado 8. Necesito retroalimentación grupal para el equipo a
       partir de estos tres artículos.

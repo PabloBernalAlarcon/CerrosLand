@@ -5,7 +5,7 @@ import sys
 from pathlib import Path
 
 from . import effective_status, load_catalog
-from .providers import ClaudeCodeProvider, from_env
+from .providers import claude_auth_status, from_env
 
 SPEC = Path(__file__).resolve().parents[1] / "spec" / "working"
 
@@ -21,16 +21,29 @@ def doctor() -> int:
     for cid in ("FL-C02", "SP-C01"):
         st = effective_status(cat, cid)
         print(f"✓ Pilot {cid}: {st.presented_lifecycle}, blocked steps: {st.blocked_steps or 'none'}")
+    provider_name = None
     try:
-        p = from_env()
-        print(f"✓ Provider: {p.name}")
+        provider_name = from_env().name
+        print(f"✓ Provider: {provider_name}")
     except Exception as e:
         ok = False
         print(f"✗ Provider: {e}")
-    if ClaudeCodeProvider.available():
-        print("✓ Claude Code found. If you haven't yet, run `claude` and `/login` with YOUR OWN Claude account.")
+    if provider_name != "claude_code":
+        return 0 if ok else 1
+    auth = claude_auth_status()
+    if not auth["installed"]:
+        ok = False
+        print("✗ Claude Code not found. Install it, then run `claude` and `/login` with YOUR OWN Claude account.")
+    elif auth["logged_in"] is None:
+        print("• Claude Code found, but its sign-in status could not be read. Run `claude auth status`.")
+    elif not auth["logged_in"]:
+        ok = False
+        print("✗ Claude Code is installed but not signed in. Run `claude`, then `/login` with your own account.")
+    elif auth["auth_method"] == "claude.ai":
+        print("✓ Claude Code signed in with a Claude plan (usage counts against your own plan).")
     else:
-        print("• Claude Code not found. Install it to use your own Claude plan (see README).")
+        print(f"• Claude Code signed in with method '{auth['auth_method']}'. Cerros AI expects your own Claude "
+              "plan ('claude.ai'); other methods may bill an API account.")
     return 0 if ok else 1
 
 

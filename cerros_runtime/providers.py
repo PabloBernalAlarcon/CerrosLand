@@ -11,6 +11,7 @@ routes one person's requests through another person's plan.
 from __future__ import annotations
 
 import json
+import os
 import shutil
 import subprocess
 import tempfile
@@ -57,9 +58,15 @@ class ClaudeCodeProvider:
     """Calls `claude -p` with the signed-in user's own Claude plan.
 
     Each person installs Claude Code once and signs in with `claude` → `/login`.
-    Not `--bare`: bare mode ignores the subscription login and needs an API key.
-    The call runs in an empty temporary folder with tools denied, so the model only
-    answers; it cannot read or change files.
+    Flags (see https://code.claude.com/docs/en/cli-reference):
+    - not `--bare`: bare mode ignores the subscription login and needs an API key;
+    - `--safe-mode`: personal CLAUDE.md, skills, hooks, MCP servers and memory do not load,
+      while login and model selection work normally;
+    - `--system-prompt-file`: Cerros AI's instructions replace the default prompt; a file
+      avoids Windows command-line length limits and quoting problems;
+    - `--tools ""` and `--disallowedTools "mcp__*"`: no tools, so the model can only answer;
+    - `--no-session-persistence`: the conversation is not saved to disk by Claude Code.
+    The call runs in an empty temporary folder.
     """
     model: str | None = None
     timeout_s: int = 300
@@ -67,34 +74,59 @@ class ClaudeCodeProvider:
     _last_cost: float | None = field(default=None, repr=False)
 
     @staticmethod
-    def available() -> bool:
-        return shutil.which("claude") is not None
+    def executable() -> str | None:
+        return shutil.which("claude")  # resolves claude.exe / claude.cmd on Windows
 
-    def _cmd(self, system: str) -> list[str]:
-        cmd = ["claude", "-p", "--output-format", "json", "--system-prompt", system,
-               "--permission-mode", "dontAsk"]
+    @classmethod
+    def available(cls) -> bool:
+        return cls.executable() is not None
+
+    def _cmd(self, system_file: str, exe: str = "claude") -> list[str]:
+        cmd = [exe, "-p", "--output-format", "json", "--system-prompt-file", system_file,
+               "--safe-mode", "--tools", "", "--disallowedTools", "mcp__*",
+               "--no-session-persistence", "--permission-mode", "dontAsk"]
         if self.model:
             cmd += ["--model", self.model]
         return cmd
 
     def complete(self, system: str, messages: list[dict]) -> str:
-        if not self.available():
+        exe = self.executable()
+        if not exe:
             raise ProviderNotConfigured("Claude Code is not installed. Install it, run `claude`, then `/login` "
                                         "with your own Claude account.")
         with tempfile.TemporaryDirectory(prefix="cerros_") as cwd:
+            system_file = os.path.join(cwd, "cerros_system_prompt.md")
+            with open(system_file, "w", encoding="utf-8") as f:
+                f.write(system)
             try:
-                r = subprocess.run(self._cmd(system), input=_render(messages), capture_output=True, text=True,
-                                   cwd=cwd, timeout=self.timeout_s)
+                r = subprocess.run(self._cmd(system_file, exe), input=_render(messages), capture_output=True,
+                                   text=True, encoding="utf-8", errors="replace", cwd=cwd, timeout=self.timeout_s)
             except subprocess.TimeoutExpired as e:
                 raise ProviderError(f"Claude Code did not answer within {self.timeout_s}s") from e
         try:
             data = json.loads(r.stdout)
         except json.JSONDecodeError as e:
-            raise ProviderError(f"Unexpected output from Claude Code: {r.stdout[:300] or r.stderr[:300]}") from e
+            hint = (" If it mentions an unknown option, run `claude update`."
+                    if "unknown option" in (r.stderr or "").lower() else "")
+            raise ProviderError(f"Unexpected output from Claude Code: {(r.stdout or r.stderr)[:300]}{hint}") from e
         if data.get("is_error") or r.returncode != 0:
             raise ProviderError(f"Claude Code error: {data.get('result') or r.stderr[:300]}")
         self._last_cost = data.get("total_cost_usd")
         return data.get("result", "")
+
+
+def claude_auth_status() -> dict:
+    """Ask Claude Code whether this computer is signed in. Never reads or returns credentials."""
+    exe = ClaudeCodeProvider.executable()
+    if not exe:
+        return {"installed": False, "logged_in": False, "auth_method": None}
+    try:
+        r = subprocess.run([exe, "auth", "status"], capture_output=True, text=True, encoding="utf-8",
+                           errors="replace", timeout=30)
+        data = json.loads(r.stdout) if r.stdout.strip().startswith("{") else {}
+    except (subprocess.TimeoutExpired, json.JSONDecodeError, OSError):
+        return {"installed": True, "logged_in": None, "auth_method": None}
+    return {"installed": True, "logged_in": r.returncode == 0, "auth_method": data.get("authMethod")}
 
 
 class AnthropicAPIProvider:

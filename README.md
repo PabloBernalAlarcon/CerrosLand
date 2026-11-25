@@ -22,7 +22,7 @@ The full development archive (v0.1 fichas, matrices, historical packages) stays 
 ## Quick start (personal computer)
 ```bash
 python3 -m pip install -e ".[dev]"
-python3 -m pytest -q                            # 26 tests
+python3 -m pytest -q                            # 28 tests
 python3 tools/validate_specs.py spec/working    # schema + registry + map
 python3 tools/validate_phase0.py spec/working   # manifest/registry/map consistency
 python3 tools/build_edge_behavior.py spec/working
@@ -31,11 +31,14 @@ python3 -m cerros_runtime doctor                # is this computer ready?
 
 ## Access model: everyone uses their own Claude account
 Each person runs Cerros AI on their own computer and signs in to Claude Code with **their own** Claude account:
-1. Install Claude Code (see https://code.claude.com/docs).
-2. Run `claude`, then `/login`, and sign in with your own account.
+1. Install Claude Code by following the instructions for your system at https://code.claude.com/docs/en/setup (Windows, macOS or Linux).
+2. Open a new terminal, run `claude`, then `/login`, and sign in with your own account. Type `/exit` to leave.
 3. Copy `.env.example` to `.env` (default provider: `claude_code`).
+4. Run `python -m cerros_runtime doctor`. Every line should show ✓.
 
-Cerros AI never stores, receives or shares anyone's credentials, and never routes one person's requests through another person's plan. Anthropic's terms require each end user to authenticate with their own credentials. Usage counts against each person's own plan. When there is a budget, switching to an API key or an institutional plan is a configuration change (`CERROS_PROVIDER=anthropic_api`); the specs, rules and tests stay the same. See `docs/ACCESS_AND_PROVIDERS.md`.
+On Windows, use `python` instead of `python3` in the commands above.
+
+Cerros AI never stores, receives or shares anyone's credentials, and never routes one person's requests through another person's plan. Anthropic's terms require each end user to authenticate with their own credentials. Usage counts against each person's own plan. Cerros AI runs Claude Code with personal customizations off (`--safe-mode`) and without tools, so the model can only answer. When there is a budget, switching to an API key or an institutional plan is a configuration change (`CERROS_PROVIDER=anthropic_api`); the specs, rules and tests stay the same. See `docs/ACCESS_AND_PROVIDERS.md`.
 
 ## Runtime rules (full text: `spec/working/runtime_policy_v1.yaml`)
 - **RT-01** handoffs only after the source is VALIDADO (human-confirmed) and the user asks or accepts.

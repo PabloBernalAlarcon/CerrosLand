@@ -1,4 +1,9 @@
-"""Command line: `python -m cerros_runtime doctor` checks this computer is ready."""
+"""Command line.
+
+    python -m cerros_runtime doctor               check this computer is ready
+    python -m cerros_runtime chat [COMPONENT]     talk to a component (default SP-C01)
+    python -m cerros_runtime acceptance COMPONENT run the spec's acceptance scenarios
+"""
 from __future__ import annotations
 
 import sys
@@ -8,6 +13,15 @@ from . import effective_status, load_catalog
 from .providers import claude_auth_status, from_env
 
 SPEC = Path(__file__).resolve().parents[1] / "spec" / "working"
+PILOT = ("FL-C02", "SP-C01")
+
+
+def _utf8_console() -> None:
+    for stream in (sys.stdout, sys.stderr):
+        try:
+            stream.reconfigure(encoding="utf-8")
+        except (AttributeError, ValueError):
+            pass
 
 
 def doctor() -> int:
@@ -18,7 +32,7 @@ def doctor() -> int:
     except Exception as e:  # report, don't hide
         print(f"✗ Canonical layer failed to load: {e}")
         return 1
-    for cid in ("FL-C02", "SP-C01"):
+    for cid in PILOT:
         st = effective_status(cat, cid)
         print(f"✓ Pilot {cid}: {st.presented_lifecycle}, blocked steps: {st.blocked_steps or 'none'}")
     provider_name = None
@@ -47,10 +61,44 @@ def doctor() -> int:
     return 0 if ok else 1
 
 
+def _pilot_only(component: str) -> bool:
+    if component not in PILOT:
+        print(f"Por ahora el piloto solo incluye {', '.join(PILOT)}. {component} queda para una fase posterior.")
+        return False
+    return True
+
+
+def chat(component: str) -> int:
+    from .chat import run_chat
+    if not _pilot_only(component):
+        return 2
+    run_chat(load_catalog(SPEC), component, from_env())
+    return 0
+
+
+def acceptance(component: str) -> int:
+    from .acceptance import run, write_report
+    if not _pilot_only(component):
+        return 2
+    provider = from_env()
+    print(f"Ejecutando escenarios de aceptación de {component} con {provider.name} "
+          "(cada escenario usa dos llamadas al modelo)…")
+    results = run(load_catalog(SPEC), component, provider)
+    path = write_report(component, provider.name, results)
+    counts = {v: sum(r.verdict == v for r in results) for v in ("CUMPLE", "NO CUMPLE", "DUDOSO")}
+    print(f"Listo: {counts}. Revisa y marca tu acuerdo en: {path}")
+    return 0
+
+
 def main(argv: list[str]) -> int:
+    _utf8_console()
     if argv[:1] == ["doctor"]:
         return doctor()
-    print("usage: python -m cerros_runtime doctor")
+    if argv[:1] == ["chat"]:
+        return chat(argv[1] if len(argv) > 1 else "SP-C01")
+    if argv[:1] == ["acceptance"] and len(argv) > 1:
+        return acceptance(argv[1])
+    print(__doc__)
     return 2
 
 

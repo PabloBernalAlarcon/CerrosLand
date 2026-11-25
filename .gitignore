@@ -26,3 +26,6 @@ dist/
 Thumbs.db
 .vscode/
 .idea/
+
+# acceptance reports (fictitious data, reviewed locally)
+reports/
